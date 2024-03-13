@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Line Style -->
+    <Brush x:Key="MinLineBrush">Red</Brush>
+    <Brush x:Key="MaxLineBrush">Blue</Brush>
+    <Style x:Key="LineBaseStyle" TargetType="Line"  >
+        <Setter Property="StrokeThickness" Value="5"/>
+        <Setter Property="Canvas.ZIndex" Value="1"/>
+    </Style>
+    <Style x:Key="LineUnSelected"
+           TargetType="Line"
+           BasedOn="{StaticResource LineBaseStyle}">
+        <Setter Property="StrokeDashArray" Value="5 0"/>
+    </Style>
+    <Style x:Key="LineSelected"
+           TargetType="Line" 
+           BasedOn="{StaticResource LineBaseStyle}">
+        <Setter Property="StrokeDashArray" Value="5 5"/>
+    </Style>
+    <!-- Point Style -->
+    <Style x:Key="PointBaseStyle"
+           TargetType="Ellipse">
+        <Setter Property="Width" Value="12"/>
+        <Setter Property="Height" Value="12"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+    </Style>
+    <Style x:Key="PointSelected"
+           TargetType="Ellipse"
+           BasedOn="{StaticResource PointBaseStyle}">
+        <Setter Property="Fill" Value="Red"/>
+        <Setter Property="Stroke" Value="Red"/>
+    </Style>
+    <Style x:Key="PointUnSelected"
+           TargetType="Ellipse"
+           BasedOn="{StaticResource PointBaseStyle}">
+        <Setter Property="Fill" Value="Black"/>
+        <Setter Property="Stroke" Value="Black"/>
+    </Style>
+</ResourceDictionary>
