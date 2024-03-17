@@ -6,14 +6,8 @@
         xmlns:local="clr-namespace:TCRHelper_desktop"
         mc:Ignorable="d"
         xmlns:TCRHelperUserControl="clr-namespace:TCRHelperUserControl;assembly=TCRHelperUserControl"
-        Title="PlotDataCollectionWindows" Height="900" Width="1600">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ResDict.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+        Title="PlotDataCollectionWindows" Height="900" Width="1600"
+        Loaded="TabularDataCollectionWindow_OnLoaded">
     <Grid>
         <StackPanel Orientation="Horizontal">
             <TCRHelperUserControl:ImageDataCanvas x:Name="Tabular" Margin="5"
@@ -26,7 +20,8 @@
                             <TextBox x:Name="RowNumTextBox"
                                      Style="{StaticResource TextBoxBaseStyle}"
                                      Margin="5"
-                                     Text="2"/>
+                                     Text="2"
+                                     MouseEnter="UnFocusableTextBox_OnMouseEnter"/>
                             <Label Content="行"/>
                         </StackPanel>
                         <Slider x:Name="RowNumSlider"
@@ -36,41 +31,59 @@
                             <TextBox x:Name="ColNumTextBox"
                                      Style="{StaticResource TextBoxBaseStyle}"
                                      Margin="5"
-                                     Text="2"/>
+                                     Text="2"
+                                     MouseEnter="UnFocusableTextBox_OnMouseEnter"/>
                             <Label Content="列"/>
                         </StackPanel>
                         <Slider x:Name="ColNumSlider"
                                 Style="{StaticResource IntSliderBaseStyle}"
                                 ValueChanged="ColNumSlider_OnValueChanged"/>
-                        <CheckBox x:Name="ConfirmNumRowCol"  Content="确认"
+                        <CheckBox x:Name="ConfirmNumRowColCheckBox"  Content="确认"
                                   HorizontalAlignment="Right"
-                                  Margin="5,1"/>
+                                  Margin="5,1"
+                                  Checked="ConfirmNumRowColCheckBox_OnChecked"
+                                  Unchecked="ConfirmNumRowColCheckBox_OnUnchecked"/>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="表格类型">
                     <StackPanel>
-                        <RadioButton Content="均匀分布"
-                                     Style="{StaticResource RadioButtonBaseStyle}"
-                                     IsChecked="True"/>
-                        <RadioButton Content="非均匀分布"
-                                     Style="{StaticResource RadioButtonBaseStyle}"/>
-                        <Button Content="确认分割点" 
-                                Style="{StaticResource FunctionButtonBaseType}"/>
-                        <CheckBox Content="显示分割线"
-                                  Margin="5"/>
+                        <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                            
+                        </Border>
+                        <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                            <StackPanel>
+                                <RadioButton 
+                                    x:Name="UniformDistributedRadioButton"
+                                    Content="均匀分布"
+                                    Style="{StaticResource RadioButtonBaseStyle}"
+                                    Checked="UniformDistributedRadioButton_OnChecked"/>
+                                <RadioButton x:Name="NonUniformDistributedRadioButton"
+                                             Content="非均匀分布"
+                                             Style="{StaticResource RadioButtonBaseStyle}"
+                                             Checked="NonUniformDistributedRadioButton_OnChecked"/>
+                                
+                            </StackPanel>
+                        </Border>
+                        
+                        <CheckBox x:Name="ShowSplitLinesCheckBox" Content="显示分割线"
+                                  Margin="5"
+                                  Checked="ShowSplitLinesCheckBox_OnChecked"
+                                  Unchecked="ShowSplitLinesCheckBox_OnUnchecked"/>
+                        <CheckBox x:Name="ConfirmSplitCheckBox"
+                                  Content="确认分割位置"
+                                  Margin="5,1"
+                                  Checked="ConfirmSplitCheckBox_OnChecked"
+                                  />
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="功能按键">
-                    <StackPanel>
-                        <Button Content="获取数据"
-                                Style="{StaticResource FunctionButtonBaseType}"/>
-                        <Button Content="发送数据"
-                                Style="{StaticResource FunctionButtonBaseType}"/>
-                        <Button Content="重新开始"
-                                Style="{StaticResource FunctionButtonBaseType}"/>
-                    </StackPanel>
+                <GroupBox Header="功能">
+                    <Button x:Name="IdentifyContentButton"
+                            Style="{StaticResource FunctionButtonBaseType}"
+                            Content="识别表格内容"
+                            Click="IdentifyContentButton_OnClick"/>
                 </GroupBox>
             </StackPanel>
+            <Canvas x:Name="TestCanvas"></Canvas>
         </StackPanel>
     </Grid>
 </Window>

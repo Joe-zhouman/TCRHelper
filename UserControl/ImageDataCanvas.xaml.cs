@@ -26,6 +26,7 @@ namespace TCRHelperUserControl {
         private List<Ellipse> _points;
         private Ellipse? _selectedPoint;
         private List<Line> _lines;
+        private List<Point> _splitePoints;
 
         public ImageDataCanvas() {
             InitializeComponent();
@@ -40,6 +41,7 @@ namespace TCRHelperUserControl {
             _selectedPoint = null;
             pointAddable = false;
             _lines = [];
+            _splitePoints = [];
         }
         /// <summary>
         /// 将Image控件的备注设置为默认背景
@@ -182,7 +184,6 @@ namespace TCRHelperUserControl {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ImageProcessCanvas_OnKeyDown(object sender, KeyEventArgs e) {
-            ImageProcessCanvas.Focus();
             if(lineMovable && _movedLine is not null) {
                 LineOnKeyDown(e.Key);
             }
@@ -347,6 +348,132 @@ namespace TCRHelperUserControl {
                 ImageProcessCanvas.Children.Remove(line);
             }
             _lines.Clear();
+        }
+
+        public void ShowSplitLines(int nRow, int nCol, int tabularType) {
+            if(!AddSplitPoints(nRow, nCol, tabularType)) { return; }
+            AddXLine(0);
+            AddYLine(0);
+            for(int i = 1; i < nRow - 1; ++i) { AddXLine(i); }
+            for(int i = nRow - 1; i < nCol + nRow - 3; ++i) { AddYLine(i); }
+
+            foreach(Line line in _lines) {
+                ImageProcessCanvas.Children.Add(line);
+            }
+        }
+
+        public bool AddSplitPoints(int nRow, int nCol, int tabularType) {
+            _splitePoints.Clear();
+            if(tabularType == 0) {
+                double dx = (XMaxLine.X1 - XMinLine.X1) / nCol;
+                double dy = (YMinLine.Y1 - YMaxLine.Y1) / nRow;
+                for(int i = 1; i < nRow; ++i) {
+                    _splitePoints.Add(new Point(
+                            XMinLine.X1 + dx,
+                            YMaxLine.Y1 + i * dy)
+                        );
+                }
+
+                for(int i = 2; i < nCol; ++i) {
+                    _splitePoints.Add(new Point(
+                            XMinLine.X1 + i * dx,
+                            YMaxLine.Y1 + dy)
+                        );
+                }
+            }
+            else if(tabularType == 1) {
+                if(_points.Count != (nRow + nCol - 3)) {
+                    InteractionUtilities.ShowAndHideTooltip("选取的分割点数量不对.");
+                    return false;
+                }
+                foreach(Ellipse point in _points) {
+                    _splitePoints.Add(new Point(
+                            Canvas.GetLeft(point) + point.Width / 2,
+                            Canvas.GetTop(point) + point.Height / 2
+                        ));
+                }
+            }
+            return true;
+        }
+
+        public void SplitImage(int nRow, int nCol, ref BitmapSource[,] images, int border = 0) {
+            List<double> splitY = [
+                YMaxLine.Y1
+            ];
+            for(int i = 0; i < nRow - 1; ++i) {
+                splitY.Add(_splitePoints[i].Y);
+            }
+            splitY.Add(YMinLine.Y1);
+            List<double> splitX = [
+                XMinLine.X1,
+                _splitePoints[0].X
+            ];
+            for(int i = nRow - 1; i < nRow + nCol - 3; ++i) {
+                splitX.Add(_splitePoints[i].X);
+            }
+            splitX.Add(XMaxLine.X1);
+
+            double scaleX = LoadedImage.ActualWidth / LoadedImage.Source.Width;
+            double scaleY = LoadedImage.ActualHeight / LoadedImage.Source.Height;
+            TransformedBitmap scaledBitmap = new(
+                    (LoadedImage.Source as BitmapSource)!,
+                    new ScaleTransform(scaleX, scaleY)
+                );
+            var imageDX = (ImageProcessCanvas.ActualWidth - LoadedImage.ActualWidth) / 2;
+            var imageDY = (ImageProcessCanvas.ActualHeight - LoadedImage.ActualHeight) / 2;
+            for(int i = 0; i < nRow; i++) {
+                double height = splitY[i + 1] - splitY[i] - 2 * border;
+                double ys = splitY[i] + border;
+                for(int j = 0; j < nCol; j++) {
+                    double width = splitX[j + 1] - splitX[j] - 2 * border;
+                    double xs = splitX[j] + border;
+                    var rect = new Int32Rect(
+                            (int)(xs - imageDX),
+                            (int)(ys - imageDY),
+                            (int)(width),
+                            (int)(height)
+                        );
+                    if(rect.X < 0) {
+                        rect.Width += rect.X;
+                        rect.X = 0;
+                    }
+
+                    if(rect.X + rect.Width > scaledBitmap.Width) {
+                        rect.Width = (int)(scaledBitmap.Width - rect.X);
+                    }
+
+                    if(rect.Y < 0) {
+                        rect.Height += rect.Y;
+                        rect.Y = 0;
+                    }
+                    if(rect.Y + rect.Height > scaledBitmap.Height) {
+                        rect.Height = (int)(scaledBitmap.Height - rect.Y);
+                    }
+                    images[i, j] = new CroppedBitmap(scaledBitmap, rect);
+                }
+            }
+        }
+
+        private void AddYLine(int i) {
+            _lines.Add(new Line {
+                X1 = _splitePoints[i].X,
+                X2 = _splitePoints[i].X,
+                Y1 = 0,
+                Y2 = ImageProcessCanvas.ActualHeight,
+                Style = Resources["LineBaseStyle"] as Style,
+                Stroke = Brushes.Black
+            });
+        }
+
+        private void AddXLine(int index) {
+            _lines.Add(new Line {
+                X1 = 0,
+                X2 = ImageProcessCanvas.ActualWidth,
+                Y1 = _splitePoints[index].Y,
+                Y2 = _splitePoints[index].Y,
+                Style = Resources["LineBaseStyle"] as Style,
+                Stroke = Brushes.Black
+            });
         }
     }
 }

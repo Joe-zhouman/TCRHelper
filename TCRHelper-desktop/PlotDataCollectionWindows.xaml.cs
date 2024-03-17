@@ -46,7 +46,7 @@ public partial class PlotDataCollectionWindows : Window {
             || !InteractionUtilities.TexBoxValueConvert(XMaxTextBox, ref _xMax)
             || !InteractionUtilities.TexBoxValueConvert(YMinTextBox, ref _yMin)
             || !InteractionUtilities.TexBoxValueConvert(YMaxTextBox, ref _yMax)) {
-            InteractionUtilities.ShowAndHideTooltip("输入的不是一个数字, 请检查输入!");
+            InteractionUtilities.ShowAndHideTooltip("输入的不是一个正确的数字, 请检查输入!");
             ConfirmBoundaryCheckbox.IsChecked = false;
             return;
         }
@@ -107,4 +107,10 @@ public partial class PlotDataCollectionWindows : Window {
     }
 
 
+    private void PlotGrid_OnMouseEnter(object sender, MouseEventArgs e) { Plot.Focus(); }
+    private void PlotGrid_OnKeyDown(object sender, KeyEventArgs e) { Plot.Focus(); }
+
+    private void UnFocusableTextBox_OnMouseEnter(object sender, MouseEventArgs e) {
+        if(sender is TextBox textBox) { textBox.Focusable = true; }
+    }
 }

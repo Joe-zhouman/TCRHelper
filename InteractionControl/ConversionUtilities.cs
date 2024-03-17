@@ -14,6 +14,8 @@
 
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -45,9 +47,30 @@ public static class ConversionUtilities {
         bitmap.UnlockBits(bitmapData);
         return bitmapSource;
     }
+    public static BitmapSource ImageSourceToBitmapSource(ImageSource imageSource) {
+        // 尝试将 ImageSource 转换为 BitmapSource
+        if(imageSource is BitmapSource source) { return source; }
+        else {
+            // 如果无法直接转换，创建新的 BitmapSource
+            DrawingVisual drawingVisual = new DrawingVisual();
+            using(DrawingContext drawingContext = drawingVisual.RenderOpen()) {
+                drawingContext.DrawImage(imageSource, new Rect(0, 0, imageSource.Width, imageSource.Height));
+            }
 
-    public static bool Str2Num(string s, ref double result) {
-        return double.TryParse(s.Replace(" ", ""), out result);
+            RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)imageSource.Width,
+                (int)imageSource.Height, 96, 96, PixelFormats.Bgr32);
+            renderTargetBitmap.Render(drawingVisual);
+
+            return renderTargetBitmap;
+        }
+    }
+
+    public static string BitmapSource2Base64(BitmapSource image) {
+        using MemoryStream ms = new();
+        BitmapEncoder encoder = new PngBitmapEncoder();
+        encoder.Frames.Add(BitmapFrame.Create(image));
+        encoder.Save(ms);
+        return Convert.ToBase64String(ms.ToArray());
     }
     public class CoordinateConverter {
         private double _xMinCanvas, _xMaxCanvas, _yMinCanvas, _yMaxCanvas;

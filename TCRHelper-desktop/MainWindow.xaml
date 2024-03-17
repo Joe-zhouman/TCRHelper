@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCRHelper_desktop"
-        xmlns:TCRHelperUserControl="clr-namespace:TCRHelperUserControl;assembly=TCRHelperUserControl" x:Class="TCRHelper_desktop.MainWindow"
+        xmlns:TCRHelperUserControl="clr-namespace:TCRHelperUserControl;assembly=TCRHelperUserControl"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime"
+        xmlns:model="clr-namespace:Model;assembly=Model"
+        x:Class="TCRHelper_desktop.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1600">
+        Title="MainWindow" Height="900" Width="1600"
+        Loaded="MainWindow_OnLoaded">
     <Grid Background="#FFD8D8D8">
         <TabControl x:Name="MainFuncTab" FontSize="20">
             <TabItem Header="查询">
@@ -35,7 +39,31 @@
                 <Grid Background="#FFD8D8D8"/>
             </TabItem>
             <TabItem Header="设置">
-                <Grid Background="#FFD8D8D8"/>
+                <Grid Background="#FFD8D8D8">
+                    <StackPanel>
+                    <GroupBox Header="文字识别">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="接口"></Label>
+                                <ComboBox x:Name="ConfigOcrTypeComboBox" SelectedIndex="0"/>
+                                <Label Content="ApiKey"></Label>
+                                <TextBox x:Name ="ConfigApiKeyTextBox"  MinWidth="100"/>
+                                <Label Content="SecretKey"></Label>
+                                <TextBox x:Name ="ConfigSecretKeyTextBox"  MinWidth="100"></TextBox>
+                                <Button x:Name="ConfigTestOcrApiButton"
+                                        Content="测试"
+                                        Style="{StaticResource FunctionButtonBaseType}"
+                                        Click="TestOcrApiButton_OnClick"></Button>
+                                </StackPanel>
+                            
+                        </StackPanel>
+                    </GroupBox>
+                    <Button x:Name="ConfigApplyButton" 
+                            Style="{StaticResource FunctionButtonBaseType}"
+                            Content="应用"
+                            Click="ConfigApplyButton_OnClick"></Button>
+                    </StackPanel>
+                </Grid>
             </TabItem>
         </TabControl>
 

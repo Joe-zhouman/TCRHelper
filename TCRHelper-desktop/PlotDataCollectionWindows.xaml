@@ -7,20 +7,17 @@
         xmlns:TCRHelperUserControl="clr-namespace:TCRHelperUserControl;assembly=TCRHelperUserControl"
         mc:Ignorable="d"
         Title="PlotDataCollectionWindows" Height="900" Width="1600">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ResDict.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <TCRHelperUserControl:ImageDataCanvas x:Name="Plot" Margin="5"
-                                                     MouseEnter="Plot_OnMouseEnter"
-                                                     KeyDown="Plot_OnKeyDown"/>
+            <Grid x:Name="PlotGrid" MouseEnter="PlotGrid_OnMouseEnter"
+                  KeyDown="PlotGrid_OnKeyDown">
+                <TCRHelperUserControl:ImageDataCanvas x:Name="Plot" Margin="5"
+                                                      MouseEnter="Plot_OnMouseEnter"
+                                                      KeyDown="Plot_OnKeyDown"/>
+            </Grid>
+            
             <StackPanel Margin="5" x:Name="FunctionStackPanel">
-                <GroupBox Header="坐标轴" Margin="5">
+                <GroupBox x:Name="CorGroupBox" Header="坐标轴" Margin="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -40,25 +37,30 @@
                         <TextBox Text="0.0" 
                                  x:Name="XMinTextBox"
                                  Style="{StaticResource TextBoxBaseStyle}"
-                                 Grid.Column="1" Grid.Row="0"/>
+                                 Grid.Column="1" Grid.Row="0"
+                                 MouseEnter="UnFocusableTextBox_OnMouseEnter"/>
                         <TextBox Text="0.0" 
                                  x:Name="XMaxTextBox"
                                  Style="{StaticResource TextBoxBaseStyle}"
-                                 Grid.Column="1" Grid.Row="1"/>
+                                 Grid.Column="1" Grid.Row="1"
+                                 MouseEnter="UnFocusableTextBox_OnMouseEnter"/>
                         <TextBox Text="0.0" 
                                  x:Name="YMinTextBox"
                                  Style="{StaticResource TextBoxBaseStyle}"
-                                 Grid.Column="1" Grid.Row="2"/>
+                                 Grid.Column="1" Grid.Row="2"
+                                 MouseEnter="UnFocusableTextBox_OnMouseEnter"/>
                         <TextBox Text="0.0"
                                  x:Name="YMaxTextBox"
                                  Style="{StaticResource TextBoxBaseStyle}"
-                                 Grid.Column="1" Grid.Row="3"/>
+                                 Grid.Column="1" Grid.Row="3"
+                                 MouseEnter="UnFocusableTextBox_OnMouseEnter"/>
                         <CheckBox x:Name="ConfirmBoundaryCheckbox"
                                   Content="确认"
                                   Margin="5"
                                   Grid.Column="1" Grid.Row="4"
                                   HorizontalAlignment="Right"
                                   VerticalAlignment="Center"
+                                  Focusable="False"
                                   Checked="ConfirmBoundaryCheckbox_OnChecked"
                                   Unchecked="ConfirmBoundaryCheckbox_OnUnchecked"/>
                     </Grid>
@@ -74,7 +76,7 @@
                         <Button Content="获取数据"
                                 x:Name="ManualSelectedButton"
                                 Style="{StaticResource FunctionButtonBaseType}"
-                                Click="ManualSelectedButton_OnClick"/>
+                                Click="ManualSelectedButton_OnClick" Focusable="False"/>
                         <Button Content="发送数据(未实现)"
                                 x:Name="SendDataButton"
                                 Style="{StaticResource FunctionButtonBaseType}"
@@ -112,6 +114,7 @@
                             <CheckBox x:Name="ShowPlotLineCheckBox"
                                       Content="显示连线" Margin="5" 
                                       HorizontalAlignment="Center"
+                                      Focusable="False"
                                       Checked="ShowPlotLineCheckBox_OnChecked"
                                       Unchecked="ShowPlotLineCheckBox_OnUnchecked"/>
                         </StackPanel>

@@ -1,8 +1,10 @@
 
+using Model;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Utilities.Ocr;
 
 namespace Utilities;
 
@@ -32,12 +34,31 @@ public static class InteractionUtilities {
     /// <param name="textBox"></param>
     /// <param name="result"></param>
     /// <returns></returns>
-    public static bool TexBoxValueConvert(TextBox textBox, ref double result) {
-        if(ConversionUtilities.Str2Num(textBox.Text, ref result)) { return true; }
-        InteractionUtilities.ShowAndHideTooltip("输入错误!");
-        return false;
+    public static bool TexBoxValueConvert<T>(TextBox textBox, ref T result) {
+        try {
+            result = (T)Convert.ChangeType(textBox.Text.Replace(" ", ""), typeof(T));
+            return true;
+        }
+        catch {
+            return false;
+        }
     }
 
+    public static void ShowErrorMessageBox(string errorMessage) {
+        MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+    }
+    public static async Task<IOcrProduct> CreateOcr(OcrConfig ocrConfig) {
+        var ocr = OcrFactory.CreateOcrProduct(ocrConfig);
+        try {
+            string s = await ocr.GetToken();
+            if(s != "") { throw new Exception(s); }
+            InteractionUtilities.ShowAndHideTooltip("OCR API连接成功!");
+        }
+        catch(Exception e) {
+            InteractionUtilities.ShowErrorMessageBox($"获取OCR秘钥失败, 请检查OCR相关设置\n具体错误如下:\n{e}");
+        }
+        return ocr;
+    }
     public static void SetFocusableForChildren(DependencyObject parent, bool focusable) {
         // 遍历parent内的所有子元素，设置Focusable属性
         for(int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++) {
@@ -46,7 +67,7 @@ public static class InteractionUtilities {
                 SetFocusableForChildren(child, focusable);
             }
             if(child is Control control) {
-                control.IsEnabled = focusable;
+                control.Focusable = focusable;
             }
         }
     }
