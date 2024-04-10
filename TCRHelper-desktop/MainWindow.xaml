@@ -20,7 +20,7 @@
             <TabItem Header="导入" RenderTransformOrigin="0.5,0.5">
                 <Grid Background="#FFD8D8D8">
                     <GroupBox Header="导入方法">
-                        <StackPanel>
+                        <StackPanel Orientation="Horizontal">
                             <Button x:Name="ImportFromPlotButton" Content="图片"
                                     Margin="10"
                                     Click="ImportFromPlotButton_OnClick"></Button>

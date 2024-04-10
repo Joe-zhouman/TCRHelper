@@ -36,4 +36,11 @@
         <Setter Property="Fill" Value="Black"/>
         <Setter Property="Stroke" Value="Black"/>
     </Style>
+    <!--Button Style-->
+    <Style x:Key="ButtonBaseStyle"
+           TargetType="Button">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Canvas.ZIndex" Value="1"/>
+    </Style>
 </ResourceDictionary>

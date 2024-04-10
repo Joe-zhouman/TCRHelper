@@ -24,7 +24,30 @@
                     KeyDown="ImageProcessCanvas_OnKeyDown"
                     Loaded="ImageProcessCanvas_OnLoaded"
                     MouseLeftButtonDown="ImageProcessCanvas_OnMouseLeftButtonDown">
-
+                <WrapPanel 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top" 
+                    Margin="5" 
+                    Width="95"
+                    Orientation="Horizontal"
+                    ZIndex="1">
+                    <Button x:Name="XMinSelectButton"
+                            Content="XMin"
+                            Style="{StaticResource ButtonBaseStyle}"
+                            Click="XMinSelectButton_OnClick"/>
+                    <Button x:Name="XMaxSelectButton"
+                            Content="XMax"
+                            Style="{StaticResource ButtonBaseStyle}"
+                            Click="XMaxSelectButton_OnClick"/>
+                    <Button x:Name="YMinSelectButton"
+                            Content="YMin"
+                            Style="{StaticResource ButtonBaseStyle}"
+                            Click="YMinSelectButton_OnClick"/>
+                    <Button x:Name="YMaxSelectButton"
+                            Content="YMax"
+                            Style="{StaticResource ButtonBaseStyle}"
+                            Click="YMaxSelectButton_OnClick"/>
+                </WrapPanel>
                 <Image x:Name="LoadedImage" 
                        Width="1200" Height="900"/>
                 <Line x:Name="XMinLine"

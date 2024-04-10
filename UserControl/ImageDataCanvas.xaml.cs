@@ -147,11 +147,44 @@ namespace TCRHelperUserControl {
                 case Key.Delete: {
                         _points.Remove(_selectedPoint);
                         ImageProcessCanvas.Children.Remove(_selectedPoint);
-                        if(_points.Count == 0) { _selectedPoint = null; }
-                        else {
-                            _selectedPoint = _points.Last();
-                            _selectedPoint.Style = Resources["PointSelected"] as Style;
+                        _selectedPoint = null;
+                        if(_points.Count > 0) {
+                            SelectPoint(_points.Last());
                         }
+                        break;
+                    }
+                case Key.A: {
+                        if(_points.Count <= 1) { return; }
+                        if(_points.First() == _selectedPoint) {
+                            SelectPoint(_points.Last());
+                        }
+                        else {
+                            var idx = _points.IndexOf(_selectedPoint);
+                            if(idx < 1) { return; }
+                            SelectPoint(_points[idx - 1]);
+                        }
+                        break;
+                    }
+                case Key.D: {
+                        if(_points.Count <= 1) { return; }
+                        if(_points.Last() == _selectedPoint) {
+                            SelectPoint(_points.First());
+                        }
+                        else {
+                            var idx = _points.IndexOf(_selectedPoint);
+                            if(idx < 0 || idx >= _points.Count - 1) { return; }
+                            SelectPoint(_points[idx + 1]);
+                        }
+                        break;
+                    }
+                case Key.W: {
+                        if(_points.Count <= 1) { return; }
+                        SelectPoint(_points.First());
+                        break;
+                    }
+                case Key.S: {
+                        if(_points.Count <= 1) { return; }
+                        SelectPoint(_points.Last());
                         break;
                     }
                 default: { return; }
@@ -475,5 +508,10 @@ namespace TCRHelperUserControl {
                 Stroke = Brushes.Black
             });
         }
+
+        private void XMinSelectButton_OnClick(object sender, RoutedEventArgs e) => SelectLine(XMinLine);
+        private void XMaxSelectButton_OnClick(object sender, RoutedEventArgs e) { SelectLine(XMaxLine); }
+        private void YMinSelectButton_OnClick(object sender, RoutedEventArgs e) { SelectLine(YMinLine); }
+        private void YMaxSelectButton_OnClick(object sender, RoutedEventArgs e) { SelectLine(YMaxLine); }
     }
 }
