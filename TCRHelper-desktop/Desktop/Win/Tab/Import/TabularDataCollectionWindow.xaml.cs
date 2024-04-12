@@ -7,12 +7,12 @@ using System.Windows.Media.Imaging;
 using Utilities;
 using Utilities.Ocr;
 
-namespace TCRHelper_desktop;
+namespace TCRHelper.Desktop.Win.Tab.Import;
 /// <summary>
 /// TabularDataCollectionWindow.xaml 的交互逻辑
 /// </summary>
 public partial class TabularDataCollectionWindow : Window {
-    private readonly List<System.Windows.Controls.Control> LOCKED_ELEMENTS;
+    private readonly List<Control> LOCKED_ELEMENTS;
 
     public int nRow;
     public int nCol;

@@ -1,8 +1,6 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
-namespace TCRHelper_desktop;
+namespace TCRHelper.Desktop;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>

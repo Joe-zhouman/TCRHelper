@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="TCRHelper.Desktop.Win.Tab.Preference.PreferenceTabPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TCRHelper.Desktop.Win.Tab.Preference"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <StackPanel>
+            <GroupBox Header="文字识别">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="接口"></Label>
+                        <ComboBox x:Name="ConfigOcrTypeComboBox" SelectedIndex="0"/>
+                        <Label Content="ApiKey"></Label>
+                        <TextBox x:Name ="ConfigApiKeyTextBox"  MinWidth="100"/>
+                        <Label Content="SecretKey"></Label>
+                        <TextBox x:Name ="ConfigSecretKeyTextBox"  MinWidth="100"></TextBox>
+                        <Button x:Name="ConfigTestOcrApiButton"
+                                Content="测试"
+                                Style="{StaticResource FunctionButtonBaseType}"
+                                Click="TestOcrApiButton_OnClick"></Button>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <Button x:Name="ConfigApplyButton" 
+                    Style="{StaticResource FunctionButtonBaseType}"
+                    Content="应用"
+                    Click="ConfigApplyButton_OnClick"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

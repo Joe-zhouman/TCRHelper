@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 using Utilities;
 using Utilities.Ocr;
 
-namespace TCRHelper_desktop;
+namespace TCRHelper.Desktop.Win.Tab.Import;
 /// <summary>
 /// IdentifyResultWindows.xaml 的交互逻辑
 /// </summary>

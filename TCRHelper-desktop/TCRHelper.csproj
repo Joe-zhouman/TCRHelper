@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows7.0</TargetFramework>
-    <RootNamespace>TCRHelper_desktop</RootNamespace>
+    <RootNamespace>TCRHelper</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
@@ -39,6 +39,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Desktop\Win\Tab\Search\" />
+    <Folder Include="Desktop\Win\Tab\Train\" />
   </ItemGroup>
 
 </Project>

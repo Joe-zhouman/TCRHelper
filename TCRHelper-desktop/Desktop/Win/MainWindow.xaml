@@ -1,0 +1,43 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TCRHelper.Desktop"
+        xmlns:TCRHelperUserControl="clr-namespace:TCRHelperUserControl;assembly=TCRHelperUserControl"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime"
+        xmlns:model="clr-namespace:Model;assembly=Model"
+        xmlns:export="clr-namespace:TCRHelper.Desktop.Win.Tab.Export"
+        xmlns:import="clr-namespace:TCRHelper.Desktop.Win.Tab.Import"
+        xmlns:preference="clr-namespace:TCRHelper.Desktop.Win.Tab.Preference"
+        x:Class="TCRHelper.Desktop.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="900" Width="1600"
+        Loaded="MainWindow_OnLoaded">
+    <Grid Background="#FFD8D8D8">
+        <TabControl x:Name="MainFuncTab" FontSize="20">
+            <TabItem Header="查询">
+                <Grid>
+                    <export:ExportTabPage></export:ExportTabPage>
+                </Grid>
+            </TabItem>  
+            <TabItem Header="导入" RenderTransformOrigin="0.5,0.5">
+                <Grid Background="#FFD8D8D8">
+                    <import:ImportTabPage x:Name="ImportTabPage"></import:ImportTabPage>
+                </Grid>
+            </TabItem>
+            <TabItem Header="输出">
+                <Grid Background="#FFD8D8D8"/>
+            </TabItem>
+            <TabItem Header="训练">
+                <Grid Background="#FFD8D8D8"/>
+            </TabItem>
+            <TabItem Header="设置">
+                <Grid Background="#FFD8D8D8">
+                    <preference:PreferenceTabPage x:Name="PreferenceTabPage"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Utilities;
 
-namespace TCRHelper_desktop;
+namespace TCRHelper.Desktop.Win.Tab.Import;
 /// <summary>
 /// PlotDataCollectionWindows.xaml 的交互逻辑
 /// </summary>
