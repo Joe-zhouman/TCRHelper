@@ -18,6 +18,75 @@
                             Click="ImportFromTabularButton_OnClick"></Button>
                 </StackPanel>
             </GroupBox>
+            <GroupBox Header="参考文献">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Column="0" Grid.Row="0"
+                        Content="DOI:"/>
+                    <TextBox x:Name="DoiTextBox"
+                             Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5"
+                             Margin="5 2"/>
+                    <Button x:Name="SearchButton"
+                            Content="搜索"
+                            Grid.Row="0" Grid.Column="6"
+                            Style="{StaticResource FunctionButtonBaseType}"
+                            Click="SearchButton_OnClick"/>
+                    <Label
+                        Content="标题:"
+                        Grid.Row="1" Grid.Column="0"></Label>
+                    <TextBox x:Name="TitleTextBox"
+                             Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
+                             Margin="5 2"/>
+                    <Button x:Name="ClearRefButton"
+                            Content="清除"
+                            Grid.Row="1" Grid.Column="6"
+                            Style="{StaticResource FunctionButtonBaseType}"/>
+                    <Label
+                        Grid.Row="2" Grid.Column="0"
+                        Content="年份:"></Label>
+                    <TextBox x:Name="YearTextBox"
+                             Grid.Row="2" Grid.Column="1"
+                             Margin="5 2"/>
+                    <Label
+                        Grid.Row="2" Grid.Column="2"
+                        Content="作者:"/>
+                    <TextBox x:Name="AuthorTextBox"
+                             Grid.Row="2" Grid.Column="3"
+                             Margin="5 2"/>
+                    <Label
+                        Grid.Row="2" Grid.Column="4"
+                        Content="期刊:"/>
+                    <TextBox x:Name="JournalTextBox"
+                             Grid.Row="2" Grid.Column="5"
+                             Margin="5 2"/>
+                    <Button x:Name="InsertButton"
+                            Content="导入"
+                            Grid.Row="2" Grid.Column="6"
+                            Style="{StaticResource FunctionButtonBaseType}"/>
+                    <Label
+                        Grid.Row="3" Grid.Column="0"
+                        Content="备注:"/>
+                    <RichTextBox x:Name="DescriptionRichTextBox"
+                             Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="6"
+                             Margin="5 2"/>
+                </Grid>
+            </GroupBox>
         </StackPanel>
     </Grid>
 </UserControl>

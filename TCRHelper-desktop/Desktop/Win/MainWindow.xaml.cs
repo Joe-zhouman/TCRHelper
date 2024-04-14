@@ -1,5 +1,5 @@
 ﻿using Data;
-using Model;
+using Model.Config;
 using System.Windows;
 namespace TCRHelper.Desktop;
 /// <summary>

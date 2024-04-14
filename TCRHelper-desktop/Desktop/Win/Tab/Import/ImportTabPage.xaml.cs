@@ -1,6 +1,10 @@
-﻿using Model;
+﻿using Model.Config;
+using Model.Db;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
+using Utilities.RefQuery;
 
 namespace TCRHelper.Desktop.Win.Tab.Import;
 /// <summary>
@@ -20,5 +24,24 @@ public partial class ImportTabPage : UserControl {
     private void ImportFromTabularButton_OnClick(object sender, RoutedEventArgs e) {
         TabularDataCollectionWindow w = new(Config);
         w.ShowDialog();
+    }
+
+    private async void SearchButton_OnClick(object sender, RoutedEventArgs e) {
+        try {
+            IRefQueryProduct query = RefQueryFactory.Create(RefQueryApi.CROSSREF);
+            Reference reference = await query.GetRef(DoiTextBox.Text);
+            TitleTextBox.Text = reference.Title;
+            YearTextBox.Text = reference.Year;
+            AuthorTextBox.Text = reference.Author;
+            JournalTextBox.Text = reference.Journal;
+        }
+        catch(Exception exception) {
+            Paragraph paragraph = new();
+            Run run = new(exception.Message) {
+                Foreground = Brushes.Red
+            };
+            paragraph.Inlines.Add(run);
+            DescriptionRichTextBox.Document.Blocks.Add(paragraph);
+        }
     }
 }

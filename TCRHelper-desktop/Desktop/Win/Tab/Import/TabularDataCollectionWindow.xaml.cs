@@ -1,4 +1,4 @@
-﻿using Model;
+﻿using Model.Config;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;

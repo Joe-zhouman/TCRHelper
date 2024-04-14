@@ -1,5 +1,4 @@
-
-using Model;
+using Model.Config;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -48,7 +47,7 @@ public static class InteractionUtilities {
         MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
     }
     public static async Task<IOcrProduct> CreateOcr(OcrConfig ocrConfig) {
-        var ocr = OcrFactory.CreateOcrProduct(ocrConfig);
+        var ocr = OcrFactory.Create(ocrConfig);
         try {
             string s = await ocr.GetToken();
             if(s != "") { throw new Exception(s); }

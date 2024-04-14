@@ -1,5 +1,4 @@
-
-using Model;
+using Model.Config;
 using System.IO;
 using System.Text.Json;
 

@@ -12,14 +12,10 @@
 // *Github*    : https://github.com/Joe-zhouman
 // *LeetCode*  : https://leetcode-cn.com/u/joe_zm/
 
-using System.ComponentModel;
 using System.Windows.Markup;
 
 namespace Model;
-public enum OcrType {
-    [Description("百度标准版")]
-    BAIDU_STD,
-}
+
 public class EnumCollectionExtension : MarkupExtension {
     public Type EnumType { get; set; }
 

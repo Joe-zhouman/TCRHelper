@@ -12,7 +12,7 @@
 // *Github*    : https://github.com/Joe-zhouman
 // *LeetCode*  : https://leetcode-cn.com/u/joe_zm/
 
-using Model;
+using Model.Config;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
