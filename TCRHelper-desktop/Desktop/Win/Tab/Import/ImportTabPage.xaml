@@ -8,7 +8,7 @@
       d:DesignHeight="850" d:DesignWidth="1600">
     <Grid>
         <StackPanel>
-            <GroupBox Header="导入方法">
+            <GroupBox Header="数据采集方法">
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="ImportFromPlotButton" Content="图片"
                             Style="{StaticResource FunctionButtonBaseType}"
@@ -86,6 +86,9 @@
                              Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="6"
                              Margin="5 2"/>
                 </Grid>
+            </GroupBox>
+            <GroupBox Header="材料属性">
+
             </GroupBox>
         </StackPanel>
     </Grid>
