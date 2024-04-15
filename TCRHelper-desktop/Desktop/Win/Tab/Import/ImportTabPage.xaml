@@ -4,8 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TCRHelper.Desktop.Win.Tab.Import"
+      xmlns:unit="clr-namespace:Model.Unit;assembly=Model"
       mc:Ignorable="d" 
       d:DesignHeight="850" d:DesignWidth="1600">
+    <UserControl.Resources>
+        <unit:UnitComboBoxViewModel x:Key="ComboBoxBindingSource"/>
+    </UserControl.Resources>
     <Grid>
         <StackPanel>
             <GroupBox Header="数据采集方法">
@@ -27,7 +31,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="120"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -40,10 +44,16 @@
                         Grid.Column="0" Grid.Row="0"
                         Content="DOI:"/>
                     <TextBox x:Name="DoiTextBox"
-                             Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5"
+                             Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
                              Margin="5 2"/>
-                    <Button x:Name="SearchButton"
-                            Content="搜索"
+                    <Label 
+                        Grid.Row="0" Grid.Column="4" 
+                        Content="编号"></Label>
+                    <TextBox x:Name="RefIdTextBox"
+                             Grid.Row="0" Grid.Column="5"
+                             Margin="5 2"/>
+                    <Button x:Name="SearchOnlineButton"
+                            Content="Online搜索"
                             Grid.Row="0" Grid.Column="6"
                             Style="{StaticResource FunctionButtonBaseType}"
                             Click="SearchButton_OnClick"/>
@@ -53,8 +63,8 @@
                     <TextBox x:Name="TitleTextBox"
                              Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
                              Margin="5 2"/>
-                    <Button x:Name="ClearRefButton"
-                            Content="清除"
+                    <Button x:Name="SearchDatabaseButton"
+                            Content="查找数据库"
                             Grid.Row="1" Grid.Column="6"
                             Style="{StaticResource FunctionButtonBaseType}"/>
                     <Label
@@ -83,8 +93,12 @@
                         Grid.Row="3" Grid.Column="0"
                         Content="备注:"/>
                     <RichTextBox x:Name="DescriptionRichTextBox"
-                             Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="6"
+                             Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5"
                              Margin="5 2"/>
+                    <Button x:Name="ClearRefButton"
+                            Content="清空"
+                            Grid.Row="3" Grid.Column="6"
+                            Style="{StaticResource FunctionButtonBaseType}"/>
                 </Grid>
             </GroupBox>
             <GroupBox Header="材料属性">
@@ -99,15 +113,17 @@
                         <Label Content="摩尔质量"
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                        <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
-                    </StackPanel>
+                                <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                          ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=MolMassUnit}"/>
+                            </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                         <Label Content="密度"
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                        <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
+                        <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                  ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=DensityUnit}"/>
                         <Label Content="参考文献" 
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -118,7 +134,8 @@
                             <Label Content="比热"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
+                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=SpecificHeat}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -129,18 +146,8 @@
                             <Label Content="热导率"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
-                            <Label Content="参考文献" 
-                                   Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                        </StackPanel>
-                    </Border>
-                    <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
-                        <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                            <Label Content="比热"
-                                   Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
+                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ThermalConductivity}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -151,29 +158,22 @@
                             <Label Content="膨胀系数"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
+                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ThermalExpansion}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
                         </StackPanel>
                     </Border>
-                    <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
-                        <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                            <Label Content="热导率"
-                                   Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
-                            <Label Content="参考文献" 
-                                   Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                        </StackPanel>
-                    </Border>
+            
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="杨氏模量"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
+                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
+                                      SelectedIndex="3"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -184,7 +184,9 @@
                             <Label Content="剪切模量"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
+                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
+                                      SelectedIndex="3"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -195,7 +197,9 @@
                             <Label Content="体积模量"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
+                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
+                                      SelectedIndex="3"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -205,7 +209,7 @@
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="泊松比"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}" Width="110"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}" Width="160"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -215,7 +219,7 @@
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="莫氏硬度"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}" Width="110"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}" Width="160"/>
                             
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
@@ -227,7 +231,9 @@
                             <Label Content="维氏硬度"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
+                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
+                                      SelectedIndex="2"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -238,7 +244,9 @@
                             <Label Content="布氏硬度"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"/>
+                            <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
+                                      SelectedIndex="2"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>

@@ -35,7 +35,10 @@
 
     <Style x:Key="UnitComboBoxBaseStyle" TargetType="ComboBox">
         <Setter Property="Margin" Value="5"/>
-        <Setter Property="Width" Value="50"></Setter>
+        <Setter Property="MinWidth" Value="100"/>
+        <Setter Property="SelectedIndex" Value="0"/>
+        <Setter Property="DisplayMemberPath" Value="Display"/>
+        <Setter Property="SelectedValuePath" Value="Value"></Setter>
     </Style>
     <Style x:Key="ConstLengthLabelBaseType" TargetType="Label">
         <Setter Property="Margin" Value="5"/>
