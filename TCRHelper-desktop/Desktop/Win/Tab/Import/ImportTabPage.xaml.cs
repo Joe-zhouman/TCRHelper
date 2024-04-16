@@ -13,8 +13,10 @@ namespace TCRHelper.Desktop.Win.Tab.Import;
 public partial class ImportTabPage : UserControl {
     private AppConfig _appConfig;
     public AppConfig Config { get => _appConfig; set => _appConfig = value; }
+    private Material _material = new Material();
     public ImportTabPage() {
         InitializeComponent();
+        MatGroupBox.DataContext = _material;
     }
     private void ImportFromPlotButton_OnClick(object sender, RoutedEventArgs e) {
         PlotDataCollectionWindows w = new();
@@ -42,6 +44,12 @@ public partial class ImportTabPage : UserControl {
             };
             paragraph.Inlines.Add(run);
             DescriptionRichTextBox.Document.Blocks.Add(paragraph);
+        }
+    }
+
+    private void MatRefTextBox_OnLoad(object sender, EventArgs e) {
+        if(sender is TextBox textBox) {
+            textBox.DataContext = _material;
         }
     }
 }

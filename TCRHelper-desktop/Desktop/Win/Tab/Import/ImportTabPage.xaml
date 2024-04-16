@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TCRHelper.Desktop.Win.Tab.Import"
       xmlns:unit="clr-namespace:Model.Unit;assembly=Model"
+      xmlns:db ="clr-namespace:Model.Db;assembly=Model"
       mc:Ignorable="d" 
       d:DesignHeight="850" d:DesignWidth="1600">
     <UserControl.Resources>
@@ -101,7 +102,7 @@
                             Style="{StaticResource FunctionButtonBaseType}"/>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="材料属性">
+            <GroupBox Header="材料属性" x:Name="MatGroupBox">
                 <StackPanel>
                 <WrapPanel>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -113,9 +114,9 @@
                         <Label Content="摩尔质量"
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
-                                <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
-                                          ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=MolMassUnit}"/>
-                            </StackPanel>
+                        <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                  ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=MolMassUnit}"/>
+                    </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
@@ -126,7 +127,9 @@
                                   ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=DensityUnit}"/>
                         <Label Content="参考文献" 
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
-                        <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                        <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                 Loaded="MatRefTextBox_OnLoad"
+                                 Text="{Binding Path=MatGroupBox}"/>
                     </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -187,7 +190,7 @@
                             <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                       ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
                                       SelectedIndex="3"/>
-                            <Label Content="参考文献" 
+                            <Label Content="参考文献"  
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
                         </StackPanel>

@@ -10,7 +10,7 @@
 // *Twitter*   : @zhouman_LFC
 // *Website*   : www.joezhouman.com
 // *Github*    : https://github.com/Joe-zhouman
-// *LeetCode*  : https://leetcode-cn.com/u/joe_zm/
+// *Bilibili*  : @satisfactions
 
 using System.Windows.Media.Imaging;
 
