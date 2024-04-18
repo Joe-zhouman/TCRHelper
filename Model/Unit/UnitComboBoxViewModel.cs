@@ -90,4 +90,12 @@ public class UnitComboBoxViewModel {
             new DisplayValuePair("W/cm\u00b2", SI.WATT/SI.SQUARE_CENTI_METER),
             new DisplayValuePair("W/mm²",SI.WATT/SI.SQUARE_MILLI_METER)
         ];
+
+    private ObservableCollection<DisplayValuePair>? _temperature;
+
+    public ObservableCollection<DisplayValuePair> Temperature =>
+        _temperature ??= [
+            new DisplayValuePair("K", SI.KELVIN),
+            new DisplayValuePair("℃", SI.CELSIUS_DEGREE, SI.CELSTUS_DEGREE_ADDITION)
+        ];
 }

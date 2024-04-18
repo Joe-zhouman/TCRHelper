@@ -24,7 +24,7 @@
                             Click="ImportFromTabularButton_OnClick"></Button>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="参考参考文献">
+            <GroupBox Header="参考文献">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50"/>
@@ -282,7 +282,7 @@
                             </StackPanel>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox/>
+                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RA"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -293,7 +293,7 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox/>
+                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RSM"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -304,7 +304,7 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox/>
+                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RRM"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -323,7 +323,7 @@
                             </StackPanel>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox/>
+                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RA"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -334,7 +334,7 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox/>
+                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RSM"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -345,7 +345,7 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox/>
+                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RRM"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -360,7 +360,7 @@
                         <StackPanel>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox/>
+                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="接触压力"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -371,7 +371,7 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox/>
+                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="环境压力"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -381,17 +381,17 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox/>
+                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="环境温度"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
-                                              ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"/>
+                                              ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Temperature}"/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox/>
+                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="热流"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -403,7 +403,22 @@
                         
                         </GroupBox>
                         <GroupBox Header="备注">
-                            <TextBox MinWidth="200"></TextBox>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MinWidth="100"/>
+                                    <ColumnDefinition MinWidth="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="参考文献" Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxBaseStyle}"/>
+                                <TextBox Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                                         BorderThickness="2"/>
+                            </Grid>
                         </GroupBox>
                     </WrapPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
