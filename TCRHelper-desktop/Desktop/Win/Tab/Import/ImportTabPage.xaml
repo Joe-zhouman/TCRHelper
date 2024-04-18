@@ -269,6 +269,143 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
+            <GroupBox Header="接触热阻">
+                <WrapPanel>
+                    <DataGrid MinWidth="300"/>
+                    <GroupBox Header="表面一">
+                        <StackPanel>
+                            <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                <Label Content="材料"></Label>
+                                <ListBox></ListBox>
+                            </StackPanel>
+                            <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox/>
+                                    <Label Content="RA"
+                                        Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                            ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
+                                            SelectedIndex="3"/>
+                                    <Label Content="参考文献" 
+                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox/>
+                                    <Label Content="RSM"
+            Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
+                SelectedIndex="3"/>
+                                    <Label Content="参考文献" 
+                Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox/>
+                                    <Label Content="RRM"
+            Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
+                SelectedIndex="3"/>
+                                    <Label Content="参考文献" 
+                Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="表面二">
+                        <StackPanel>
+                            <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                <Label Content="材料"></Label>
+                                <ListBox></ListBox>
+                            </StackPanel>
+                            <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox/>
+                                    <Label Content="RA"
+                                        Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
+                                SelectedIndex="3"/>
+                                    <Label Content="参考文献" 
+                                Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox/>
+                                    <Label Content="RSM"
+                                        Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+    ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
+    SelectedIndex="3"/>
+                                    <Label Content="参考文献" 
+    Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox/>
+                                    <Label Content="RRM"
+Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+    ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
+    SelectedIndex="3"/>
+                                    <Label Content="参考文献" 
+    Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="测试条件">
+                        <StackPanel>
+                            <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox/>
+                                    <Label Content="接触压力"
+Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+    ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
+    SelectedIndex="2"/>
+                                    <Label Content="参考文献" 
+    Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox/>
+                                    <Label Content="环境压力"
+Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+    ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"/>
+                                    <Label Content="参考文献" 
+    Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+      
+                    </GroupBox>
+                </WrapPanel>
+            </GroupBox>
         </StackPanel>
     </Grid>
 </UserControl>

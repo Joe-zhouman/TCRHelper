@@ -75,4 +75,12 @@ public class UnitComboBoxViewModel {
             new DisplayValuePair("MPa", SI.MEGA_PASCAL),
             new DisplayValuePair("GPa",SI.GIGA_PASCAL)
         ];
+    private ObservableCollection<DisplayValuePair>? _length;
+    public ObservableCollection<DisplayValuePair> Length =>
+        _length ??= [
+            new DisplayValuePair("m", SI.METER),
+            new DisplayValuePair("cm", SI.CENTI_METER),
+            new DisplayValuePair("mm",SI.MILLI_METER),
+            new DisplayValuePair("μm",SI.MICRO_METER)
+        ];
 }
