@@ -10,6 +10,8 @@
       d:DesignHeight="850" d:DesignWidth="1600">
     <UserControl.Resources>
         <unit:UnitComboBoxViewModel x:Key="ComboBoxBindingSource"/>
+        <db:Material x:Key="MatBindingSource"/>
+        <db:Reference x:Key="RefBindingSource"/>
     </UserControl.Resources>
     <Grid>
         <ScrollViewer>
@@ -22,9 +24,14 @@
                     <Button x:Name="ImportFromTabularButton" Content="表格" 
                             Style="{StaticResource FunctionButtonBaseType}"
                             Click="ImportFromTabularButton_OnClick"></Button>
-                </StackPanel>
+                        <Button x:Name="TestButton"
+                        Content="测试"
+                        Style="{StaticResource FunctionButtonBaseType}"
+                        Click="TestButton_Click"/>
+
+                    </StackPanel>
             </GroupBox>
-            <GroupBox Header="参考文献">
+            <GroupBox Header="参考文献" x:Name="RefGroupbox" DataContext="{Binding Source={StaticResource RefBindingSource}}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50"/>
@@ -47,63 +54,71 @@
                         Content="DOI:"/>
                     <TextBox x:Name="DoiTextBox"
                              Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
-                             Margin="5 2"/>
+                             Margin="5 2"
+                             Text="{Binding Path=DOI, Mode=OneWayToSource}"/>
                     <Label 
                         Grid.Row="0" Grid.Column="4" 
                         Content="编号"></Label>
                     <TextBox x:Name="RefIdTextBox"
                              Grid.Row="0" Grid.Column="5"
-                             Margin="5 2"/>
-                    <Button x:Name="SearchOnlineButton"
-                            Content="Online搜索"
-                            Grid.Row="0" Grid.Column="6"
-                            Style="{StaticResource FunctionButtonBaseType}"
-                            Click="SearchButton_OnClick"/>
+                             Margin="5 2"
+                             Text="{Binding Path=Id,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    
                     <Label
                         Content="标题:"
                         Grid.Row="1" Grid.Column="0"></Label>
-                    <TextBox x:Name="TitleTextBox"
+                        <TextBox x:Name="TitleTextBox"
                              Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
-                             Margin="5 2"/>
-                    <Button x:Name="SearchDatabaseButton"
-                            Content="查找数据库"
-                            Grid.Row="1" Grid.Column="6"
-                            Style="{StaticResource FunctionButtonBaseType}"/>
-                    <Label
+                             Margin="5 2"
+                             Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label
                         Grid.Row="2" Grid.Column="0"
                         Content="年份:"></Label>
                     <TextBox x:Name="YearTextBox"
                              Grid.Row="2" Grid.Column="1"
-                             Margin="5 2"/>
+                             Margin="5 2"
+                             Text="{Binding Path=Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Label
                         Grid.Row="2" Grid.Column="2"
                         Content="作者:"/>
                     <TextBox x:Name="AuthorTextBox"
                              Grid.Row="2" Grid.Column="3"
-                             Margin="5 2"/>
+                             Margin="5 2"
+                             Text="{Binding Path=Author, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Label
                         Grid.Row="2" Grid.Column="4"
                         Content="期刊:"/>
                     <TextBox x:Name="JournalTextBox"
                              Grid.Row="2" Grid.Column="5"
-                             Margin="5 2"/>
-                    <Button x:Name="InsertButton"
-                            Content="导入"
-                            Grid.Row="2" Grid.Column="6"
-                            Style="{StaticResource FunctionButtonBaseType}"/>
+                             Margin="5 2"
+                             Text="{Binding Path=Journal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    
                     <Label
                         Grid.Row="3" Grid.Column="0"
                         Content="备注:"/>
                     <RichTextBox x:Name="DescriptionRichTextBox"
                              Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5"
                              Margin="5 2"/>
+                    <Button x:Name="SearchOnlineButton"
+                        Content="Online搜索"
+                        Grid.Row="0" Grid.Column="6"
+                        Style="{StaticResource FunctionButtonBaseType}"
+                        Click="SearchButton_OnClick"/>
+                    <Button x:Name="SearchDatabaseButton"
+                        Content="查找数据库"
+                        Grid.Row="1" Grid.Column="6"
+                        Style="{StaticResource FunctionButtonBaseType}"/>
+                    <Button x:Name="InsertButton"
+                        Content="导入"
+                        Grid.Row="2" Grid.Column="6"
+                        Style="{StaticResource FunctionButtonBaseType}"/>
                     <Button x:Name="ClearRefButton"
                             Content="清空"
                             Grid.Row="3" Grid.Column="6"
                             Style="{StaticResource FunctionButtonBaseType}"/>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="材料属性" x:Name="MatGroupBox">
+            <GroupBox Header="材料属性"  x:Name="MatGroupBox" DataContext="{Binding Source={StaticResource MatBindingSource}}">
                 <StackPanel>
                 <WrapPanel>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -111,7 +126,8 @@
                         <Label Content="材料名称"
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox 
-                            Style="{StaticResource TextBoxBaseStyle}"/>
+                            Style="{StaticResource TextBoxBaseStyle}"
+                            Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
                         <Label Content="摩尔质量"
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -130,7 +146,7 @@
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox Style="{StaticResource TextBoxBaseStyle}"
                                  Loaded="MatRefTextBox_OnLoad"
-                                 Text="{Binding Path=MatGroupBox}"/>
+                                 Text="{Binding Path=Density}"/>
                     </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -257,17 +273,15 @@
                         </StackPanel>
                     </Border>
                 </WrapPanel>
-                   <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
-                       <DockPanel >
+                 <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                       <DockPanel>
                            <Label Content="备注" Style="{StaticResource ConstLengthLabelBaseType}"/>
-                           <TextBox Margin="5"></TextBox>
+                           <TextBox Margin="5" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                        </DockPanel>
                    </Border>
                     <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}" HorizontalAlignment="Right">
-                        <Button 
-                            Content="导入"
-                            Style="{StaticResource FunctionButtonBaseType}"/>
-                    </StackPanel>
+                            <Button Content="导入" Style="{StaticResource FunctionButtonBaseType}"/>
+                        </StackPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="接触热阻">

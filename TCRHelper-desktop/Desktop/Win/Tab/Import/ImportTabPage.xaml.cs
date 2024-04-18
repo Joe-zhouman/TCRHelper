@@ -5,6 +5,8 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using Utilities.RefQuery;
+using Utilities;
+using System.Windows.Threading;
 
 namespace TCRHelper.Desktop.Win.Tab.Import;
 /// <summary>
@@ -14,8 +16,10 @@ public partial class ImportTabPage : UserControl {
     private AppConfig _appConfig;
     public AppConfig Config { get => _appConfig; set => _appConfig = value; }
     private Material _material = new Material();
+    private Reference _ref = new Reference();
     public ImportTabPage() {
         InitializeComponent();
+        RefGroupbox.DataContext = _ref;
         MatGroupBox.DataContext = _material;
     }
     private void ImportFromPlotButton_OnClick(object sender, RoutedEventArgs e) {
@@ -51,5 +55,10 @@ public partial class ImportTabPage : UserControl {
         if(sender is TextBox textBox) {
             textBox.DataContext = _material;
         }
+    }
+ 
+
+    private void TestButton_Click(object sender, RoutedEventArgs e) {
+        InteractionUtilities.ShowAndHideTooltip(_ref.DOI, 3);
     }
 }
