@@ -83,4 +83,11 @@ public class UnitComboBoxViewModel {
             new DisplayValuePair("mm",SI.MILLI_METER),
             new DisplayValuePair("μm",SI.MICRO_METER)
         ];
+    private ObservableCollection<DisplayValuePair>? _heatFlux;
+    public ObservableCollection<DisplayValuePair> HeatFlux =>
+        _heatFlux ??= [
+            new DisplayValuePair("W/m\u00b2", SI.WATT/SI.SQUARE_METER),
+            new DisplayValuePair("W/cm\u00b2", SI.WATT/SI.SQUARE_CENTI_METER),
+            new DisplayValuePair("W/mm²",SI.WATT/SI.SQUARE_MILLI_METER)
+        ];
 }
