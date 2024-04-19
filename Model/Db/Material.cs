@@ -18,44 +18,122 @@ using System.Runtime.CompilerServices;
 namespace Model.Db;
 
 public class Material : INotifyPropertyChanged {
-    public int Id { get; set; }
+    public int Id { get; set; } = -1;
     private string _name;
 
     public string Name {
         get => _name;
-        set {
-            if(value != _name) {
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
+        set => SetField(ref _name, value);
     }
 
     public double MolMass { get; set; }
-    public int MolMassRefId { get; set; }
+    private int _molMassRefId = -1;
+
+    public int MolMassRefId {
+        get => _molMassRefId;
+        set => SetField(ref _molMassRefId, value);
+    }
+
     public double Density { get; set; }
-    public int DensityRefId { get; set; }
+    private int _densityRefId = -1;
+
+    public int DensityRefId {
+        get => _densityRefId;
+        set => SetField(ref _densityRefId, value);
+    }
+
     public double SpecificHeat { get; set; }
-    public int SpecificHeatRefId { get; set; }
+    private int _specificHeatRefId = -1;
+
+    public int SpecificHeatRefId {
+        get => _specificHeatRefId;
+        set => SetField(ref _specificHeatRefId, value);
+    }
+
     public double ThermalConductivity { get; set; }
-    public int ThermalConductivityRefId { get; set; }
+    private int _thermalConductivityRefId = -1;
+
+    public int ThermalConductivityRefId {
+        get => _thermalConductivityRefId;
+        set => SetField(ref _thermalConductivityRefId, value);
+    }
+
     public double ThermalExpansion { get; set; }
-    public int ThermalExpansionRefId { get; set; }
+    private int _thermalExpansionRefId = -1;
+
+    public int ThermalExpansionRefId {
+        get => _thermalExpansionRefId;
+        set => SetField(ref _thermalExpansionRefId, value);
+    }
+
     public double YoungModulus { get; set; }
-    public int YoungModulusRefId { get; set; }
+    private int _youngModulusRefId = -1;
+
+    public int YoungModulusRefId {
+        get => _youngModulusRefId;
+        set => SetField(ref _youngModulusRefId, value);
+    }
+
     public double ShearModulus { get; set; }
-    public int ShearModulusRefId { get; set; }
+
+    private int _shearModulusRefId = -1;
+
+    public int ShearModulusRefId {
+        get => _shearModulusRefId;
+        set => SetField(ref _shearModulusRefId, value);
+    }
+
     public double BulkModulus { get; set; }
-    public int BulkModulusRefId { get; set; }
+
+    private int _bulkModulusRefId = -1;
+
+    public int BulkModulusRefId {
+        get => _bulkModulusRefId;
+        set => SetField(ref _bulkModulusRefId, value);
+    }
+
     public double PoissonRatio { get; set; }
-    public int PoissonRatioRefId { get; set; }
+
+    private int _poissonRatioRefId = -1;
+
+    public int PoissonRatioRefId {
+        get => _poissonRatioRefId;
+        set => SetField(ref _poissonRatioRefId, value);
+    }
+
     public double MothsHardness { get; set; }
-    public int MothsHardnessRefId { get; set; }
+
+    private int _mothsHardnessRefId = -1;
+
+    public int MothsHardnessRefId {
+        get => _mothsHardnessRefId;
+        set => SetField(ref _mothsHardnessRefId, value);
+    }
+
     public double VickersHardness { get; set; }
-    public int VickersHardnessId { get; set; }
+
+    private int _vickersHardnessRefId;
+
+    public int VickersHardnessId {
+        get => _vickersHardnessRefId;
+        set => SetField(ref _vickersHardnessRefId, value);
+    }
+
     public double BrinellHardness { get; set; }
-    public int BrinellHardnessRefId { get; set; }
-    public string? Description { get; set; }
+
+    private int _brinellHardnessRefId = -1;
+
+    public int BrinellHardnessRefId {
+        get => _brinellHardnessRefId;
+        set => SetField(ref _brinellHardnessRefId, value);
+    }
+
+    private string _description;
+
+    public string Description {
+        get => _description;
+        set => SetField(ref _description, value);
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
