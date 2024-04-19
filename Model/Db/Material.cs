@@ -19,7 +19,18 @@ namespace Model.Db;
 
 public class Material : INotifyPropertyChanged {
     public int Id { get; set; }
-    public string Name { get; set; }
+    private string _name;
+
+    public string Name {
+        get => _name;
+        set {
+            if(value != _name) {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public double MolMass { get; set; }
     public int MolMassRefId { get; set; }
     public double Density { get; set; }
