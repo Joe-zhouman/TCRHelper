@@ -17,6 +17,7 @@ using System.Runtime.CompilerServices;
 namespace Model.Db;
 
 public class Reference : INotifyPropertyChanged {
+    private int _id;
     public int Id { get; set; }
     public string DOI { get; set; }
     public string Title { get; set; }

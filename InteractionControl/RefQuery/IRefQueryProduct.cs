@@ -17,5 +17,5 @@ using Model.Db;
 namespace Utilities.RefQuery;
 
 public interface IRefQueryProduct {
-    public Task<Reference> GetRef(string doi);
+    public Task GetRef(Reference reference);
 }

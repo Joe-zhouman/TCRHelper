@@ -29,22 +29,21 @@ public class CrossrefQuery : IRefQueryProduct {
         return await client.SendAsync(request);
     }
 
-    public async Task<Reference> GetRef(string doi) {
-        HttpResponseMessage response = await Query(doi);
+    public async Task GetRef(Reference reference) {
+        HttpResponseMessage response = await Query(reference.DOI);
         if(!response.IsSuccessStatusCode) {
             throw new HttpRequestException(response.ToString());
         }
         string jsonRespond = await response.Content.ReadAsStringAsync();
         using JsonDocument doc = JsonDocument.Parse(jsonRespond);
         JsonElement message = doc.RootElement.GetProperty("message");
-        Reference reference = new() {
-            Id = -1,
-            DOI = doi,
-            Detail = jsonRespond,
-            Title = message.GetProperty("title")[0].ToString(),
-            Year = message.GetProperty("published-print").GetProperty("date-parts")[0][0].ToString(),
-            Journal = message.GetProperty("short-container-title")[0].ToString()
-        };
+
+        reference.Id = -1;
+        reference.Detail = jsonRespond;
+        reference.Title = message.GetProperty("title")[0].ToString();
+        reference.Year = message.GetProperty("indexed").GetProperty("date-parts")[0][0].ToString();
+        reference.Journal = message.GetProperty("short-container-title")[0].ToString();
+        
         JsonElement authorInfoList = message.GetProperty("author");
         StringBuilder authorList = new();
         for(int i = 0; i < authorInfoList.GetArrayLength(); i++) {
@@ -54,6 +53,5 @@ public class CrossrefQuery : IRefQueryProduct {
             authorList.Append('|');
         }
         reference.Author = authorList.ToString();
-        return reference;
     }
 }

@@ -34,31 +34,16 @@ public partial class ImportTabPage : UserControl {
 
     private async void SearchButton_OnClick(object sender, RoutedEventArgs e) {
         try {
+            VirtualTextBox.Focus();
             IRefQueryProduct query = RefQueryFactory.Create(RefQueryApi.CROSSREF);
-            Reference reference = await query.GetRef(DoiTextBox.Text);
-            TitleTextBox.Text = reference.Title;
-            YearTextBox.Text = reference.Year;
-            AuthorTextBox.Text = reference.Author;
-            JournalTextBox.Text = reference.Journal;
+            await query.GetRef(_ref);
         }
         catch(Exception exception) {
-            Paragraph paragraph = new();
-            Run run = new(exception.Message) {
-                Foreground = Brushes.Red
-            };
-            paragraph.Inlines.Add(run);
-            DescriptionRichTextBox.Document.Blocks.Add(paragraph);
+            InteractionUtilities.ShowErrorMessageBox(exception.Message);
         }
     }
-
-    private void MatRefTextBox_OnLoad(object sender, EventArgs e) {
-        if(sender is TextBox textBox) {
-            textBox.DataContext = _material;
-        }
-    }
- 
 
     private void TestButton_Click(object sender, RoutedEventArgs e) {
-        InteractionUtilities.ShowAndHideTooltip(_ref.DOI, 3);
+        InteractionUtilities.ShowAndHideTooltip(_ref.Title, 3);
     }
 }

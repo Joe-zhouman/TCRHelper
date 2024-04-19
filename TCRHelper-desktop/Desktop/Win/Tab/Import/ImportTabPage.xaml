@@ -18,16 +18,17 @@
         <StackPanel>
             <GroupBox Header="数据采集方法">
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Name="ImportFromPlotButton" Content="图片"
+                     <Button x:Name="ImportFromPlotButton" Content="图片"
                             Style="{StaticResource FunctionButtonBaseType}"
-                            Click="ImportFromPlotButton_OnClick"></Button>
-                    <Button x:Name="ImportFromTabularButton" Content="表格" 
+                            Click="ImportFromPlotButton_OnClick"/>
+                     <Button x:Name="ImportFromTabularButton" Content="表格" 
                             Style="{StaticResource FunctionButtonBaseType}"
-                            Click="ImportFromTabularButton_OnClick"></Button>
-                        <Button x:Name="TestButton"
-                        Content="测试"
-                        Style="{StaticResource FunctionButtonBaseType}"
-                        Click="TestButton_Click"/>
+                            Click="ImportFromTabularButton_OnClick"/>
+                     <Button x:Name="TestButton"
+                            Content="测试"
+                            Style="{StaticResource FunctionButtonBaseType}"
+                            Click="TestButton_Click"/>
+                        <TextBox x:Name="VirtualTextBox" Width="0"/>
 
                     </StackPanel>
             </GroupBox>
@@ -62,7 +63,7 @@
                     <TextBox x:Name="RefIdTextBox"
                              Grid.Row="0" Grid.Column="5"
                              Margin="5 2"
-                             Text="{Binding Path=Id,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Path=Id,Mode=OneWay,UpdateSourceTrigger=LostFocus}"/>
                     
                     <Label
                         Content="标题:"
@@ -70,7 +71,7 @@
                         <TextBox x:Name="TitleTextBox"
                              Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
                              Margin="5 2"
-                             Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                         <Label
                         Grid.Row="2" Grid.Column="0"
                         Content="年份:"></Label>
@@ -91,7 +92,7 @@
                     <TextBox x:Name="JournalTextBox"
                              Grid.Row="2" Grid.Column="5"
                              Margin="5 2"
-                             Text="{Binding Path=Journal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Path=Journal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                     
                     <Label
                         Grid.Row="3" Grid.Column="0"
@@ -145,7 +146,6 @@
                         <Label Content="参考文献" 
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                 Loaded="MatRefTextBox_OnLoad"
                                  Text="{Binding Path=Density}"/>
                     </StackPanel>
                     </Border>
