@@ -12,15 +12,24 @@
 // *Github*    : https://github.com/Joe-zhouman
 // *Bilibili*  : @satisfactions
 
-using System.ComponentModel;
+using Model.ViewModel.Unit;
+using System.Collections.ObjectModel;
 
 namespace Model.ViewModel.Config;
 public enum OcrType {
-    [Description("百度标准版")]
     BAIDU_STD,
 }
+
+public class OcrConfigComboBoxViewModel {
+    private ObservableCollection<DisplayValuePair<OcrType>>? _ocrProvider;
+    public ObservableCollection<DisplayValuePair<OcrType>> OcrProvider =>
+        _ocrProvider ??= [
+            new DisplayValuePair<OcrType>("百度标准版", OcrType.BAIDU_STD),
+        ];
+}
+
 public class OcrConfig {
-    public OcrType Type { get; set; } = OcrType.BAIDU_STD;
-    public string ApiKey { get; set; } = "";
-    public string SecretKey { get; set; } = "";
+    public ViewModelProperty<OcrType> OcrType { get; set; } = new() { Value = Config.OcrType.BAIDU_STD };
+    public ViewModelProperty<string> ApiKey { get; set; } = new();
+    public ViewModelProperty<string> SecretKey { get; set; } = new();
 }

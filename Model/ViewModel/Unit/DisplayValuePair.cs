@@ -14,12 +14,12 @@
 
 namespace Model.ViewModel.Unit;
 
-public class DisplayValuePair {
+public class DisplayValuePair<T> {
     public DisplayValuePair() { }
-    public DisplayValuePair(string display, double scaleFactor) {
+    public DisplayValuePair(string display, T scaleFactor) {
         Display = display;
         ScaleFactor = scaleFactor;
     }
     public string Display { get; }
-    public double ScaleFactor { get; }
+    public T ScaleFactor { get; }
 }

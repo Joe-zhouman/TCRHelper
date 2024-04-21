@@ -29,8 +29,8 @@ public class BaiduOcr() : IOcrProduct {
     private string _secretKey;
     private string _token;
     public BaiduOcr(OcrConfig ocrConfig) : this() {
-        _apiKey = ocrConfig.ApiKey;
-        _secretKey = ocrConfig.SecretKey;
+        _apiKey = ocrConfig.ApiKey.Value;
+        _secretKey = ocrConfig.SecretKey.Value;
     }
 
     public async Task<string> GetToken() {
