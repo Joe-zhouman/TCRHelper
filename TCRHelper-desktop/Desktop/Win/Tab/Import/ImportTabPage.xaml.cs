@@ -14,10 +14,16 @@ public partial class ImportTabPage : UserControl {
     public AppConfig Config { get => _appConfig; set => _appConfig = value; }
     private MaterialViewModel _materialViewModel = new MaterialViewModel();
     private ReferenceViewModel _ref = new ReferenceViewModel();
+    private SurfaceViewModel _surf1 = new SurfaceViewModel();
+    private SurfaceViewModel _surf2 = new SurfaceViewModel();
+    private ContactViewModel _contact = new ContactViewModel();
     public ImportTabPage() {
         InitializeComponent();
         RefGroupbox.DataContext = _ref;
         MatGroupBox.DataContext = _materialViewModel;
+        _contact.Surface1 = _surf1;
+        _contact.Surface2 = _surf2;
+        ContactGroupBox.DataContext = _contact;
     }
     private void ImportFromPlotButton_OnClick(object sender, RoutedEventArgs e) {
         PlotDataCollectionWindows w = new();

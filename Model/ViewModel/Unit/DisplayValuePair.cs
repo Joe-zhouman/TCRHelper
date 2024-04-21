@@ -16,9 +16,9 @@ namespace Model.ViewModel.Unit;
 
 public class DisplayValuePair {
     public DisplayValuePair() { }
-    public DisplayValuePair(string display, double multiplier) {
+    public DisplayValuePair(string display, double scaleFactor) {
         Display = display;
-        ScaleFactor = multiplier;
+        ScaleFactor = scaleFactor;
     }
     public string Display { get; }
     public double ScaleFactor { get; }

@@ -98,4 +98,13 @@ public class UnitComboBoxViewModel {
             //new DisplayValuePair("K", SI.KELVIN),
             new DisplayValuePair("℃", SI.CELSIUS_DEGREE)
         ];
+
+    private ObservableCollection<DisplayValuePair>? _contactResistance;
+
+    public ObservableCollection<DisplayValuePair> ContactResistance =>
+        _contactResistance ??= [
+            new DisplayValuePair("mm²K/W", SI.CELSIUS_DEGREE / SI.WATT),
+            new DisplayValuePair("cm²K/W", SI.CELSIUS_DEGREE / SI.WATT * SI.SQUARE_CENTI_METER / SI.SQUARE_MILLI_METER),
+            new DisplayValuePair("m²K/W", SI.SQUARE_METER * SI.CELSIUS_DEGREE / SI.WATT / SI.SQUARE_MILLI_METER)
+        ];
 }

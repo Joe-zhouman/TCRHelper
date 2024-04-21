@@ -12,9 +12,23 @@
 // *Github*    : https://github.com/Joe-zhouman
 // *Bilibili*  : @satisfactions
 
+using SI = Model.ViewModel.Unit.SIUnitsConvertFactor;
+
 namespace Model.ViewModel.Db;
 
 public class MaterialViewModel : ViewModelBase {
+    public MaterialViewModel() {
+        MolMass.Property.Unit.Value = SI.KILO_GRAM / SI.MOL;
+        Density.Property.Unit.Value = SI.KILO_GRAM / SI.CUBIC_METER;
+        SpecificHeat.Property.Unit.Value = SI.JOULE / SI.KILO_GRAM / SI.CELSIUS_DEGREE;
+        ThermalConductivity.Property.Unit.Value = SI.WATT / SI.METER / SI.KELVIN;
+        ThermalExpansion.Property.Unit.Value = SI.MICRO / SI.KELVIN;
+        YoungModulus.Property.Unit.Value = SI.GIGA_PASCAL;
+        ShearModulus.Property.Unit.Value = SI.GIGA_PASCAL;
+        BulkModulus.Property.Unit.Value = SI.GIGA_PASCAL;
+        VickersHardness.Property.Unit.Value = SI.MEGA_PASCAL;
+        BrinellHardness.Property.Unit.Value = SI.MEGA_PASCAL;
+    }
     public int Id { get; set; } = -1;
     public ViewModelProperty<string> Name { get; set; } = new();
     public RefProperty MolMass { get; set; } = new();

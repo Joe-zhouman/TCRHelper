@@ -14,10 +14,17 @@
 // ************************************************
 // *          YOU'LL NEVER WALK ALONE             *
 // ************************************************
-
+using SI = Model.ViewModel.Unit.SIUnitsConvertFactor;
 namespace Model.ViewModel.Db;
 
 public class SurfaceViewModel {
-    public ViewModelProperty<string> Name { get; } = new();
-    //public
+    public SurfaceViewModel() {
+        RA.Unit.Value = SI.MICRO_METER;
+        RSM.Unit.Value = SI.MICRO_METER;
+        RRM.Unit.Value = SI.MICRO_METER;
+    }
+    public ViewModelProperty<string> Name { get; set; } = new();
+    public UnitaryValue RA { get; set; } = new();
+    public UnitaryValue RSM { get; set; } = new();
+    public UnitaryValue RRM { get; set; } = new();
 }

@@ -38,7 +38,6 @@
     <Style x:Key="UnitComboBoxBaseStyle" TargetType="ComboBox">
         <Setter Property="Margin" Value="5"/>
         <Setter Property="MinWidth" Value="100"/>
-        <Setter Property="SelectedIndex" Value="0"/>
         <Setter Property="DisplayMemberPath" Value="Display"/>
         <Setter Property="SelectedValuePath" Value="ScaleFactor"/>
     </Style>

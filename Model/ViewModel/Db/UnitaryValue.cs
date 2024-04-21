@@ -18,12 +18,10 @@
 namespace Model.ViewModel.Db;
 
 public class UnitaryValue : ViewModelBase {
-    public ViewModelProperty<Tuple<double, double>> Unit { get; set; } = new() {
-        Value = new Tuple<double, double>(1, 0)
-    };
+    public ViewModelProperty<double> Unit { get; set; } = new() { Value = 1.0 };
     private double _value;
     public double Value {
-        get => _value * Unit.Value.Item1 + Unit.Value.Item2;
+        get => _value * Unit.Value;
         set => SetField(ref _value, value);
     }
 }
