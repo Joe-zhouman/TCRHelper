@@ -12,12 +12,9 @@
 // *Github*    : https://github.com/Joe-zhouman
 // *Bilibili*  : @satisfactions
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+namespace Model.ViewModel.Db;
 
-namespace Model.Db;
-
-public class Material : INotifyPropertyChanged {
+public class MaterialViewModel : ViewModelBase {
     public int Id { get; set; } = -1;
     private string _name;
 
@@ -112,9 +109,9 @@ public class Material : INotifyPropertyChanged {
 
     public double VickersHardness { get; set; }
 
-    private int _vickersHardnessRefId;
+    private int _vickersHardnessRefId = -1;
 
-    public int VickersHardnessId {
+    public int VickersHardnessRefId {
         get => _vickersHardnessRefId;
         set => SetField(ref _vickersHardnessRefId, value);
     }
@@ -133,19 +130,5 @@ public class Material : INotifyPropertyChanged {
     public string Description {
         get => _description;
         set => SetField(ref _description, value);
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
-        if(EqualityComparer<T>.Default.Equals(field, value))
-            return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
     }
 }

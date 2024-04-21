@@ -12,10 +12,10 @@
 // *Github*    : https://github.com/Joe-zhouman
 // *Bilibili*  : @satisfactions
 
-using Model.Db;
+using Model.ViewModel.Db;
 
 namespace Utilities.RefQuery;
 
 public interface IRefQueryProduct {
-    public Task GetRef(Reference reference);
+    public Task GetRef(ReferenceViewModel referenceViewModel);
 }

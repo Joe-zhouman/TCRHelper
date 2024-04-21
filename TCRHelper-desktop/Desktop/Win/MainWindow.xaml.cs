@@ -1,6 +1,7 @@
 ﻿using Data;
-using Model.Config;
+using Model.ViewModel.Config;
 using System.Windows;
+
 namespace TCRHelper.Desktop;
 /// <summary>
 /// Interaction logic for MainWindow.xaml

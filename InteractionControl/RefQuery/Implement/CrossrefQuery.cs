@@ -12,7 +12,7 @@
 // *Github*    : https://github.com/Joe-zhouman
 // *Bilibili*  : @satisfactions
 
-using Model.Db;
+using Model.ViewModel.Db;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -29,8 +29,8 @@ public class CrossrefQuery : IRefQueryProduct {
         return await client.SendAsync(request);
     }
 
-    public async Task GetRef(Reference reference) {
-        HttpResponseMessage response = await Query(reference.DOI);
+    public async Task GetRef(ReferenceViewModel referenceViewModel) {
+        HttpResponseMessage response = await Query(referenceViewModel.DOI);
         if(!response.IsSuccessStatusCode) {
             throw new HttpRequestException(response.ToString());
         }
@@ -38,12 +38,12 @@ public class CrossrefQuery : IRefQueryProduct {
         using JsonDocument doc = JsonDocument.Parse(jsonRespond);
         JsonElement message = doc.RootElement.GetProperty("message");
 
-        reference.Id = -1;
-        reference.Detail = jsonRespond;
-        reference.Title = message.GetProperty("title")[0].ToString();
-        reference.Year = message.GetProperty("indexed").GetProperty("date-parts")[0][0].ToString();
-        reference.Journal = message.GetProperty("short-container-title")[0].ToString();
-        
+        referenceViewModel.Id = -1;
+        referenceViewModel.Detail = jsonRespond;
+        referenceViewModel.Title = message.GetProperty("title")[0].ToString();
+        referenceViewModel.Year = message.GetProperty("indexed").GetProperty("date-parts")[0][0].ToString();
+        referenceViewModel.Journal = message.GetProperty("short-container-title")[0].ToString();
+
         JsonElement authorInfoList = message.GetProperty("author");
         StringBuilder authorList = new();
         for(int i = 0; i < authorInfoList.GetArrayLength(); i++) {
@@ -52,6 +52,6 @@ public class CrossrefQuery : IRefQueryProduct {
             authorList.Append(authorInfoList[i].GetProperty("family"));
             authorList.Append('|');
         }
-        reference.Author = authorList.ToString();
+        referenceViewModel.Author = authorList.ToString();
     }
 }

@@ -12,7 +12,7 @@
 // *Github*    : https://github.com/Joe-zhouman
 // *Bilibili*  : @satisfactions
 
-namespace Model.Unit;
+namespace Model.ViewModel.Unit;
 
 public static class SIUnitsConvertFactor {
     /// <summary>

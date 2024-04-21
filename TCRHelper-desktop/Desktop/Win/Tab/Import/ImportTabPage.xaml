@@ -4,14 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TCRHelper.Desktop.Win.Tab.Import"
-      xmlns:unit="clr-namespace:Model.Unit;assembly=Model"
-      xmlns:db ="clr-namespace:Model.Db;assembly=Model"
+      xmlns:unit="clr-namespace:Model.ViewModel.Unit;assembly=Model"
+      xmlns:db ="clr-namespace:Model.ViewModel.Db;assembly=Model"
       mc:Ignorable="d" 
       d:DesignHeight="850" d:DesignWidth="1600">
     <UserControl.Resources>
         <unit:UnitComboBoxViewModel x:Key="ComboBoxBindingSource"/>
-        <db:Material x:Key="MatBindingSource"/>
-        <db:Reference x:Key="RefBindingSource"/>
+        <db:MaterialViewModel x:Key="MatBindingSource"/>
+        <db:ReferenceViewModel x:Key="RefBindingSource"/>
     </UserControl.Resources>
     <Grid>
         <ScrollViewer>
@@ -63,7 +63,7 @@
                     <TextBox x:Name="RefIdTextBox"
                              Grid.Row="0" Grid.Column="5"
                              Margin="5 2"
-                             Text="{Binding Path=Id,Mode=OneWay,UpdateSourceTrigger=LostFocus}"/>
+                             Text="{Binding Path=Id,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
                     
                     <Label
                         Content="标题:"
@@ -71,7 +71,7 @@
                         <TextBox x:Name="TitleTextBox"
                              Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
                              Margin="5 2"
-                             Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                             Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label
                         Grid.Row="2" Grid.Column="0"
                         Content="年份:"></Label>
@@ -119,7 +119,8 @@
                             Style="{StaticResource FunctionButtonBaseType}"/>
                 </Grid>
             </GroupBox>
-            <GroupBox Header="材料属性"  x:Name="MatGroupBox" DataContext="{Binding Source={StaticResource MatBindingSource}}">
+            <GroupBox Header="材料属性" x:Name="MatGroupBox" 
+                      DataContext="{Binding Source={StaticResource MatBindingSource}}">
                 <StackPanel>
                 <WrapPanel>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -128,7 +129,7 @@
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox 
                             Style="{StaticResource TextBoxBaseStyle}"
-                            Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=LostFocus}"/>
+                            Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Content="摩尔质量"
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
@@ -146,7 +147,7 @@
                         <Label Content="参考文献" 
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                 Text="{Binding Path=Density}"/>
+                                 Text="{Binding Path=DensityRefId }"/>
                     </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -158,7 +159,8 @@
                                       ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=SpecificHeat}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=SpecificHeatRefId}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -170,7 +172,8 @@
                                       ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ThermalConductivity}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=ThermalConductivityRefId}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -182,7 +185,8 @@
                                       ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ThermalExpansion}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=ThermalExpansionRefId}"/>
                         </StackPanel>
                     </Border>
             
@@ -196,7 +200,8 @@
                                       SelectedIndex="3"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path= YoungModulusRefId}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -209,7 +214,8 @@
                                       SelectedIndex="3"/>
                             <Label Content="参考文献"  
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=ShearModulusRefId}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -222,28 +228,33 @@
                                       SelectedIndex="3"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=BulkModulusRefId}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="泊松比"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}" Width="160"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}" Width="160"
+                                     Text="{Binding Path=PoissonRatio}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=PoissonRatioRefId}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="莫氏硬度"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}" Width="160"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}" Width="160"
+                                     Text="{Binding Path=MothsHardness}"/>
                             
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=MothsHardnessRefId}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -256,7 +267,8 @@
                                       SelectedIndex="2"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=VickersHardnessRefId}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -269,14 +281,16 @@
                                       SelectedIndex="2"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=BrinellHardnessRefId}"/>
                         </StackPanel>
                     </Border>
                 </WrapPanel>
                  <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                        <DockPanel>
                            <Label Content="备注" Style="{StaticResource ConstLengthLabelBaseType}"/>
-                           <TextBox Margin="5" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                           <TextBox Margin="5" 
+                                    Text="{Binding Path=Description}"/>
                        </DockPanel>
                    </Border>
                     <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}" HorizontalAlignment="Right">

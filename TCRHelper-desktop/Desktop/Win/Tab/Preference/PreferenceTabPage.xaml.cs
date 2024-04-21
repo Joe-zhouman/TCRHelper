@@ -1,5 +1,5 @@
 ﻿using Data;
-using Model.Config;
+using Model.ViewModel.Config;
 using System.Windows;
 using System.Windows.Controls;
 using Utilities;

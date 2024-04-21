@@ -13,8 +13,8 @@
 // *Bilibili*  : @satisfactions
 
 using System.Collections.ObjectModel;
-using SI = Model.Unit.SIUnitsConvertFactor;
-namespace Model.Unit;
+using SI = Model.ViewModel.Unit.SIUnitsConvertFactor;
+namespace Model.ViewModel.Unit;
 
 public class UnitComboBoxViewModel {
     /// <summary>

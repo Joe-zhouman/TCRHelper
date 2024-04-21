@@ -1,12 +1,9 @@
-﻿using Model.Config;
-using Model.Db;
+﻿using Model.ViewModel.Config;
+using Model.ViewModel.Db;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
-using Utilities.RefQuery;
 using Utilities;
-using System.Windows.Threading;
+using Utilities.RefQuery;
 
 namespace TCRHelper.Desktop.Win.Tab.Import;
 /// <summary>
@@ -15,12 +12,12 @@ namespace TCRHelper.Desktop.Win.Tab.Import;
 public partial class ImportTabPage : UserControl {
     private AppConfig _appConfig;
     public AppConfig Config { get => _appConfig; set => _appConfig = value; }
-    private Material _material = new Material();
-    private Reference _ref = new Reference();
+    private MaterialViewModel _materialViewModel = new MaterialViewModel();
+    private ReferenceViewModel _ref = new ReferenceViewModel();
     public ImportTabPage() {
         InitializeComponent();
         RefGroupbox.DataContext = _ref;
-        MatGroupBox.DataContext = _material;
+        MatGroupBox.DataContext = _materialViewModel;
     }
     private void ImportFromPlotButton_OnClick(object sender, RoutedEventArgs e) {
         PlotDataCollectionWindows w = new();

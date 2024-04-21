@@ -18,16 +18,19 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Model.Unit;
+namespace Model.ViewModel.Unit;
 
-public class UnitConverter : IValueConverter {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+public class UnitConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
         return parameter is Tuple<double, double> tuple && value is double val
             ? (val - tuple.Item2) / tuple.Item1
             : value;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
         return parameter is Tuple<double, double> tuple && value is double val
             ? val * tuple.Item1 + tuple.Item2
             : value;

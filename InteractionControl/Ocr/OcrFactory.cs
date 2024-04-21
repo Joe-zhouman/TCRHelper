@@ -1,4 +1,4 @@
-﻿using Model.Config;
+﻿using Model.ViewModel.Config;
 using Utilities.Ocr.Implement;
 
 namespace Utilities.Ocr;

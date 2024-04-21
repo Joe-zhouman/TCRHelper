@@ -12,7 +12,7 @@
 // *Github*    : https://github.com/Joe-zhouman
 // *Bilibili*  : @satisfactions
 
-using Model.Config;
+using Model.ViewModel.Config;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
