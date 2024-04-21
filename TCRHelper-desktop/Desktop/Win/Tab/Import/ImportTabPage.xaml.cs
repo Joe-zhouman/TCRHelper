@@ -41,6 +41,6 @@ public partial class ImportTabPage : UserControl {
     }
 
     private void TestButton_Click(object sender, RoutedEventArgs e) {
-        InteractionUtilities.ShowAndHideTooltip(_ref.Title, 3);
+        InteractionUtilities.ShowAndHideTooltip(_ref.Title.Value, 3);
     }
 }

@@ -40,7 +40,7 @@
         <Setter Property="MinWidth" Value="100"/>
         <Setter Property="SelectedIndex" Value="0"/>
         <Setter Property="DisplayMemberPath" Value="Display"/>
-        <Setter Property="SelectedValuePath" Value="Value"/>
+        <Setter Property="SelectedValuePath" Value="ScaleFactor"/>
     </Style>
     <Style x:Key="ConstLengthLabelBaseType" TargetType="Label">
         <Setter Property="Margin" Value="5"/>

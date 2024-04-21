@@ -56,7 +56,7 @@
                     <TextBox x:Name="DoiTextBox"
                              Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
                              Margin="5 2"
-                             Text="{Binding Path=DOI, Mode=OneWayToSource}"/>
+                             Text="{Binding Path=DOI.Value, Mode=OneWayToSource}"/>
                     <Label 
                         Grid.Row="0" Grid.Column="4" 
                         Content="编号"></Label>
@@ -71,35 +71,36 @@
                         <TextBox x:Name="TitleTextBox"
                              Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
                              Margin="5 2"
-                             Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Path=Title.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label
                         Grid.Row="2" Grid.Column="0"
                         Content="年份:"></Label>
                     <TextBox x:Name="YearTextBox"
                              Grid.Row="2" Grid.Column="1"
                              Margin="5 2"
-                             Text="{Binding Path=Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Path=Year.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Label
                         Grid.Row="2" Grid.Column="2"
                         Content="作者:"/>
                     <TextBox x:Name="AuthorTextBox"
                              Grid.Row="2" Grid.Column="3"
                              Margin="5 2"
-                             Text="{Binding Path=Author, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Path=Author.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Label
                         Grid.Row="2" Grid.Column="4"
                         Content="期刊:"/>
                     <TextBox x:Name="JournalTextBox"
                              Grid.Row="2" Grid.Column="5"
                              Margin="5 2"
-                             Text="{Binding Path=Journal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Path=Journal.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     
                     <Label
                         Grid.Row="3" Grid.Column="0"
                         Content="备注:"/>
-                    <RichTextBox x:Name="DescriptionRichTextBox"
+                    <TextBox x:Name="DescriptionRichTextBox"
                              Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5"
-                             Margin="5 2"/>
+                             Margin="5 2"
+                             Text="{Binding Path=Description.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Button x:Name="SearchOnlineButton"
                         Content="Online搜索"
                         Grid.Row="0" Grid.Column="6"
@@ -129,64 +130,74 @@
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox 
                             Style="{StaticResource TextBoxBaseStyle}"
-                            Text="{Binding Path=Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            Text="{Binding Path=Name.Value, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Content="摩尔质量"
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
-                        <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                        <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                 Text="{Binding Path=MolMass.Property.Value}"/>
                         <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
-                                  ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=MolMassUnit}"/>
+                                  ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=MolMassUnit}"
+                                  SelectedValue="{Binding Path=MolMass.Property.Unit, Mode=OneWayToSource}"/>
                     </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                         <Label Content="密度"
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
-                        <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                        <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                 Text="{Binding Path=Density.Property.Value}"/>
                         <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
-                                  ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=DensityUnit}"/>
+                                  ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=DensityUnit}"
+                                  SelectedValue="{Binding Path=Density.Property.Unit, Mode=OneWayToSource}"/>
                         <Label Content="参考文献" 
                                Style="{StaticResource ConstLengthLabelBaseType}"/>
                         <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                 Text="{Binding Path=DensityRefId }"/>
+                                 Text="{Binding Path=Density.RefId.Value}"/>
                     </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="比热"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=SpecificHeat.Property.Value}"/>
                             <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
-                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=SpecificHeat}"/>
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=SpecificHeat}"
+                                      SelectedValue="{Binding Path=SpecificHeat.Property.Unit, Mode=OneWayToSource}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                     Text="{Binding Path=SpecificHeatRefId}"/>
+                                     Text="{Binding Path=SpecificHeat.RefId.Value}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="热导率"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding ThermalConductivity.Property.Value}"/>
                             <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
-                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ThermalConductivity}"/>
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ThermalConductivity}"
+                                      SelectedValue="{Binding Path=ThermalConductivity.Property.Unit, Mode=OneWayToSource}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                     Text="{Binding Path=ThermalConductivityRefId}"/>
+                                     Text="{Binding Path=ThermalConductivity.RefId.Value}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="膨胀系数"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=ThermalExpansion.Property.Value}"/>
                             <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
-                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ThermalExpansion}"/>
+                                      ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ThermalExpansion}"
+                                      SelectedValue="{Binding Path=ThermalExpansion.Property.Unit, Mode=OneWayToSource}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                     Text="{Binding Path=ThermalExpansionRefId}"/>
+                                     Text="{Binding Path=ThermalExpansion.RefId.Value}"/>
                         </StackPanel>
                     </Border>
             
@@ -194,42 +205,48 @@
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="杨氏模量"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=YoungModulus.Property.Value}"/>
                             <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                       ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
-                                      SelectedIndex="3"/>
+                                      SelectedIndex="3"
+                                      SelectedValue="{Binding Path=YoungModulus.Property.Unit,Mode=OneWayToSource}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                     Text="{Binding Path= YoungModulusRefId}"/>
+                                     Text="{Binding Path= YoungModulus.RefId.Value}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="剪切模量"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=ShearModulus.Property.Value}"/>
                             <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                       ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
-                                      SelectedIndex="3"/>
+                                      SelectedIndex="3"
+                                      SelectedValue="{Binding Path=ShearModulus.Property.Unit, Mode=OneWayToSource}"/>
                             <Label Content="参考文献"  
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                     Text="{Binding Path=ShearModulusRefId}"/>
+                                     Text="{Binding Path=ShearModulus.RefId.Value}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="体积模量"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=BulkModulus.Property.Value}"/>
                             <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                       ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
-                                      SelectedIndex="3"/>
+                                      SelectedIndex="3"
+                                      SelectedValue="{Binding Path=BulkModulus.Property.Unit, Mode=OneWayToSource}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                     Text="{Binding Path=BulkModulusRefId}"/>
+                                     Text="{Binding Path=BulkModulus.RefId.Value}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -237,11 +254,11 @@
                             <Label Content="泊松比"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}" Width="160"
-                                     Text="{Binding Path=PoissonRatio}"/>
+                                     Text="{Binding Path=PoissonRatio.Property.Value}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                     Text="{Binding Path=PoissonRatioRefId}"/>
+                                     Text="{Binding Path=PoissonRatio.RefId.Value}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -249,40 +266,44 @@
                             <Label Content="莫氏硬度"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}" Width="160"
-                                     Text="{Binding Path=MothsHardness}"/>
+                                     Text="{Binding Path=MothsHardness.Property.Value}"/>
                             
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                     Text="{Binding Path=MothsHardnessRefId}"/>
+                                     Text="{Binding Path=MothsHardness.RefId.Value}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="维氏硬度"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=VickersHardness.Property.Value}"/>
                             <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                       ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
-                                      SelectedIndex="2"/>
+                                      SelectedIndex="2"
+                                      SelectedValue="{Binding Path=VickersHardness.Property.Unit , Mode=OneWayToSource}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                     Text="{Binding Path=VickersHardnessRefId}"/>
+                                     Text="{Binding Path=VickersHardness.RefId.Value}"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                         <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                             <Label Content="布氏硬度"
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
-                            <TextBox Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="{Binding Path=BrinellHardness.Property.Value}"/>
                             <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                       ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
-                                      SelectedIndex="2"/>
+                                      SelectedIndex="2"
+                                      SelectedValue="{Binding Path=BrinellHardness.Property.Unit, Mode=OneWayToSource}"/>
                             <Label Content="参考文献" 
                                    Style="{StaticResource ConstLengthLabelBaseType}"/>
                             <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                     Text="{Binding Path=BrinellHardnessRefId}"/>
+                                     Text="{Binding Path=BrinellHardness.RefId.Value}"/>
                         </StackPanel>
                     </Border>
                 </WrapPanel>
@@ -290,7 +311,7 @@
                        <DockPanel>
                            <Label Content="备注" Style="{StaticResource ConstLengthLabelBaseType}"/>
                            <TextBox Margin="5" 
-                                    Text="{Binding Path=Description}"/>
+                                    Text="{Binding Path=Description.Value}"/>
                        </DockPanel>
                    </Border>
                     <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}" HorizontalAlignment="Right">

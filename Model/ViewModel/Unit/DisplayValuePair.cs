@@ -16,10 +16,10 @@ namespace Model.ViewModel.Unit;
 
 public class DisplayValuePair {
     public DisplayValuePair() { }
-    public DisplayValuePair(string display, double multiplier, double addition = 0.0) {
+    public DisplayValuePair(string display, double multiplier) {
         Display = display;
-        Value = new Tuple<double, double>(multiplier, addition);
+        ScaleFactor = multiplier;
     }
     public string Display { get; }
-    public Tuple<double, double> Value { get; }
+    public double ScaleFactor { get; }
 }

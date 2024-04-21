@@ -30,7 +30,7 @@ public class CrossrefQuery : IRefQueryProduct {
     }
 
     public async Task GetRef(ReferenceViewModel referenceViewModel) {
-        HttpResponseMessage response = await Query(referenceViewModel.DOI);
+        HttpResponseMessage response = await Query(referenceViewModel.DOI.Value);
         if(!response.IsSuccessStatusCode) {
             throw new HttpRequestException(response.ToString());
         }
@@ -40,9 +40,9 @@ public class CrossrefQuery : IRefQueryProduct {
 
         referenceViewModel.Id = -1;
         referenceViewModel.Detail = jsonRespond;
-        referenceViewModel.Title = message.GetProperty("title")[0].ToString();
-        referenceViewModel.Year = message.GetProperty("indexed").GetProperty("date-parts")[0][0].ToString();
-        referenceViewModel.Journal = message.GetProperty("short-container-title")[0].ToString();
+        referenceViewModel.Title.Value = message.GetProperty("title")[0].ToString();
+        referenceViewModel.Year.Value = message.GetProperty("indexed").GetProperty("date-parts")[0][0].ToString();
+        referenceViewModel.Journal.Value = message.GetProperty("short-container-title")[0].ToString();
 
         JsonElement authorInfoList = message.GetProperty("author");
         StringBuilder authorList = new();
@@ -52,6 +52,6 @@ public class CrossrefQuery : IRefQueryProduct {
             authorList.Append(authorInfoList[i].GetProperty("family"));
             authorList.Append('|');
         }
-        referenceViewModel.Author = authorList.ToString();
+        referenceViewModel.Author.Value = authorList.ToString();
     }
 }

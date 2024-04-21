@@ -95,7 +95,7 @@ public class UnitComboBoxViewModel {
 
     public ObservableCollection<DisplayValuePair> Temperature =>
         _temperature ??= [
-            new DisplayValuePair("K", SI.KELVIN),
-            new DisplayValuePair("℃", SI.CELSIUS_DEGREE, SI.CELSTUS_DEGREE_ADDITION)
+            //new DisplayValuePair("K", SI.KELVIN),
+            new DisplayValuePair("℃", SI.CELSIUS_DEGREE)
         ];
 }
