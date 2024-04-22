@@ -6,15 +6,17 @@
       xmlns:local="clr-namespace:TCRHelper.Desktop.Win.Tab.Preference"
       xmlns:config="clr-namespace:Model.ViewModel.Config;assembly=Model"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
+      d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="PreferenceTabPage_OnLoaded">
     <UserControl.Resources>
         <config:AppConfig x:Key="ConfigSource"></config:AppConfig>
         <config:OcrConfigComboBoxViewModel x:Key="OcrViewModel"></config:OcrConfigComboBoxViewModel>
     </UserControl.Resources>
-    <Grid DataContext="{Binding Source={StaticResource ConfigSource}}">
+    <Grid x:Name="RootGrid" DataContext="{Binding Source={StaticResource ConfigSource}}">
         <StackPanel>
             <GroupBox Header="文字识别">
                 <StackPanel>
+                    <TextBox Width="0" Height="0" x:Name="UnFocusTextBox"></TextBox>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="接口"></Label>
                         <ComboBox x:Name="ConfigOcrTypeComboBox"

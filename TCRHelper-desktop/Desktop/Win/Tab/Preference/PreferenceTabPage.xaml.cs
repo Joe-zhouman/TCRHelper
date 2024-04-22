@@ -14,12 +14,14 @@ public partial class PreferenceTabPage : UserControl {
 
     public PreferenceTabPage() {
         InitializeComponent();
-        DataContext = Config;
+        RootGrid.DataContext = Config;
     }
     private async void TestOcrApiButton_OnClick(object sender, RoutedEventArgs e) {
+        UnFocusTextBox.Focus();
         await InteractionUtilities.CreateOcr(Config.OcrConfig);
     }
     private void ConfigApplyButton_OnClick(object sender, RoutedEventArgs e) {
+        UnFocusTextBox.Focus();
         ConfigUtilities.SaveConfig(Config);
     }
     private void ModifyOcrConfig() {
@@ -31,4 +33,7 @@ public partial class PreferenceTabPage : UserControl {
     //    ConfigApiKeyTextBox.Text = Config.OcrConfig.ApiKey;
     //    ConfigSecretKeyTextBox.Text = Config.OcrConfig.SecretKey;
     //}
+    private void PreferenceTabPage_OnLoaded(object sender, RoutedEventArgs e) {
+        RootGrid.DataContext = Config;
+    }
 }
