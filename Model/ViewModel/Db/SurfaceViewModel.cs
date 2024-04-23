@@ -20,11 +20,13 @@ namespace Model.ViewModel.Db;
 public class SurfaceViewModel {
     public SurfaceViewModel() {
         RA.Unit.Value = SI.MICRO_METER;
+        RZ.Unit.Value = SI.MICRO_METER;
         RSM.Unit.Value = SI.MICRO_METER;
-        RRM.Unit.Value = SI.MICRO_METER;
+        RMR.Unit.Value = SI.MICRO_METER;
     }
     public ViewModelProperty<string> Name { get; set; } = new();
     public UnitaryValue RA { get; set; } = new();
+    public UnitaryValue RZ { get; set; } = new();
     public UnitaryValue RSM { get; set; } = new();
-    public UnitaryValue RRM { get; set; } = new();
+    public UnitaryValue RMR { get; set; } = new();
 }

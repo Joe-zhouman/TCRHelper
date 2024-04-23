@@ -347,6 +347,18 @@
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <Label Content="RZ"
+                                           Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                             Text="{Binding Path=Surface1.RZ.Value}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                              ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
+                                              SelectedValue="{Binding Path=Surface1.RZ.Unit.Value}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RSM"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"
@@ -359,13 +371,13 @@
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
-                                    <Label Content="RRM"
+                                    <Label Content="RMR"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                             Text="{Binding Path=Surface1.RRM.Value}"/>
+                                             Text="{Binding Path=Surface1.RMR.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
-                                        SelectedValue="{Binding Path=Surface1.RRM.Unit.Value}"/>
+                                        SelectedValue="{Binding Path=Surface1.RMR.Unit.Value}"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
@@ -391,6 +403,18 @@
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <Label Content="RZ"
+                                           Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                             Text="{Binding Path=Surface2.RZ.Value}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                              ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
+                                              SelectedValue="{Binding Path=Surface2.RZ.Unit.Value}"/>
+                                </StackPanel>
+                            </Border>
+                                    <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RSM"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"
@@ -403,13 +427,13 @@
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
-                                    <Label Content="RRM"
+                                    <Label Content="RMR"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                             Text="{Binding Path=Surface2.RRM.Value}"/>
+                                             Text="{Binding Path=Surface2.RMR.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
-                                        SelectedValue="{Binding Path=Surface2.RRM.Unit.Value}"/>
+                                        SelectedValue="{Binding Path=Surface2.RMR.Unit.Value}"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
@@ -464,7 +488,20 @@
                                               SelectedValue="{Binding Path=HeatFlux.Unit.Value}"/>
                                 </StackPanel>
                             </Border>
-                        </StackPanel>
+                            <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                                <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              IsChecked="True"/>
+                                    <Label Content="接触热阻"
+                                           Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                             Text="{Binding Path=ContactResistance.Value}"/>
+                                    <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
+                                              ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ContactResistance}"
+                                              SelectedValue="{Binding Path=ContactResistance.Unit.Value}"/>
+                                </StackPanel>
+                            </Border>
+                                </StackPanel>
                         
                         </GroupBox>
                         <GroupBox Header="其他">
@@ -479,24 +516,11 @@
                                     <ColumnDefinition MinWidth="100"/>
                                     <ColumnDefinition MinWidth="100"/>
                                 </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" 
-                                    Style="{StaticResource ControlGroupBorderBaseStyle}">
-                                    <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                        <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"
-                                                  IsChecked="True"/>
-                                        <Label Content="接触热阻"
-                                               Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                        <TextBox Style="{StaticResource TextBoxBaseStyle}"
-                                                 Text="{Binding Path=ContactResistance.Value}"/>
-                                        <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
-                                                  ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ContactResistance}"
-                                                  SelectedValue="{Binding Path=ContactResistance.Unit.Value}"/>
-                                    </StackPanel>
-                                </Border>
-                                <Label Grid.Row="1" Grid.Column="0" Content="参考文献" Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBoxBaseStyle}"
+                                
+                                <Label Grid.Row="0" Grid.Column="0" Content="参考文献" Style="{StaticResource ConstLengthLabelBaseType}"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource TextBoxBaseStyle}"
                                          Text="{Binding Path=RefId.Value}"/>
-                                <TextBox Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                                <TextBox Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" 
                                          BorderThickness="2"
                                          Text="{Binding Path=Description.Value}"/>
                             </Grid>
