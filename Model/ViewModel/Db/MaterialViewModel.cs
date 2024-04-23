@@ -59,17 +59,29 @@ public class MaterialViewModel : ViewModelBase {
         VickersHardness.Property.Unit.Value = SI.MEGA_PASCAL;
         BrinellHardness.Property.Unit.Value = SI.MEGA_PASCAL;
     }
-    public int Id { get; set; } = -1;
+
+    public ViewModelProperty<int> Id { get; set; } = new();
+
     public ViewModelProperty<string> Name { get; set; } = new();
+
     public RefProperty MolMass { get; set; } = new();
+
     public RefProperty Density { get; set; } = new();
+
     public RefProperty SpecificHeat { get; set; } = new();
+
     public RefProperty ThermalConductivity { get; set; } = new();
+
     public RefProperty ThermalExpansion { get; set; } = new();
+
     public RefProperty YoungModulus { get; set; } = new();
+
     public RefProperty ShearModulus { get; set; } = new();
+
     public RefProperty BulkModulus { get; set; } = new();
+
     public RefProperty PoissonRatio { get; set; } = new();
+
     public RefProperty MothsHardness { get; set; } = new();
 
     public RefProperty VickersHardness { get; set; } = new();

@@ -38,7 +38,6 @@ public class CrossrefQuery : IRefQueryProduct {
         using JsonDocument doc = JsonDocument.Parse(jsonRespond);
         JsonElement message = doc.RootElement.GetProperty("message");
 
-        referenceViewModel.Id = -1;
         referenceViewModel.Detail = jsonRespond;
         referenceViewModel.Title.Value = message.GetProperty("title")[0].ToString();
         referenceViewModel.Year.Value = message.GetProperty("indexed").GetProperty("date-parts")[0][0].ToString();

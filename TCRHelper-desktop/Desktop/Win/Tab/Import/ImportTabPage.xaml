@@ -65,7 +65,7 @@
                     <TextBox x:Name="RefIdTextBox"
                              Grid.Row="0" Grid.Column="5"
                              Margin="5 2"
-                             Text="{Binding Path=Id,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding Path=.Id.Value,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
                     
                     <Label
                         Content="标题:"
