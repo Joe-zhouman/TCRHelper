@@ -16,6 +16,16 @@ using SI = Model.ViewModel.Unit.SIUnitsConvertFactor;
 
 namespace Model.ViewModel.Db;
 
+public static class MaterialTable {
+    public const string TABLE_NAME = "material";
+    public const string ID = "mat_id";
+    public const string NAME = "mat_name";
+    public const string MOLAR_MASS = "molar_mass";
+    public const string DENSITY = "density";
+    public const string DENSITY_REF = "density_ref";
+    public const string
+}
+
 public class MaterialViewModel : ViewModelBase {
     public MaterialViewModel() {
         MolMass.Property.Unit.Value = SI.KILO_GRAM / SI.MOL;

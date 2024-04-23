@@ -16,4 +16,5 @@ namespace Model.ViewModel.Config;
 
 public class AppConfig {
     public OcrConfig OcrConfig { get; set; } = new OcrConfig();
+    public DbConfig DbConfig { get; set; } = new DbConfig();
 }

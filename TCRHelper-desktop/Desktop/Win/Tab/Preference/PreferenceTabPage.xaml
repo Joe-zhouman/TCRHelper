@@ -9,8 +9,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Loaded="PreferenceTabPage_OnLoaded">
     <UserControl.Resources>
-        <config:AppConfig x:Key="ConfigSource"></config:AppConfig>
-        <config:OcrConfigComboBoxViewModel x:Key="OcrViewModel"></config:OcrConfigComboBoxViewModel>
+        <config:AppConfig x:Key="ConfigSource"/>
+        <config:OcrConfigComboBoxViewModel x:Key="OcrViewModel"/>
+        <config:DbConfigComboBoxViewModel x:Key="DbViewModel"/>
     </UserControl.Resources>
     <Grid x:Name="RootGrid" DataContext="{Binding Source={StaticResource ConfigSource}}">
         <StackPanel>
@@ -36,6 +37,35 @@
                                 Style="{StaticResource FunctionButtonBaseType}"
                                 Click="TestOcrApiButton_OnClick"></Button>
                     </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="数据库">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="类型"/>
+                    <ComboBox 
+                              Style="{StaticResource UnitComboBoxBaseStyle}"
+                              ItemsSource="{Binding Source={StaticResource DbViewModel}, Path=DbProvider}"
+                              SelectedValue="{Binding Path=DbConfig.Type.Value}"/>
+                    <Label Content="数据库"/>
+                    <TextBox MinWidth="50" Text="{Binding Path=DbConfig.Db.Value}"/>
+                    <Label Content="地址"/>
+                    <TextBox   
+                             MinWidth="100"
+                             Text ="{Binding Path=DbConfig.Address.Value}"/>
+                    <Label Content="端口"/>
+                    <TextBox  
+                             MinWidth="100"
+                             Text="{Binding Path=DbConfig.Port.Value}"/>
+                    <Label Content="用户名"/>
+                    <TextBox  
+                        MinWidth="100"
+                        Text="{Binding Path=DbConfig.User.Value}"/>
+                    <Label Content="密码"/>
+                    <TextBox MinWidth="100" Text="{Binding Path=DbConfig.Password.Value}"/>
+                <Button x:Name="ConfigTestDbConnectButton"
+                            Content="测试"
+                            Style="{StaticResource FunctionButtonBaseType}"
+                            Click="ConfigTestDbConnectButton_OnClickButton_OnClick"></Button>
                 </StackPanel>
             </GroupBox>
             <Button x:Name="ConfigApplyButton" 

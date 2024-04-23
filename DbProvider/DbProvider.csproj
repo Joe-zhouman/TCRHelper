@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.4" />
     <PackageReference Include="MySql.Data" Version="8.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DbProvider\DbProvider.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 

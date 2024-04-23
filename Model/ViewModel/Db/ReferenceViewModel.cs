@@ -13,6 +13,18 @@
 
 namespace Model.ViewModel.Db;
 
+public static class ReferenceTable {
+    public const string TABLE_NAME = "reference";
+    public const string ID = "ref_id";
+    public const string DOI = "doi";
+    public const string TITLE = "title";
+    public const string YEAR = "year";
+    public const string AUTHOR = "author";
+    public const string JOURNAL = "journal";
+    public const string DETAIL = "detail";
+    public const string DESCRIPTION = "description";
+}
+
 public class ReferenceViewModel {
     public int Id { get; set; } = -1;
     public ViewModelProperty<string> DOI { get; set; } = new();

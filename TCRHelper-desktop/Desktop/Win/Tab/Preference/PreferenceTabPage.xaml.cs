@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data.Db;
 using Model.ViewModel.Config;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,7 +15,6 @@ public partial class PreferenceTabPage : UserControl {
 
     public PreferenceTabPage() {
         InitializeComponent();
-        RootGrid.DataContext = Config;
     }
     private async void TestOcrApiButton_OnClick(object sender, RoutedEventArgs e) {
         UnFocusTextBox.Focus();
@@ -35,5 +35,17 @@ public partial class PreferenceTabPage : UserControl {
     //}
     private void PreferenceTabPage_OnLoaded(object sender, RoutedEventArgs e) {
         RootGrid.DataContext = Config;
+    }
+
+    private void ConfigTestDbConnectButton_OnClickButton_OnClick(object sender, RoutedEventArgs e) {
+        DbHelper helper = new DbHelper(Config.DbConfig);
+        try {
+            helper.TextDbConnect();
+            InteractionUtilities.ShowAndHideTooltip("数据库连接成功!");
+        }
+        catch(Exception exception) {
+            InteractionUtilities.ShowErrorMessageBox(@$"数据库连接失败, 具体原因如下:
+{exception}");
+        }
     }
 }
