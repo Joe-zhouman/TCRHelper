@@ -18,12 +18,32 @@ namespace Model.ViewModel.Db;
 
 public static class MaterialTable {
     public const string TABLE_NAME = "material";
-    public const string ID = "mat_id";
-    public const string NAME = "mat_name";
+    public const string MAT_ID = "mat_id";
+    public const string MAT_NAME = "mat_name";
     public const string MOLAR_MASS = "molar_mass";
     public const string DENSITY = "density";
     public const string DENSITY_REF = "density_ref";
-    public const string
+    public const string SPECIFIC_HEAT = "specific_heat";
+    public const string SPECIFIC_HEAT_REF = "specific_heat_ref";
+    public const string THERMAL_CONDUCTIVITY = "thermal_conductivity";
+    public const string THERMAL_CONDUCTIVITY_REF = "thermal_conductivity_ref";
+    public const string THERMAL_EXPANSION = "thermal_expansion";
+    public const string THERMAL_EXPANSION_REF = "thermal_expansion_ref";
+    public const string YOUNG_MODULUS = "youngs_modulus";
+    public const string YOUNG_MODULUS_REF = "youngs_modulus_ref";
+    public const string SHEAR_MODULUS = "shear_modulus";
+    public const string SHEAR_MODULUS_REF = "shear_modulus_ref";
+    public const string BULK_MODULUS = "bulk_modulus";
+    public const string BULK_MODULUS_REF = "bulk_modulus_ref";
+    public const string POISSON_RATIO = "poisson_ratio";
+    public const string POISSON_RATIO_REF = "poisson_ratio_ref";
+    public const string MOTHS_HARDNESS = "moths_hardness";
+    public const string MOTHS_HARDNESS_REF = "moths_hardness_ref";
+    public const string VICKERS_HARDNESS = "vickers_hardness";
+    public const string VICKERS_HARDNSS_REF = "vickers_hardness_ref";
+    public const string BRINELL_HARDNESS = "brinell_hardness";
+    public const string BRINELL_HARDNESS_REF = "brinell_hardness_ref";
+    public const string DESCRIPTION = "description";
 }
 
 public class MaterialViewModel : ViewModelBase {
