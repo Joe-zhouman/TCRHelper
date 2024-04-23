@@ -44,13 +44,14 @@ WHERE {colName}={value}");
 
     public bool InsertRef(ReferenceViewModel reference) {
         DbClient?.OpenDb();
-        if(Exist(ReferenceTable.TABLE_NAME, ReferenceTable.DOI, reference.DOI.Value)) { return false; }
+        if(Exist(ReferenceTable.TABLE_NAME, ReferenceTable.DOI, reference.DOI.Value)) { DbClient?.CloseSqlConnection(); return false; }
         var reader = DbClient?.InsertIntoSpecific(ReferenceTable.TABLE_NAME,
             $"{ReferenceTable.DOI},{ReferenceTable.TITLE},{ReferenceTable.AUTHOR},{ReferenceTable.YEAR},{ReferenceTable.JOURNAL},{ReferenceTable.DESCRIPTION},{ReferenceTable.DETAIL}",
             $"{reference.DOI.Value},{reference.Title.Value},{reference.Author.Value},{reference.Year.Value},{reference.Journal.Value},{reference.Description.Value},{reference.Detail}");
         if(reader is null || !reader.HasRows) { throw new DBConcurrencyException(); }
         reader.Read();
         reference.Id.Value = reader.GetInt32(ReferenceTable.ID);
+        DbClient?.CloseSqlConnection();
         return true;
     }
 }
