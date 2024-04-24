@@ -40,7 +40,7 @@ public static class MaterialTable {
     public const string MOTHS_HARDNESS = "moths_hardness";
     public const string MOTHS_HARDNESS_REF = "moths_hardness_ref";
     public const string VICKERS_HARDNESS = "vickers_hardness";
-    public const string VICKERS_HARDNSS_REF = "vickers_hardness_ref";
+    public const string VICKERS_HARDNESS_REF = "vickers_hardness_ref";
     public const string BRINELL_HARDNESS = "brinell_hardness";
     public const string BRINELL_HARDNESS_REF = "brinell_hardness_ref";
     public const string DESCRIPTION = "description";
