@@ -33,6 +33,7 @@ public class MySqlClient : DbClientBase {
     }
 
     public override bool HasTableCreated(string dbName, string tableName) {
+        _reader?.Dispose();
         var query = ExecuteQuery($@"SELECT count(*) 
 FROM INFORMATION_SCHEMA.TABLES 
 WHERE TABLE_SCHEMA = '{dbName}' 

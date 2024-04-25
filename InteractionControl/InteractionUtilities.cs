@@ -1,3 +1,4 @@
+using Data.Db;
 using Model.ViewModel.Config;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,6 +58,18 @@ public static class InteractionUtilities {
             InteractionUtilities.ShowErrorMessageBox($"获取OCR秘钥失败, 请检查OCR相关设置\n具体错误如下:\n{e}");
         }
         return ocr;
+    }
+
+    public static DbHelper CreateDbHelper(DbConfig dbConfig) {
+        var dbHelper = new DbHelper(dbConfig);
+        try {
+            dbHelper.TextDbConnect();
+            InteractionUtilities.ShowAndHideTooltip("数据库连接成功!");
+        }
+        catch(Exception e) {
+            InteractionUtilities.ShowErrorMessageBox($"数据库连接失败, 请检查数据库相关设置\n具体错误如下:\n{e}");
+        }
+        return dbHelper;
     }
     public static void SetFocusableForChildren(DependencyObject parent, bool focusable) {
         // 遍历parent内的所有子元素，设置Focusable属性

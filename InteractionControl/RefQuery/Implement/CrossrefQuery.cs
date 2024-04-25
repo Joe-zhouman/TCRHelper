@@ -41,11 +41,17 @@ public class CrossrefQuery : IRefQueryProduct {
         referenceViewModel.Detail = jsonRespond;
         referenceViewModel.Title.Value = message.GetProperty("title")[0].ToString();
         referenceViewModel.Year.Value = message.GetProperty("indexed").GetProperty("date-parts")[0][0].ToString();
-        referenceViewModel.Journal.Value = message.GetProperty("short-container-title")[0].ToString();
-
+        try { referenceViewModel.Journal.Value = message.GetProperty("short-container-title")[0].ToString(); }
+        catch {
+            try { referenceViewModel.Journal.Value = message.GetProperty("container-title")[0].ToString(); }
+            catch {
+                referenceViewModel.Journal.Value = "";
+            }
+        }
         JsonElement authorInfoList = message.GetProperty("author");
         StringBuilder authorList = new();
-        for(int i = 0; i < authorInfoList.GetArrayLength(); i++) {
+        int numAuthor = authorInfoList.GetArrayLength();
+        for(int i = 0; i < numAuthor; i++) {
             authorList.Append(authorInfoList[i].GetProperty("given"));
             authorList.Append(", ");
             authorList.Append(authorInfoList[i].GetProperty("family"));

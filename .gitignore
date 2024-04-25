@@ -5,6 +5,7 @@
 
 # my specific files
 etc/
+db/
 
 # User-specific files
 *.rsuser

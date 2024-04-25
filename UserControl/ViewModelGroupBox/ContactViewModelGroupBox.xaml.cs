@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TCRHelperUserControl;
+namespace TCRHelperUserControl.ViewModelGroupBox;
 /// <summary>
-/// LabelTextLabel.xaml 的交互逻辑
+/// ContactViewModelGroupBox.xaml 的交互逻辑
 /// </summary>
-public partial class LabelTextLabel : UserControl {
-    public LabelTextLabel() {
+public partial class ContactViewModelGroupBox : UserControl {
+    public ContactViewModelGroupBox() {
         InitializeComponent();
     }
 }

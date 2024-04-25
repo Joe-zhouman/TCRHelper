@@ -1,4 +1,5 @@
-﻿using Model.ViewModel.Config;
+﻿using Data.Db;
+using Model.ViewModel.Config;
 using Model.ViewModel.Db;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,10 +18,11 @@ public partial class ImportTabPage : UserControl {
     private SurfaceViewModel _surf1 = new SurfaceViewModel();
     private SurfaceViewModel _surf2 = new SurfaceViewModel();
     private ContactViewModel _contact = new ContactViewModel();
+    private static DbHelper _dbHelper;
     public ImportTabPage() {
         InitializeComponent();
-        RefGroupbox.DataContext = _ref;
-        MatGroupBox.DataContext = _materialViewModel;
+        ImportRefViewModelGroupBox.RootGrid.DataContext = _ref;
+        ImportMatPropViewModelGroupBox.RootGrid.DataContext = _materialViewModel;
         _contact.Surface1 = _surf1;
         _contact.Surface2 = _surf2;
         ContactGroupBox.DataContext = _contact;
@@ -48,5 +50,16 @@ public partial class ImportTabPage : UserControl {
 
     private void TestButton_Click(object sender, RoutedEventArgs e) {
         InteractionUtilities.ShowAndHideTooltip(_ref.Title.Value, 3);
+    }
+
+    private void InsertIntoDbButton_OnClick(object sender, RoutedEventArgs e) {
+        try { InteractionUtilities.ShowAndHideTooltip(_dbHelper.InsertRef(_ref) ? "数据插入成功" : "记录已存在!"); }
+        catch(Exception exception) { ShowDbInsertError(exception); }
+    }
+
+    private static void ShowDbInsertError(Exception exception) => InteractionUtilities.ShowErrorMessageBox($"向数据库中插入是遇到未知错误, 前检查相应设置.\n具体错误如下:\n{exception}");
+
+    private void ImportTabPage_OnLoaded(object sender, RoutedEventArgs e) {
+        _dbHelper = InteractionUtilities.CreateDbHelper(Config.DbConfig);
     }
 }

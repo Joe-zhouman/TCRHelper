@@ -19,5 +19,5 @@ namespace Model.ViewModel.Db;
 
 public class RefProperty {
     public UnitaryValue Property { get; set; } = new();
-    public ViewModelProperty<int> RefId { get; set; } = new() { Value = -1 };
+    public ViewModelProperty<int> RefId { get; set; } = new() { Value = 1 };
 }

@@ -43,4 +43,5 @@
         <Setter Property="Height" Value="20"/>
         <Setter Property="Canvas.ZIndex" Value="1"/>
     </Style>
+    
 </ResourceDictionary>

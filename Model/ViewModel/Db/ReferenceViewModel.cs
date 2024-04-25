@@ -27,7 +27,7 @@ public static class ReferenceTable {
 
 public class ReferenceViewModel {
     public ViewModelProperty<int> Id { get; set; } = new();
-    public ViewModelProperty<string> DOI { get; set; } = new();
+    public ViewModelProperty<string> DOI { get; set; } = new() { Value = "undefined" };
     public ViewModelProperty<string> Title { get; set; } = new();
     public ViewModelProperty<string> Year { get; set; } = new();
     public ViewModelProperty<string> Author { get; set; } = new();

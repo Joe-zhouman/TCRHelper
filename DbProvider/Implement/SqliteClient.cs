@@ -34,6 +34,7 @@ public class SqliteClient : DbClientBase {
     }
 
     public override bool HasTableCreated(string dbName, string tableName) {
+        _reader?.Dispose();
         var query = ExecuteQuery($@"SELECT count(*) 
 FROM sqlite_master
 WHERE type='table'

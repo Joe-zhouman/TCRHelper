@@ -43,8 +43,8 @@ public abstract class DbClientBase : IDbClient {
     }
 
     public DbDataReader? ExecuteQuery(string sqlQuery) {
-        if(_dbConnection is null)
-            return null;
+        _reader?.Dispose();
+        if(_dbConnection is null) { return null; }
         try {
             _dbCommand = _dbConnection.CreateCommand();
             _dbCommand.CommandText = sqlQuery;
@@ -60,6 +60,7 @@ public abstract class DbClientBase : IDbClient {
     public abstract bool HasTableCreated(string dbName, string tableName);
 
     public DbDataReader? CreateTable(string tableName, string[] colName, string[] colType, int keyIndex = -1, int[]? notNull = null) {
+        _reader?.Dispose();
         bool[] isNotNull = new bool[colName.Length];
         if(notNull != null)
             foreach(int i in notNull) {
@@ -75,25 +76,30 @@ public abstract class DbClientBase : IDbClient {
     }
 
     public DbDataReader? DropTable(string tableName) {
+        _reader?.Dispose();
         return ExecuteQuery($@"DROP TABLE {tableName}");
     }
 
     public DbDataReader? ReadFullTable(string tableName) {
+        _reader?.Dispose();
         return ExecuteQuery($@"SELECT * FROM {tableName}");
     }
 
     public DbDataReader? InsertInto(string tableName, string values) {
+        _reader?.Dispose();
         return ExecuteQuery($@"INSERT INTO {tableName}
 VALUES ({values})");
     }
 
     public DbDataReader? InsertIntoSpecific(string tableName, string cols, string values) {
+        _reader?.Dispose();
         return ExecuteQuery($@"INSERT INTO {tableName}
 ({cols})
 VALUES({values})");
     }
 
     public DbDataReader? UpdateInto<TKey>(string tableName, IDictionary<string, TKey> updatePair, string condition) {
+        _reader?.Dispose();
         StringBuilder query = new StringBuilder();
         query.AppendLine($@"UPDATE {tableName} SET");
         foreach(var keyVal in updatePair) {
@@ -105,26 +111,31 @@ VALUES({values})");
     }
 
     public DbDataReader? DeleteWhere(string tableName, string condition) {
+        _reader?.Dispose();
         return ExecuteQuery($@"DELETE FROM {tableName}
 WHERE {condition}");
     }
 
     public DbDataReader? DeleteContents(string tableName) {
+        _reader?.Dispose();
         return ExecuteQuery($@"DELETE FROM {tableName}");
     }
 
     public DbDataReader? SelectWhere(string tableName, string cols, string operation) {
+        _reader?.Dispose();
         return ExecuteQuery($@"SELECT {cols}
 FROM {tableName}
 WHERE {operation}");
     }
 
     public DbDataReader? Select(string tableName, string cols) {
+        _reader?.Dispose();
         return ExecuteQuery($@"SELECT {cols}
 FROM {tableName}");
     }
 
     public DbDataReader? SelectTop(string tableName, string cols, int n, string orderCol) {
+        _reader?.Dispose();
         return ExecuteQuery($@"SELECT {cols}
 FROM {tableName}
 ORDER BY {orderCol} DESC LIMIT {n}");

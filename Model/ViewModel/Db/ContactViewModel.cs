@@ -53,7 +53,7 @@ public class ContactViewModel {
     public UnitaryValue AmbientPressure { get; set; } = new();
     public UnitaryValue AmbientTemperature { get; set; } = new();
     public UnitaryValue HeatFlux { get; set; } = new();
-    public ViewModelProperty<int> RefId { get; set; } = new() { Value = -1 };
+    public ViewModelProperty<int> RefId { get; set; } = new() { Value = 1 };
     public ViewModelProperty<string> Description { get; set; } = new();
     public UnitaryValue ContactResistance { get; set; } = new();
 }
