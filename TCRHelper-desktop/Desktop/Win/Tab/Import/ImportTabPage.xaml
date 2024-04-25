@@ -97,7 +97,7 @@
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RA"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=Surface1.RA.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                             ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
@@ -109,7 +109,7 @@
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RZ"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=Surface1.RZ.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
@@ -121,7 +121,7 @@
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RSM"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=Surface1.RSM.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
@@ -133,7 +133,7 @@
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RMR"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=Surface1.RMR.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
@@ -153,7 +153,7 @@
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RA"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=Surface2.RA.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                             ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
@@ -165,7 +165,7 @@
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RZ"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=Surface2.RZ.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
@@ -177,7 +177,7 @@
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RSM"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=Surface2.RSM.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
@@ -189,7 +189,7 @@
                                     <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="RMR"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=Surface2.RMR.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
@@ -205,7 +205,7 @@
                                             <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="接触压力"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=ContactPressure.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
@@ -217,7 +217,7 @@
                                             <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="环境压力"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=AmbientPressure.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
@@ -229,7 +229,7 @@
                                             <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="环境温度"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=AmbientTemperature.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Temperature}"
@@ -241,7 +241,7 @@
                                             <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
                                     <Label Content="热流"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=HeatFlux.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=HeatFlux}"
@@ -254,7 +254,7 @@
                                               IsChecked="True"/>
                                     <Label Content="接触热阻"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
-                                    <TextBox Style="{StaticResource TextBoxBaseStyle}"
+                                    <TextBox Style="{StaticResource PropTextBox}"
                                              Text="{Binding Path=ContactResistance.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ContactResistance}"
@@ -273,7 +273,7 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition MinWidth="100"/>
-                                    <ColumnDefinition MinWidth="100"/>
+                                    <ColumnDefinition MinWidth="50"/>
                                 </Grid.ColumnDefinitions>
                                 
                                 <Label Grid.Row="0" Grid.Column="0" Content="参考文献" Style="{StaticResource ConstLengthLabelBaseType}"/>

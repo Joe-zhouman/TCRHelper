@@ -23,7 +23,6 @@ public class UnitaryValue : ViewModelBase {
         get => _unit;
         set {
             if(!SetField(ref _unit, value)) { return; }
-
             OnPropertyChanged(nameof(Value));
         }
     }
@@ -31,5 +30,13 @@ public class UnitaryValue : ViewModelBase {
     public double Value {
         get => _value / _unit;
         set => SetField(ref _value, value * _unit);
+    }
+
+    public double RealValue {
+        get => _value;
+        set {
+            _value = value;
+            OnPropertyChanged(nameof(Value));
+        }
     }
 }
