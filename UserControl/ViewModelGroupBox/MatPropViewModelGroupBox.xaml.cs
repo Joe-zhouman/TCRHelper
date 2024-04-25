@@ -9,4 +9,6 @@ public partial class MatPropViewModelGroupBox : UserControl {
     public MatPropViewModelGroupBox() {
         InitializeComponent();
     }
+
+
 }

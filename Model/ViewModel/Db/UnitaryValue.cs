@@ -18,10 +18,18 @@
 namespace Model.ViewModel.Db;
 
 public class UnitaryValue : ViewModelBase {
-    public ViewModelProperty<double> Unit { get; set; } = new() { Value = 1.0 };
+    private double _unit = 1;
+    public double Unit {
+        get => _unit;
+        set {
+            if(!SetField(ref _unit, value)) { return; }
+
+            OnPropertyChanged(nameof(Value));
+        }
+    }
     private double _value;
     public double Value {
-        get => _value * Unit.Value;
-        set => SetField(ref _value, value);
+        get => _value / _unit;
+        set => SetField(ref _value, value * _unit);
     }
 }

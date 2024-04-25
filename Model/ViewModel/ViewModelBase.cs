@@ -26,7 +26,12 @@ public abstract class ViewModelBase : INotifyPropertyChanged {
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
+    protected bool SetField(ref double field, double value, [CallerMemberName] string? propertyName = null) {
+        if(Math.Abs(1 - field / value) < 1e-3) { return false; }
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
+    }
     protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
         if(EqualityComparer<T>.Default.Equals(field, value)) { return false; }
         field = value;

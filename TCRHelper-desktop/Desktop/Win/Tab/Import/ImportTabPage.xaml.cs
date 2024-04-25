@@ -71,4 +71,10 @@ public partial class ImportTabPage : UserControl {
     }
 
     private void ClearRefButton_OnClick(object sender, RoutedEventArgs e) { }
+
+    private void InsertMatToDbButton_OnClick(object sender, RoutedEventArgs e) {
+        VirtualTextBox.Focus();
+        try { InteractionUtilities.ShowAndHideTooltip(_dbHelper.InsertMat(_materialViewModel) ? "数据插入成功" : "记录已存在!"); }
+        catch(Exception exception) { ShowDbError(exception, "插入"); }
+    }
 }

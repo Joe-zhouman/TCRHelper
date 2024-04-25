@@ -19,7 +19,7 @@ namespace Model.ViewModel.Db;
 public static class MaterialTable {
     public const string TABLE_NAME = "material";
     public const string MAT_ID = "mat_id";
-    public const string MAT_NAME = "mat_name";
+    public const string MAT_NAME = "material_name";
     public const string MOLAR_MASS = "molar_mass";
     public const string DENSITY = "density";
     public const string DENSITY_REF = "density_ref";
@@ -48,16 +48,16 @@ public static class MaterialTable {
 
 public class MaterialViewModel : ViewModelBase {
     public MaterialViewModel() {
-        MolMass.Property.Unit.Value = SI.KILO_GRAM / SI.MOL;
-        Density.Property.Unit.Value = SI.KILO_GRAM / SI.CUBIC_METER;
-        SpecificHeat.Property.Unit.Value = SI.JOULE / SI.KILO_GRAM / SI.CELSIUS_DEGREE;
-        ThermalConductivity.Property.Unit.Value = SI.WATT / SI.METER / SI.KELVIN;
-        ThermalExpansion.Property.Unit.Value = SI.MICRO / SI.KELVIN;
-        YoungModulus.Property.Unit.Value = SI.GIGA_PASCAL;
-        ShearModulus.Property.Unit.Value = SI.GIGA_PASCAL;
-        BulkModulus.Property.Unit.Value = SI.GIGA_PASCAL;
-        VickersHardness.Property.Unit.Value = SI.MEGA_PASCAL;
-        BrinellHardness.Property.Unit.Value = SI.MEGA_PASCAL;
+        MolMass.Property.Unit = SI.KILO_GRAM / SI.MOL;
+        Density.Property.Unit = SI.KILO_GRAM / SI.CUBIC_METER;
+        SpecificHeat.Property.Unit = SI.JOULE / SI.KILO_GRAM / SI.CELSIUS_DEGREE;
+        ThermalConductivity.Property.Unit = SI.WATT / SI.METER / SI.KELVIN;
+        ThermalExpansion.Property.Unit = SI.MICRO / SI.KELVIN;
+        YoungModulus.Property.Unit = SI.GIGA_PASCAL;
+        ShearModulus.Property.Unit = SI.GIGA_PASCAL;
+        BulkModulus.Property.Unit = SI.GIGA_PASCAL;
+        VickersHardness.Property.Unit = SI.MEGA_PASCAL;
+        BrinellHardness.Property.Unit = SI.MEGA_PASCAL;
     }
 
     public ViewModelProperty<int> Id { get; set; } = new();

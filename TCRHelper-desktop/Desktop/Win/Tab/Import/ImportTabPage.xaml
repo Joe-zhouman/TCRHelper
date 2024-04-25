@@ -73,8 +73,11 @@
                 <StackPanel>
                     <vmControl:MatPropViewModelGroupBox x:Name="ImportMatPropViewModelGroupBox"/>
                     <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}" HorizontalAlignment="Right">
-                            <Button Content="导入" Style="{StaticResource FunctionButtonBaseType}"/>
-                        </StackPanel>
+                            <Button x:Name="InsertMatToDbButton" 
+                                    Content="导入" 
+                                    Style="{StaticResource FunctionButtonBaseType}"
+                                    Click="InsertMatToDbButton_OnClick"/>
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="接触热阻" x:Name="ContactGroupBox"
@@ -98,7 +101,7 @@
                                              Text="{Binding Path=Surface1.RA.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                             ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
-                                            SelectedValue="{Binding Path=Surface1.RA.Unit.Value}"/>
+                                            SelectedValue="{Binding Path=Surface1.RA.Unit}"/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -110,7 +113,7 @@
                                              Text="{Binding Path=Surface1.RZ.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
-                                              SelectedValue="{Binding Path=Surface1.RZ.Unit.Value}"/>
+                                              SelectedValue="{Binding Path=Surface1.RZ.Unit}"/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -122,7 +125,7 @@
                                              Text="{Binding Path=Surface1.RSM.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
-                                        SelectedValue="{Binding Path=Surface1.RSM.Unit.Value}"/>
+                                        SelectedValue="{Binding Path=Surface1.RSM.Unit}"/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -134,7 +137,7 @@
                                              Text="{Binding Path=Surface1.RMR.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
-                                        SelectedValue="{Binding Path=Surface1.RMR.Unit.Value}"/>
+                                        SelectedValue="{Binding Path=Surface1.RMR.Unit}"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
@@ -154,7 +157,7 @@
                                              Text="{Binding Path=Surface2.RA.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                             ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
-                                            SelectedValue="{Binding Path=Surface2.RA.Unit.Value}"/>
+                                            SelectedValue="{Binding Path=Surface2.RA.Unit}"/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -166,7 +169,7 @@
                                              Text="{Binding Path=Surface2.RZ.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
-                                              SelectedValue="{Binding Path=Surface2.RZ.Unit.Value}"/>
+                                              SelectedValue="{Binding Path=Surface2.RZ.Unit}"/>
                                 </StackPanel>
                             </Border>
                                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -178,7 +181,7 @@
                                              Text="{Binding Path=Surface2.RSM.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
-                                        SelectedValue="{Binding Path=Surface2.RSM.Unit.Value}"/>
+                                        SelectedValue="{Binding Path=Surface2.RSM.Unit}"/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -190,7 +193,7 @@
                                              Text="{Binding Path=Surface2.RMR.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Length}"
-                                        SelectedValue="{Binding Path=Surface2.RMR.Unit.Value}"/>
+                                        SelectedValue="{Binding Path=Surface2.RMR.Unit}"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
@@ -206,7 +209,7 @@
                                              Text="{Binding Path=ContactPressure.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
-                                        SelectedValue="{Binding Path=ContactPressure.Unit.Value}"/>
+                                        SelectedValue="{Binding Path=ContactPressure.Unit}"/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -218,7 +221,7 @@
                                              Text="{Binding Path=AmbientPressure.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                         ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Pressure}"
-                                        SelectedValue="{Binding Path=AmbientPressure.Unit.Value}"/>
+                                        SelectedValue="{Binding Path=AmbientPressure.Unit}"/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -230,7 +233,7 @@
                                              Text="{Binding Path=AmbientTemperature.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=Temperature}"
-                                              SelectedValue="{Binding Path=AmbientTemperature.Unit.Value}"/>
+                                              SelectedValue="{Binding Path=AmbientTemperature.Unit}"/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -242,7 +245,7 @@
                                              Text="{Binding Path=HeatFlux.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=HeatFlux}"
-                                              SelectedValue="{Binding Path=HeatFlux.Unit.Value}"/>
+                                              SelectedValue="{Binding Path=HeatFlux.Unit}"/>
                                 </StackPanel>
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -255,7 +258,7 @@
                                              Text="{Binding Path=ContactResistance.Value}"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ContactResistance}"
-                                              SelectedValue="{Binding Path=ContactResistance.Unit.Value}"/>
+                                              SelectedValue="{Binding Path=ContactResistance.Unit}"/>
                                 </StackPanel>
                             </Border>
                                 </StackPanel>

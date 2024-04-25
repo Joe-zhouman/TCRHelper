@@ -41,11 +41,11 @@ public static class ResistanceTable {
 
 public class ContactViewModel {
     public ContactViewModel() {
-        ContactPressure.Unit.Value = SI.MEGA_PASCAL;
-        AmbientPressure.Unit.Value = SI.PASCAL;
-        AmbientTemperature.Unit.Value = SI.CELSIUS_DEGREE;
-        HeatFlux.Unit.Value = SI.WATT / SI.SQUARE_METER;
-        ContactResistance.Unit.Value = SI.CELSIUS_DEGREE / SI.WATT;
+        ContactPressure.Unit = SI.MEGA_PASCAL;
+        AmbientPressure.Unit = SI.PASCAL;
+        AmbientTemperature.Unit = SI.CELSIUS_DEGREE;
+        HeatFlux.Unit = SI.WATT / SI.SQUARE_METER;
+        ContactResistance.Unit = SI.CELSIUS_DEGREE / SI.WATT;
     }
     public SurfaceViewModel Surface1 { get; set; } = new();
     public SurfaceViewModel Surface2 { get; set; } = new();

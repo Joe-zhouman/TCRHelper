@@ -35,7 +35,7 @@ public class UnitComboBoxViewModel {
             new DisplayValuePair<double>("kg/m\u00b3", SI.KILO_GRAM/SI.CUBIC_METER),
             new DisplayValuePair<double>("g/cm\u00b3", SI.GRAM/SI.CUBIC_CENTI_METER),
             new DisplayValuePair<double>("g/ml",SI.GRAM/SI.MILLI_LITRE),
-            new DisplayValuePair<double>("g/L",SI.GRAM/SI.MILLI_LITRE)
+            new DisplayValuePair<double>("g/L",SI.GRAM/SI.LITRE)
         ];
     /// <summary>
     /// 比热单位
