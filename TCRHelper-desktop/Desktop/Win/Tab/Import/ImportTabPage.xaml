@@ -51,11 +51,12 @@
                         Content="Online搜索"
                         Grid.Row="0" Grid.Column="1"
                         Style="{StaticResource FunctionButtonBaseType}"
-                        Click="SearchButton_OnClick"/>
+                        Click="SearchOnlineButton_OnClick"/>
                     <Button x:Name="SearchDatabaseButton"
                         Content="查找数据库"
                         Grid.Row="1" Grid.Column="1"
-                        Style="{StaticResource FunctionButtonBaseType}"/>
+                        Style="{StaticResource FunctionButtonBaseType}"
+                        Click="SearchDatabaseButton_OnClick"/>
                     <Button x:Name="InsertButton"
                         Content="导入"
                         Grid.Row="2" Grid.Column="1"
@@ -64,7 +65,8 @@
                     <Button x:Name="ClearRefButton"
                             Content="清空"
                             Grid.Row="3" Grid.Column="1"
-                            Style="{StaticResource FunctionButtonBaseType}"/>
+                            Style="{StaticResource FunctionButtonBaseType}"
+                            Click="ClearRefButton_OnClick"/>
                 </Grid>
             </GroupBox>
             <GroupBox Header="材料属性" x:Name="MatGroupBox">

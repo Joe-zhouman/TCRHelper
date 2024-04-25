@@ -37,7 +37,7 @@ public partial class ImportTabPage : UserControl {
         w.ShowDialog();
     }
 
-    private async void SearchButton_OnClick(object sender, RoutedEventArgs e) {
+    private async void SearchOnlineButton_OnClick(object sender, RoutedEventArgs e) {
         try {
             VirtualTextBox.Focus();
             IRefQueryProduct query = RefQueryFactory.Create(RefQueryApi.CROSSREF);
@@ -53,13 +53,22 @@ public partial class ImportTabPage : UserControl {
     }
 
     private void InsertIntoDbButton_OnClick(object sender, RoutedEventArgs e) {
+        VirtualTextBox.Focus();
         try { InteractionUtilities.ShowAndHideTooltip(_dbHelper.InsertRef(_ref) ? "数据插入成功" : "记录已存在!"); }
-        catch(Exception exception) { ShowDbInsertError(exception); }
+        catch(Exception exception) { ShowDbError(exception, "插入"); }
     }
 
-    private static void ShowDbInsertError(Exception exception) => InteractionUtilities.ShowErrorMessageBox($"向数据库中插入是遇到未知错误, 前检查相应设置.\n具体错误如下:\n{exception}");
+    private static void ShowDbError(Exception exception, string op) => InteractionUtilities.ShowErrorMessageBox($"向数据库中{op}时遇到未知错误, 前检查相应设置.\n具体错误如下:\n{exception}");
 
     private void ImportTabPage_OnLoaded(object sender, RoutedEventArgs e) {
         _dbHelper = InteractionUtilities.CreateDbHelper(Config.DbConfig);
     }
+
+    private void SearchDatabaseButton_OnClick(object sender, RoutedEventArgs e) {
+        VirtualTextBox.Focus();
+        try { InteractionUtilities.ShowAndHideTooltip(_dbHelper.SearchRef(_ref) ? "数据查找成功" : "记录不存在!"); }
+        catch(Exception exception) { ShowDbError(exception, "查找"); }
+    }
+
+    private void ClearRefButton_OnClick(object sender, RoutedEventArgs e) { }
 }

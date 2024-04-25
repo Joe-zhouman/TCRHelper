@@ -73,7 +73,6 @@ public class DbHelper {
             DbClient?.CloseSqlConnection();
             return false;
         }
-
         DbClient?.InsertIntoSpecific(MaterialTable.TABLE_NAME, _COMMON_MATERIAL_TABLE_COL, CommonMaterialTableValue(material));
         DbClient?.CloseSqlConnection();
         return true;
@@ -83,6 +82,24 @@ public class DbHelper {
         DbClient?.OpenDb();
         DbClient?.InsertIntoSpecific(ResistanceTable.TABLE_NAME, _COMMON_RESISTANCE_TABLE_COL,
             CommonResistanceTableValue(contact));
+        DbClient?.CloseSqlConnection();
+        return true;
+    }
+
+    public bool SearchRef(ReferenceViewModel reference) {
+        DbClient?.OpenDb();
+        var reader = DbClient?.SelectWhere(ReferenceTable.TABLE_NAME, "*",
+            $"{ReferenceTable.DOI}='{reference.DOI.Value}'");
+        if(reader is null || !reader.HasRows) { DbClient?.CloseSqlConnection(); return false; }
+
+        reader.Read();
+        reference.Id.Value = reader.GetInt32(ReferenceTable.ID);
+        reference.Author.Value = reader.GetString(ReferenceTable.AUTHOR);
+        reference.Description.Value = reader.GetString(ReferenceTable.DESCRIPTION);
+        reference.Detail = reader.GetString(ReferenceTable.DETAIL);
+        reference.Journal.Value = reader.GetString(ReferenceTable.JOURNAL);
+        reference.Title.Value = reader.GetString(ReferenceTable.TITLE);
+        reference.Year.Value = reader.GetString(ReferenceTable.YEAR);
         DbClient?.CloseSqlConnection();
         return true;
     }
