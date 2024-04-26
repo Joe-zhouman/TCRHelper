@@ -9,7 +9,8 @@
       xmlns:vmControl="clr-namespace:TCRHelperUserControl.ViewModelGroupBox;assembly=TCRHelperUserControl"
       mc:Ignorable="d" 
       d:DesignHeight="850" d:DesignWidth="1600"
-      Loaded="ImportTabPage_OnLoaded">
+      Loaded="ImportTabPage_OnLoaded"
+      >
     <UserControl.Resources>
         <unit:UnitComboBoxViewModel x:Key="ComboBoxBindingSource"/>
         <db:ContactViewModel x:Key="ContactBindingSource"/>
@@ -73,10 +74,17 @@
                 <StackPanel>
                     <vmControl:MatPropViewModelGroupBox x:Name="ImportMatPropViewModelGroupBox"/>
                     <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}" HorizontalAlignment="Right">
-                            <Button x:Name="InsertMatToDbButton" 
-                                    Content="导入" 
-                                    Style="{StaticResource FunctionButtonBaseType}"
-                                    Click="InsertMatToDbButton_OnClick"/>
+                        <ComboBox/>
+                        <Button x:Name="SearchFromNameTextBoxButton"
+                                Content="从名称查询"
+                                Style="{StaticResource FunctionButtonBaseType}"/>
+                        <Button x:Name="UpdateMatButton"
+                                Content="更新"
+                                Style="{StaticResource FunctionButtonBaseType}"/>
+                        <Button x:Name="InsertMatToDbButton" 
+                                Content="导入" 
+                                Style="{StaticResource FunctionButtonBaseType}"
+                                Click="InsertMatToDbButton_OnClick"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
@@ -90,7 +98,7 @@
                             <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                                 <Label Content="材料"></Label>
                                 <ComboBox MinWidth="150"
-                                          SelectedValue="{Binding Path=Surface1.Name.Value}"></ComboBox>
+                                          SelectedValue="{Binding Path=Surface1.Name.Value}"/>
                             </StackPanel>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
