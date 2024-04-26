@@ -18,6 +18,8 @@
 using DbProvider;
 using Model.ViewModel.Config;
 using Model.ViewModel.Db;
+using Model.ViewModel.Unit;
+using System.Collections.ObjectModel;
 using System.Data;
 
 namespace Data.Db;
@@ -104,5 +106,51 @@ public class DbHelper {
         return true;
     }
 
+    public bool SearchMat(MaterialViewModel mat) {
+        DbClient?.OpenDb();
+        var reader =
+            DbClient?.SelectWhere(MaterialTable.TABLE_NAME, "*", $"{MaterialTable.MAT_NAME}='{mat.Name.Value}'");
+        if(reader is null || !reader.HasRows) { DbClient?.CloseSqlConnection(); return false; }
 
+        reader.Read();
+        mat.MolMass.Property.RealValue = reader.GetDouble(MaterialTable.MOLAR_MASS);
+        mat.Density.Property.RealValue = reader.GetDouble(MaterialTable.DENSITY);
+        mat.Density.RefId.Value = reader.GetInt32(MaterialTable.DENSITY_REF);
+        mat.SpecificHeat.Property.RealValue = reader.GetDouble(MaterialTable.SPECIFIC_HEAT);
+        mat.SpecificHeat.RefId.Value = reader.GetInt32(MaterialTable.SPECIFIC_HEAT_REF);
+        mat.ThermalConductivity.Property.RealValue = reader.GetDouble(MaterialTable.THERMAL_CONDUCTIVITY);
+        mat.ThermalConductivity.RefId.Value = reader.GetInt32(MaterialTable.THERMAL_CONDUCTIVITY_REF);
+        mat.ThermalExpansion.Property.RealValue = reader.GetDouble(MaterialTable.THERMAL_EXPANSION);
+        mat.ThermalExpansion.RefId.Value = reader.GetInt32(MaterialTable.THERMAL_EXPANSION_REF);
+        mat.YoungModulus.Property.RealValue = reader.GetDouble(MaterialTable.YOUNG_MODULUS);
+        mat.YoungModulus.RefId.Value = reader.GetInt32(MaterialTable.YOUNG_MODULUS_REF);
+        mat.ShearModulus.Property.RealValue = reader.GetDouble(MaterialTable.SHEAR_MODULUS);
+        mat.ShearModulus.RefId.Value = reader.GetInt32(MaterialTable.SHEAR_MODULUS_REF);
+        mat.BulkModulus.Property.RealValue = reader.GetDouble(MaterialTable.BULK_MODULUS);
+        mat.BulkModulus.RefId.Value = reader.GetInt32(MaterialTable.BULK_MODULUS_REF);
+        mat.PoissonRatio.Property.RealValue = reader.GetDouble(MaterialTable.POISSON_RATIO);
+        mat.PoissonRatio.RefId.Value = reader.GetInt32(MaterialTable.POISSON_RATIO_REF);
+        mat.MothsHardness.Property.RealValue = reader.GetDouble(MaterialTable.MOTHS_HARDNESS);
+        mat.MothsHardness.RefId.Value = reader.GetInt32(MaterialTable.MOTHS_HARDNESS_REF);
+        mat.VickersHardness.Property.RealValue = reader.GetDouble(MaterialTable.VICKERS_HARDNESS);
+        mat.VickersHardness.RefId.Value = reader.GetInt32(MaterialTable.VICKERS_HARDNESS_REF);
+        mat.BrinellHardness.Property.RealValue = reader.GetDouble(MaterialTable.BRINELL_HARDNESS);
+        mat.BrinellHardness.RefId.Value = reader.GetInt32(MaterialTable.BRINELL_HARDNESS_REF);
+        mat.Description.Value = reader.GetString(MaterialTable.DESCRIPTION);
+
+        DbClient?.CloseSqlConnection();
+        return true;
+    }
+    public ObservableCollection<DisplayValuePair<int>> GetMatList() {
+        DbClient?.OpenDb();
+        var reader = DbClient?.Select(MaterialTable.TABLE_NAME, $"{MaterialTable.MAT_ID},{MaterialTable.MAT_NAME}");
+        ObservableCollection<DisplayValuePair<int>> matList = [];
+        if(reader is null || !reader.HasRows) { DbClient?.CloseSqlConnection(); return matList; }
+
+        while(reader.Read()) {
+            matList.Add(new DisplayValuePair<int>(reader.GetString(MaterialTable.MAT_NAME), reader.GetInt32(MaterialTable.MAT_ID)));
+        }
+        DbClient?.CloseSqlConnection();
+        return matList;
+    }
 }

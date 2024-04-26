@@ -13,6 +13,7 @@
       >
     <UserControl.Resources>
         <unit:UnitComboBoxViewModel x:Key="ComboBoxBindingSource"/>
+        <db:MatListComboBoxViewModel x:Key="MatList"/>
         <db:ContactViewModel x:Key="ContactBindingSource"/>
     </UserControl.Resources>
     <Grid>
@@ -74,10 +75,16 @@
                 <StackPanel>
                     <vmControl:MatPropViewModelGroupBox x:Name="ImportMatPropViewModelGroupBox"/>
                     <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}" HorizontalAlignment="Right">
-                        <ComboBox/>
+                        <ComboBox x:Name="ImportMatListComboBox"
+                                  Width="100"
+                                  ItemsSource="{Binding Source={ StaticResource MatList},Path=MatList}"
+                                  DisplayMemberPath="Display"
+                                  SelectedValuePath="Display"
+                                  SelectionChanged="ImportMatListComboBox_OnSelectionChanged"/>
                         <Button x:Name="SearchFromNameTextBoxButton"
                                 Content="从名称查询"
-                                Style="{StaticResource FunctionButtonBaseType}"/>
+                                Style="{StaticResource FunctionButtonBaseType}"
+                                Click="SearchFromNameTextBoxButton_OnClick"/>
                         <Button x:Name="UpdateMatButton"
                                 Content="更新"
                                 Style="{StaticResource FunctionButtonBaseType}"/>
@@ -97,7 +104,11 @@
                         <StackPanel>
                             <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                                 <Label Content="材料"></Label>
-                                <ComboBox MinWidth="150"
+                                <ComboBox x:Name="Surf1MatListComboBox"
+                                          MinWidth="150"
+                                          ItemsSource="{Binding Source={ StaticResource MatList},Path=MatList}"
+                                          DisplayMemberPath="Display"
+                                          SelectedValuePath="ScaleFactor"
                                           SelectedValue="{Binding Path=Surface1.Name.Value}"/>
                             </StackPanel>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
@@ -154,7 +165,12 @@
                         <StackPanel>
                             <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
                                 <Label Content="材料"></Label>
-                                <ComboBox MinWidth="150" SelectedValue="{Binding Path=Surface2.Name.Value}"/>
+                                        <ComboBox x:Name="Surf2MatListComboBox" 
+                                                  MinWidth="150"
+                                                  ItemsSource="{Binding Source={ StaticResource MatList},Path=MatList}"
+                                                  DisplayMemberPath="Display"
+                                                  SelectedValuePath="ScaleFactor"
+                                                  SelectedValue="{Binding Path=Surface2.Name.Value}"/>
                             </StackPanel>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">

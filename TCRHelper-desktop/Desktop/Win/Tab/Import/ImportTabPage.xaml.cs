@@ -19,6 +19,7 @@ public partial class ImportTabPage : UserControl {
     private SurfaceViewModel _surf2 = new SurfaceViewModel();
     private ContactViewModel _contact = new ContactViewModel();
     private static DbHelper _dbHelper;
+    private MatListComboBoxViewModel _matList = new();
     public ImportTabPage() {
         InitializeComponent();
         ImportRefViewModelGroupBox.RootGrid.DataContext = _ref;
@@ -26,6 +27,7 @@ public partial class ImportTabPage : UserControl {
         _contact.Surface1 = _surf1;
         _contact.Surface2 = _surf2;
         ContactGroupBox.DataContext = _contact;
+
     }
     private void ImportFromPlotButton_OnClick(object sender, RoutedEventArgs e) {
         PlotDataCollectionWindows w = new();
@@ -62,6 +64,10 @@ public partial class ImportTabPage : UserControl {
 
     private void ImportTabPage_OnLoaded(object sender, RoutedEventArgs e) {
         _dbHelper = InteractionUtilities.CreateDbHelper(Config.DbConfig);
+        _matList.MatList = _dbHelper.GetMatList();
+        ImportMatListComboBox.ItemsSource = _matList.MatList;
+        Surf1MatListComboBox.ItemsSource = _matList.MatList;
+        Surf2MatListComboBox.ItemsSource = _matList.MatList;
     }
 
     private void SearchDatabaseButton_OnClick(object sender, RoutedEventArgs e) {
@@ -76,5 +82,25 @@ public partial class ImportTabPage : UserControl {
         VirtualTextBox.Focus();
         try { InteractionUtilities.ShowAndHideTooltip(_dbHelper.InsertMat(_materialViewModel) ? "数据插入成功" : "记录已存在!"); }
         catch(Exception exception) { ShowDbError(exception, "插入"); }
+    }
+
+    private void SearchFromNameTextBoxButton_OnClick(object sender, RoutedEventArgs e) {
+        VirtualTextBox.Focus();
+        SearchMatFromDb();
+    }
+
+    private void SearchMatFromDb() {
+        try {
+            InteractionUtilities.ShowAndHideTooltip(_dbHelper.SearchMat(_materialViewModel) ? "查询成功!" : "记录不存在!");
+        }
+        catch(Exception exception) {
+            ShowDbError(exception, "查找");
+        }
+    }
+
+    private void ImportMatListComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
+        _materialViewModel.Name.Value = ImportMatListComboBox.SelectedValue.ToString()!;
+        VirtualTextBox.Focus();
+        SearchMatFromDb();
     }
 }
