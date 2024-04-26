@@ -99,13 +99,17 @@ VALUES({values})");
     }
 
     public DbDataReader? UpdateInto<TKey>(string tableName, IDictionary<string, TKey> updatePair, string condition) {
+        return UpdateInto(tableName, updatePair.Keys, updatePair.Values, condition);
+    }
+
+    public DbDataReader? UpdateInto<TKey>(string tableName, ICollection<string> colNameList, ICollection<TKey> colValueList,
+        string condition) {
         _reader?.Dispose();
         StringBuilder query = new StringBuilder();
         query.AppendLine($@"UPDATE {tableName} SET");
-        foreach(var keyVal in updatePair) {
-            query.AppendLine($@"{keyVal.Key}={keyVal.Value}");
-        }
 
+        query.AppendLine(string.Join(',', from i in Enumerable.Range(0, colNameList.Count)
+                                          select $"{colNameList.ElementAt(i)}={colValueList.ElementAt(i)}"));
         query.AppendLine($@"WHERE {condition}");
         return ExecuteQuery(query.ToString());
     }

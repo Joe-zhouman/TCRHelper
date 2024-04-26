@@ -87,7 +87,8 @@
                                 Click="SearchFromNameTextBoxButton_OnClick"/>
                         <Button x:Name="UpdateMatButton"
                                 Content="更新"
-                                Style="{StaticResource FunctionButtonBaseType}"/>
+                                Style="{StaticResource FunctionButtonBaseType}"
+                                Click="UpdateMatButton_OnClick"/>
                         <Button x:Name="InsertMatToDbButton" 
                                 Content="导入" 
                                 Style="{StaticResource FunctionButtonBaseType}"

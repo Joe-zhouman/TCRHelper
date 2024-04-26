@@ -21,6 +21,7 @@ using Model.ViewModel.Db;
 using Model.ViewModel.Unit;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Text;
 
 namespace Data.Db;
 
@@ -76,6 +77,10 @@ public class DbHelper {
             return false;
         }
         DbClient?.InsertIntoSpecific(MaterialTable.TABLE_NAME, _COMMON_MATERIAL_TABLE_COL, CommonMaterialTableValue(material));
+        var reader = DbClient?.ExecuteQuery($"SELECT {MaterialTable.MAT_ID} FROM {MaterialTable.TABLE_NAME} WHERE {MaterialTable.MAT_NAME}='{material.Name.Value}'");
+        if(reader is null || !reader.HasRows) { throw new DBConcurrencyException(); }
+        reader.Read();
+        material.Id.Value = reader.GetInt32(MaterialTable.MAT_ID);
         DbClient?.CloseSqlConnection();
         return true;
     }
@@ -113,6 +118,7 @@ public class DbHelper {
         if(reader is null || !reader.HasRows) { DbClient?.CloseSqlConnection(); return false; }
 
         reader.Read();
+        mat.Id.Value = reader.GetInt32(MaterialTable.MAT_ID);
         mat.MolMass.Property.RealValue = reader.GetDouble(MaterialTable.MOLAR_MASS);
         mat.Density.Property.RealValue = reader.GetDouble(MaterialTable.DENSITY);
         mat.Density.RefId.Value = reader.GetInt32(MaterialTable.DENSITY_REF);
@@ -152,5 +158,15 @@ public class DbHelper {
         }
         DbClient?.CloseSqlConnection();
         return matList;
+    }
+
+    public bool UpdateMat(MaterialViewModel mat) {
+        DbClient?.OpenDb();
+        List<string> colNameList = _COMMON_MATERIAL_TABLE_COL.Split(',').ToList();
+        List<string> colValueList = CommonMaterialTableValue(mat).Split(',').ToList();
+        DbClient?.UpdateInto(MaterialTable.TABLE_NAME, colNameList, colValueList,
+            $"{MaterialTable.MAT_ID}={mat.Id.Value}");
+        DbClient?.CloseSqlConnection();
+        return true;
     }
 }

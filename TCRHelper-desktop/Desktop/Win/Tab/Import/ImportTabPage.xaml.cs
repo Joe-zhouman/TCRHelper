@@ -103,4 +103,14 @@ public partial class ImportTabPage : UserControl {
         VirtualTextBox.Focus();
         SearchMatFromDb();
     }
+
+    private void UpdateMatButton_OnClick(object sender, RoutedEventArgs e) {
+        VirtualTextBox.Focus();
+        try {
+            InteractionUtilities.ShowAndHideTooltip(_dbHelper.UpdateMat(_materialViewModel) ? "更新成功!" : "记录不存在!");
+        }
+        catch(Exception exception) {
+            ShowDbError(exception, "更新");
+        }
+    }
 }

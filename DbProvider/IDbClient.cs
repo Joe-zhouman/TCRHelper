@@ -91,8 +91,16 @@ public interface IDbClient {
     /// <param name="updatePair"></param>
     /// <param name="condition"></param>
     /// <returns></returns>
-    DbDataReader? UpdateInto<TKey>(string tableName, IDictionary<string, TKey> updatePair,
-        string condition);
+    DbDataReader? UpdateInto<TKey>(string tableName, IDictionary<string, TKey> updatePair, string condition);
+    /// <summary>
+    /// 按指定操作更新数据
+    /// </summary>
+    /// <param name="tableName">表名</param>
+    /// <param name="colNameList">列名</param>
+    /// <param name="colValueList">列值</param>
+    /// <param name="condition">更新条件</param>
+    /// <returns></returns>
+    DbDataReader? UpdateInto<TKey>(string tableName, ICollection<string> colNameList, ICollection<TKey> colValueList, string condition);
     /// <summary>
     /// 按指定操作删除数据
     /// </summary>
