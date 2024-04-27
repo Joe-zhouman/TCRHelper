@@ -77,7 +77,7 @@
                                 x:Name="ManualSelectedButton"
                                 Style="{StaticResource FunctionButtonBaseType}"
                                 Click="ManualSelectedButton_OnClick" Focusable="False"/>
-                        <Button Content="发送数据(未实现)"
+                        <Button Content="发送数据"
                                 x:Name="SendDataButton"
                                 Style="{StaticResource FunctionButtonBaseType}"
                                 Click="SendDataButton_OnClick"/>

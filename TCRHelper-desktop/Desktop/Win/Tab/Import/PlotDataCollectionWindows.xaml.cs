@@ -14,10 +14,11 @@ public partial class PlotDataCollectionWindows : Window {
     private double _yMin;
     private double _yMax;
     private List<Point> _points;
-
-    public PlotDataCollectionWindows() {
+    private ImportTabPage _parent;
+    public PlotDataCollectionWindows(ImportTabPage parent) {
         InitializeComponent();
         _points = [];
+        _parent = parent;
     }
 
 
@@ -26,10 +27,11 @@ public partial class PlotDataCollectionWindows : Window {
         Cursor = Cursors.Arrow;
         Plot.ConvertToCoordinate(_xMin, _xMax, _yMin, _yMax, ref _points);
         PlotDataGrid.ItemsSource = _points;
+
     }
 
     private void SendDataButton_OnClick(object sender, RoutedEventArgs e) {
-
+        _parent.ShowPoints(_points);
     }
 
     private void Plot_OnMouseEnter(object sender, MouseEventArgs e) {

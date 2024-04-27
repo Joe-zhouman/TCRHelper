@@ -3,6 +3,7 @@ using Model.ViewModel.Config;
 using Model.ViewModel.Db;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Utilities;
 using Utilities.RefQuery;
 
@@ -20,6 +21,8 @@ public partial class ImportTabPage : UserControl {
     private ContactViewModel _contact = new ContactViewModel();
     private static DbHelper _dbHelper;
     private MatListComboBoxViewModel _matList = new();
+    private IList<Point>? _points;
+
     public ImportTabPage() {
         InitializeComponent();
         ImportRefViewModelGroupBox.RootGrid.DataContext = _ref;
@@ -27,10 +30,13 @@ public partial class ImportTabPage : UserControl {
         _contact.Surface1 = _surf1;
         _contact.Surface2 = _surf2;
         ContactGroupBox.DataContext = _contact;
-
+    }
+    public void ShowPoints(List<Point> points) {
+        _points = points;
+        ContactDataGrid.ItemsSource = points;
     }
     private void ImportFromPlotButton_OnClick(object sender, RoutedEventArgs e) {
-        PlotDataCollectionWindows w = new();
+        PlotDataCollectionWindows w = new(this);
         w.ShowDialog();
     }
 
@@ -112,5 +118,89 @@ public partial class ImportTabPage : UserControl {
         catch(Exception exception) {
             ShowDbError(exception, "更新");
         }
+    }
+
+    private void ContactCheckBox_Checked(object sender, RoutedEventArgs e) {
+        ChangeTextBoxStatusFromCheckBox(sender, false);
+    }
+
+    private static void ChangeTextBoxStatusFromCheckBox(object sender, bool status) {
+        CheckBox checkBox = (CheckBox)sender;
+        // 找到同一个StackPanel下的所有TextBox，并设置为不可编辑状态
+        StackPanel stackPanel = (StackPanel)checkBox.Parent;
+        foreach(var child in stackPanel.Children) {
+            if(child is TextBox textBox) {
+                textBox.IsEnabled = status;
+            }
+        }
+    }
+    private void ContactCheckBox_Unchecked(object sender, RoutedEventArgs e) {
+        ChangeTextBoxStatusFromCheckBox(sender, true);
+    }
+
+    private void GetNumCheckedBox(DependencyObject parent, ref int numCheckedBox) {
+        for(int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++) {
+            DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+
+            if(child is CheckBox checkBox) {
+                if(checkBox.IsChecked is not null && (bool)checkBox.IsChecked) {
+                    numCheckedBox++;
+                }
+            }
+            else {
+                // 递归检查子控件
+                GetNumCheckedBox(child, ref numCheckedBox);
+            }
+        }
+    }
+
+    private void InsertContactToDb() {
+        try { InteractionUtilities.ShowAndHideTooltip(_dbHelper.InsertResistance(_contact) ? "数据插入成功" : "记录已存在!"); }
+        catch(Exception exception) { ShowDbError(exception, "插入"); }
+    }
+
+    private void ImportContactButton_OnClick(object sender, RoutedEventArgs e) {
+        int numCheckedBox = 0;
+        GetNumCheckedBox(ContactGroupBox, ref numCheckedBox);
+        if(numCheckedBox is 1 or > 2) {
+            InteractionUtilities.ShowErrorMessageBox($"请检查被勾选的CheckBox数量, 应该为0或2!");
+            return;
+        }
+
+        if(numCheckedBox is 2 && ThermalConductivityCheckBox.IsChecked is not null &&
+            !(bool)ThermalConductivityCheckBox.IsChecked) {
+            InteractionUtilities.ShowErrorMessageBox($"勾选了两个CheckBox, 但未勾选接触热阻相关的CheckBox, 请检查正确性!");
+            return;
+        }
+
+        VirtualTextBox.Focus();
+        if(numCheckedBox is 0) { InsertContactToDb(); return; }
+
+        if(_points is null || _points.Count == 0) {
+            InteractionUtilities.ShowErrorMessageBox($"没有可用的数据!");
+            return;
+        }
+
+        UnitaryValue x;
+        if((bool)Surf1RaCheckbox.IsChecked!) { x = _contact.Surface1.RA; }
+        else if((bool)Surf1RzCheckBox.IsChecked!) { x = _contact.Surface1.RZ; }
+        else if((bool)Surf1RsmCheckBox.IsChecked!) { x = _contact.Surface1.RSM; }
+        else if((bool)Surf1RmrCheckBox.IsChecked!) { x = _contact.Surface1.RMR; }
+        else if((bool)Surf2RaCheckBox.IsChecked!) { x = _contact.Surface2.RA; }
+        else if((bool)Surf2RzCheckBox.IsChecked!) { x = _contact.Surface2.RZ; }
+        else if((bool)Surf2RsmCheckBox.IsChecked!) { x = _contact.Surface2.RSM; }
+        else if((bool)Surf2RmrCheckBox.IsChecked!) { x = _contact.Surface2.RMR; }
+        else if((bool)ContactPressCheckBox.IsChecked!) { x = _contact.ContactPressure; }
+        else if((bool)AmbientPressCheckBox.IsChecked!) { x = _contact.AmbientPressure; }
+        else if((bool)AmbientTemperatureCheckBox.IsChecked!) { x = _contact.AmbientTemperature; }
+        else { x = _contact.HeatFlux; }
+
+        foreach(Point point in _points) {
+            x.Value = point.X;
+            _contact.ContactResistance.Value = point.Y;
+            _dbHelper.InsertResistance(_contact);
+        }
+        InteractionUtilities.ShowAndHideTooltip("所有数据插入成功");
+
     }
 }

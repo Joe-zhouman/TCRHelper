@@ -100,7 +100,7 @@
                       DataContext="{Binding Source={StaticResource ContactBindingSource}}">
                 <StackPanel>
                 <WrapPanel>
-                    <DataGrid MinWidth="300"/>
+                    <DataGrid x:Name="ContactDataGrid" MinWidth="300"/>
                     <GroupBox Header="表面一">
                         <StackPanel>
                             <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
@@ -114,7 +114,10 @@
                             </StackPanel>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="Surf1RaCheckbox"
+                                        Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="RA"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -126,7 +129,10 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="Surf1RzCheckBox" 
+                                              Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="RZ"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -138,7 +144,10 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="Surf1RsmCheckBox" 
+                                              Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="RSM"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -150,7 +159,9 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="Surf1RmrCheckBox" Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="RMR"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -175,7 +186,9 @@
                             </StackPanel>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="Surf2RaCheckBox" Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="RA"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -187,7 +200,10 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="Surf2RzCheckBox" 
+                                              Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="RZ"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -199,7 +215,10 @@
                             </Border>
                                     <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="Surf2RsmCheckBox" 
+                                              Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="RSM"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -211,7 +230,10 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="Surf2RmrCheckBox" 
+                                              Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="RMR"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -227,7 +249,10 @@
                         <StackPanel>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="ContactPressCheckBox" 
+                                              Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="接触压力"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -239,7 +264,9 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="AmbientPressCheckBox" Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="环境压力"
                                         Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -251,7 +278,10 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="AmbientTemperatureCheckBox" 
+                                              Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="环境温度"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -263,7 +293,9 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                            <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"/>
+                                    <CheckBox x:Name="HeatFluxCheckBox" Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="热流"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
@@ -275,12 +307,16 @@
                             </Border>
                             <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
                                 <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
-                                    <CheckBox Style="{DynamicResource ImportCheckBoxBaseStyle}"
-                                              IsChecked="True"/>
+                                    <CheckBox x:Name="ThermalConductivityCheckBox"
+                                        Style="{DynamicResource ImportCheckBoxBaseStyle}"
+                                              IsChecked="True"
+                                              Checked="ContactCheckBox_Checked"
+                                              Unchecked="ContactCheckBox_Unchecked"/>
                                     <Label Content="接触热阻"
                                            Style="{StaticResource ConstLengthLabelBaseType}"/>
                                     <TextBox Style="{StaticResource PropTextBox}"
-                                             Text="{Binding Path=ContactResistance.Value}"/>
+                                             Text="{Binding Path=ContactResistance.Value}"
+                                             IsEnabled="False"/>
                                     <ComboBox Style="{StaticResource UnitComboBoxBaseStyle}"
                                               ItemsSource="{Binding Source={StaticResource ComboBoxBindingSource},Path=ContactResistance}"
                                               SelectedValue="{Binding Path=ContactResistance.Unit}"/>
@@ -312,7 +348,10 @@
                     </WrapPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Content="热流计算器" Style="{StaticResource FunctionButtonBaseType}"></Button>
-                        <Button Content="导入" Style="{StaticResource FunctionButtonBaseType}"></Button>
+                        <Button x:Name="ImportContactButton"
+                                Content="导入" 
+                                Style="{StaticResource FunctionButtonBaseType}"
+                                Click="ImportContactButton_OnClick"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox> 
