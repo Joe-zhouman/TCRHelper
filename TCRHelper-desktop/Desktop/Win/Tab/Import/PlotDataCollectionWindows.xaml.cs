@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using Utilities;
 
 namespace TCRHelper.Desktop.Win.Tab.Import;
@@ -85,17 +84,10 @@ public partial class PlotDataCollectionWindows : Window {
     private void ReGetPointButton_OnClick(object sender, RoutedEventArgs e) => Plot.ClearPoints();
 
     private void SortMethodRadioButton_OnChecked(object sender, RoutedEventArgs e) {
-        var checkedButton = sender as RadioButton;
-        var parent = checkedButton?.Parent;
-        if(parent is null) { return; }
-        for(int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++) {
-            var child = VisualTreeHelper.GetChild(parent, i);
-            if(child is RadioButton button && button != checkedButton) {
-                button.IsChecked = false;
-            }
-        }
-
+        InteractionUtilities.RadioButtonSwitch(sender);
     }
+
+
 
     private void ShowPlotLineCheckBox_OnChecked(object sender, RoutedEventArgs e) {
         int sortMethod = 0;

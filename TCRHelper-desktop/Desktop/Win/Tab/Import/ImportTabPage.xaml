@@ -347,6 +347,19 @@
                         </GroupBox>
                     </WrapPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Border Style="{StaticResource ControlGroupBorderBaseStyle}">
+                            <StackPanel Style="{StaticResource ImportGroupStackPanelBaseStyle}">
+                                <RadioButton x:Name="ResistanceRadioButton" 
+                                             Style="{StaticResource RadioButtonBaseStyle}"
+                                             IsChecked="True" 
+                                             Checked="ResistanceConductanceSwitchRadioButton_OnChecked"/>
+                                <Label  Content="接触热阻"></Label>
+                                <RadioButton x:Name="ConductanceRadioButton" 
+                                             Style="{StaticResource RadioButtonBaseStyle}"
+                                             Checked="ResistanceConductanceSwitchRadioButton_OnChecked"/>
+                                <Label  Content="接触热导"></Label>
+                            </StackPanel>
+                        </Border>
                         <Button Content="热流计算器" Style="{StaticResource FunctionButtonBaseType}"></Button>
                         <Button x:Name="ImportContactButton"
                                 Content="导入" 

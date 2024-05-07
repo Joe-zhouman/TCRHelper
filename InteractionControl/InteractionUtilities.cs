@@ -83,5 +83,16 @@ public static class InteractionUtilities {
             }
         }
     }
+    public static void RadioButtonSwitch(object sender) {
+        var checkedButton = sender as RadioButton;
+        var parent = checkedButton?.Parent;
+        if(parent is null) { return; }
+        for(int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++) {
+            var child = VisualTreeHelper.GetChild(parent, i);
+            if(child is RadioButton button && button != checkedButton) {
+                button.IsChecked = false;
+            }
+        }
+    }
 }
 

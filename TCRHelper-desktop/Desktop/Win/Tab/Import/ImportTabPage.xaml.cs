@@ -70,10 +70,13 @@ public partial class ImportTabPage : UserControl {
 
     private void ImportTabPage_OnLoaded(object sender, RoutedEventArgs e) {
         _dbHelper = InteractionUtilities.CreateDbHelper(Config.DbConfig);
-        _matList.MatList = _dbHelper.GetMatList();
-        ImportMatListComboBox.ItemsSource = _matList.MatList;
-        Surf1MatListComboBox.ItemsSource = _matList.MatList;
-        Surf2MatListComboBox.ItemsSource = _matList.MatList;
+        try {
+            _matList.MatList = _dbHelper.GetMatList();
+            ImportMatListComboBox.ItemsSource = _matList.MatList;
+            Surf1MatListComboBox.ItemsSource = _matList.MatList;
+            Surf2MatListComboBox.ItemsSource = _matList.MatList;
+        }
+        catch { }
     }
 
     private void SearchDatabaseButton_OnClick(object sender, RoutedEventArgs e) {
@@ -195,12 +198,18 @@ public partial class ImportTabPage : UserControl {
         else if((bool)AmbientTemperatureCheckBox.IsChecked!) { x = _contact.AmbientTemperature; }
         else { x = _contact.HeatFlux; }
 
+        bool isResistance = ResistanceRadioButton.IsChecked.HasValue && ResistanceRadioButton.IsChecked.Value;
+
         foreach(Point point in _points) {
             x.Value = point.X;
-            _contact.ContactResistance.Value = point.Y;
+            _contact.ContactResistance.Value = isResistance ? point.Y : 1 / point.Y;
             _dbHelper.InsertResistance(_contact);
         }
         InteractionUtilities.ShowAndHideTooltip("所有数据插入成功");
 
+    }
+
+    private void ResistanceConductanceSwitchRadioButton_OnChecked(object sender, RoutedEventArgs e) {
+        InteractionUtilities.RadioButtonSwitch(sender);
     }
 }
