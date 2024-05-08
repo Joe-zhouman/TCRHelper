@@ -40,7 +40,7 @@ public class CrossrefQuery : IRefQueryProduct {
 
         referenceViewModel.Detail = jsonRespond;
         referenceViewModel.Title.Value = message.GetProperty("title")[0].ToString();
-        referenceViewModel.Year.Value = message.GetProperty("indexed").GetProperty("date-parts")[0][0].ToString();
+        referenceViewModel.Year.Value = message.GetProperty("published-print").GetProperty("date-parts")[0][0].ToString();
         try { referenceViewModel.Journal.Value = message.GetProperty("short-container-title")[0].ToString(); }
         catch {
             try { referenceViewModel.Journal.Value = message.GetProperty("container-title")[0].ToString(); }

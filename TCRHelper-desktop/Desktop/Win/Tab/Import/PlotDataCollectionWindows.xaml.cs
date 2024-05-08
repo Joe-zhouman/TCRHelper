@@ -4,6 +4,8 @@ using System.Windows.Input;
 using Utilities;
 
 namespace TCRHelper.Desktop.Win.Tab.Import;
+//TODO: log coordinate
+//TODO: data transformation
 /// <summary>
 /// PlotDataCollectionWindows.xaml 的交互逻辑
 /// </summary>
@@ -26,7 +28,6 @@ public partial class PlotDataCollectionWindows : Window {
         Cursor = Cursors.Arrow;
         Plot.ConvertToCoordinate(_xMin, _xMax, _yMin, _yMax, ref _points);
         PlotDataGrid.ItemsSource = _points;
-
     }
 
     private void SendDataButton_OnClick(object sender, RoutedEventArgs e) {
