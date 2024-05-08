@@ -37,12 +37,12 @@ public partial class ImportTabPage : UserControl {
     }
     private void ImportFromPlotButton_OnClick(object sender, RoutedEventArgs e) {
         PlotDataCollectionWindows w = new(this);
-        w.ShowDialog();
+        w.Show();
     }
 
     private void ImportFromTabularButton_OnClick(object sender, RoutedEventArgs e) {
         TabularDataCollectionWindow w = new(Config);
-        w.ShowDialog();
+        w.Show();
     }
 
     private async void SearchOnlineButton_OnClick(object sender, RoutedEventArgs e) {
