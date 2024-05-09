@@ -30,7 +30,11 @@ public partial class ImportTabPage : UserControl {
         _contact.Surface1 = _surf1;
         _contact.Surface2 = _surf2;
         ContactGroupBox.DataContext = _contact;
+        this.Loaded += this.ImportTabPage_OnLoaded;
     }
+
+
+
     public void ShowPoints(List<Point> points) {
         _points = points;
         ContactDataGrid.ItemsSource = points;
@@ -70,13 +74,11 @@ public partial class ImportTabPage : UserControl {
 
     private void ImportTabPage_OnLoaded(object sender, RoutedEventArgs e) {
         _dbHelper = InteractionUtilities.CreateDbHelper(Config.DbConfig);
-        try {
-            _matList.MatList = _dbHelper.GetMatList();
-            ImportMatListComboBox.ItemsSource = _matList.MatList;
-            Surf1MatListComboBox.ItemsSource = _matList.MatList;
-            Surf2MatListComboBox.ItemsSource = _matList.MatList;
-        }
+        try { _matList.MatList = _dbHelper.GetMatList(); }
         catch { }
+        finally {
+            Loaded -= ImportTabPage_OnLoaded;
+        }
     }
 
     private void SearchDatabaseButton_OnClick(object sender, RoutedEventArgs e) {
@@ -89,7 +91,13 @@ public partial class ImportTabPage : UserControl {
 
     private void InsertMatToDbButton_OnClick(object sender, RoutedEventArgs e) {
         VirtualTextBox.Focus();
-        try { InteractionUtilities.ShowAndHideTooltip(_dbHelper.InsertMat(_materialViewModel) ? "数据插入成功" : "记录已存在!"); }
+        try {
+            InteractionUtilities.ShowAndHideTooltip(_dbHelper.InsertMat(_materialViewModel) ? "数据插入成功" : "记录已存在!");
+            _matList.MatList = _dbHelper.GetMatList();
+            ImportMatListComboBox.GetBindingExpression(ItemsControl.ItemsSourceProperty)?.UpdateTarget();
+            Surf1MatListComboBox.GetBindingExpression(ItemsControl.ItemsSourceProperty)?.UpdateTarget();
+            Surf2MatListComboBox.GetBindingExpression(ItemsControl.ItemsSourceProperty)?.UpdateTarget();
+        }
         catch(Exception exception) { ShowDbError(exception, "插入"); }
     }
 

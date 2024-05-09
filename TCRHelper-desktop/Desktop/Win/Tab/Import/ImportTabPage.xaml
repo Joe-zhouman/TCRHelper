@@ -8,9 +8,7 @@
       xmlns:db ="clr-namespace:Model.ViewModel.Db;assembly=Model"
       xmlns:vmControl="clr-namespace:TCRHelperUserControl.ViewModelGroupBox;assembly=TCRHelperUserControl"
       mc:Ignorable="d" 
-      d:DesignHeight="850" d:DesignWidth="1600"
-      Loaded="ImportTabPage_OnLoaded"
-      >
+      d:DesignHeight="850" d:DesignWidth="1600">
     <UserControl.Resources>
         <unit:UnitComboBoxViewModel x:Key="ComboBoxBindingSource"/>
         <db:MatListComboBoxViewModel x:Key="MatList"/>
