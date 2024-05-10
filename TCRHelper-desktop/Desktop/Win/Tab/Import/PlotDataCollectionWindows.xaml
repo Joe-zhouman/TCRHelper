@@ -101,16 +101,13 @@
                             <RadioButton x:Name="SortBySelectRadioButton"
                                          Content="按选择顺序"
                                          Style="{StaticResource RadioButtonBaseStyle}"
-                                         IsChecked="True"
-                                         Checked="SortMethodRadioButton_OnChecked"/>
+                                         IsChecked="True"/>
                             <RadioButton x:Name="SortByXRadioButton"
                                          Content="按X大小"
-                                         Style="{StaticResource RadioButtonBaseStyle}"
-                                         Checked="SortMethodRadioButton_OnChecked"/>
+                                         Style="{StaticResource RadioButtonBaseStyle}"/>
                             <RadioButton x:Name="SortByYRadioButton"
                                          Content="按Y大小"
-                                         Style="{StaticResource RadioButtonBaseStyle}"
-                                         Checked="SortMethodRadioButton_OnChecked"/>
+                                         Style="{StaticResource RadioButtonBaseStyle}"/>
                             <CheckBox x:Name="ShowPlotLineCheckBox"
                                       Content="显示连线" Margin="5" 
                                       HorizontalAlignment="Center"
@@ -119,6 +116,35 @@
                                       Unchecked="ShowPlotLineCheckBox_OnUnchecked"/>
                         </StackPanel>
                     </Border>
+                </GroupBox>
+                <GroupBox Header="数据变换">
+                    <StackPanel>
+                        <RadioButton x:Name="FirstColRadioButton"
+                                     Content="第一列"
+                                     Style="{StaticResource RadioButtonBaseStyle}"
+                                     IsChecked="True"/>
+                        <RadioButton x:Name="SecondColRadioButton"
+                                     Content="第二列"
+                                     Style="{StaticResource RadioButtonBaseStyle}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox x:Name="OperationComboBox" 
+                                      SelectedIndex="0" 
+                                      Width="40" Height="20" Margin="5">
+                                <ComboBoxItem Content="+"/>
+                                <ComboBoxItem Content="-"/>
+                                <ComboBoxItem Content="*"/>
+                                <ComboBoxItem Content="/"/>
+                                <ComboBoxItem Content="^"/>
+                            </ComboBox>
+                            <TextBox x:Name="OperationNumberTextBox"
+                                     Style="{StaticResource TextBoxBaseStyle}"/>
+                        </StackPanel>
+                        <Button x:Name="UpdateDataButton"
+                                Content="更新数据"
+                                Style="{StaticResource FunctionButtonBaseType}"
+                                HorizontalAlignment="Right"
+                                Click="UpdateDataButton_OnClick"/>
+                    </StackPanel>
                 </GroupBox>
                 <GroupBox Header="TODO List!">
                     <StackPanel>

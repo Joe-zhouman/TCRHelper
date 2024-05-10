@@ -25,6 +25,7 @@ public partial class PlotDataCollectionWindows : Window {
 
     private void ManualSelectedButton_OnClick(object sender, RoutedEventArgs e) {
         _points.Clear();
+        Plot.ClearPoints();
         Cursor = Cursors.Arrow;
         Plot.ConvertToCoordinate(_xMin, _xMax, _yMin, _yMax, ref _points);
         PlotDataGrid.ItemsSource = _points;
@@ -84,11 +85,6 @@ public partial class PlotDataCollectionWindows : Window {
 
     private void ReGetPointButton_OnClick(object sender, RoutedEventArgs e) => Plot.ClearPoints();
 
-    private void SortMethodRadioButton_OnChecked(object sender, RoutedEventArgs e) {
-        InteractionUtilities.RadioButtonSwitch(sender);
-    }
-
-
 
     private void ShowPlotLineCheckBox_OnChecked(object sender, RoutedEventArgs e) {
         int sortMethod = 0;
@@ -107,5 +103,25 @@ public partial class PlotDataCollectionWindows : Window {
 
     private void UnFocusableTextBox_OnMouseEnter(object sender, MouseEventArgs e) {
         if(sender is TextBox textBox) { textBox.Focusable = true; }
+    }
+
+    private void UpdateDataButton_OnClick(object sender, RoutedEventArgs e) {
+        Func<double, double, double> operation = OperationComboBox.Text switch {
+            "+" => (a, b) => a + b,
+            "-" => (a, b) => a - b,
+            "*" => (a, b) => a * b,
+            "/" => (a, b) => a / b,
+            "^" => Math.Pow,
+            _ => throw new NotImplementedException("无发进行未定义的操作!")
+        };
+        if(!double.TryParse(OperationNumberTextBox.Text, out double operationNumber)) {
+            InteractionUtilities.ShowAndHideTooltip("无法进行此操作!", 2);
+            return;
+        }
+
+        _points = (bool)FirstColRadioButton.IsChecked!
+            ? _points.Select(p => p with { X = operation(p.X, operationNumber) }).ToList()
+            : _points.Select(p => p with { Y = operation(p.Y, operationNumber) }).ToList();
+        PlotDataGrid.ItemsSource = _points;
     }
 }
