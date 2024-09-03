@@ -31,9 +31,54 @@
             <GroupBox Header="功能" MinWidth="50">
                 <StackPanel>
                     <Button Content="重新识别"
-                            Click="ButtonBase_OnClick"></Button>
+                            Click="ButtonBase_OnClick"
+                            Style="{StaticResource FunctionButtonBaseType}"/>
+                    <GroupBox Header="数据变换">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="第"/>
+                                <TextBox x:Name="ColumnTextBox"
+                                         Style="{StaticResource TextBoxBaseStyle}"/>
+                                <Label Content="列"/>
+                                </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox x:Name="OperationComboBox" 
+                                          SelectedIndex="0" 
+                                          Width="40" Height="20" Margin="5">
+                                    <ComboBoxItem Content="*"/>
+                                    <ComboBoxItem Content="/"/>
+                                    <ComboBoxItem Content="^"/>
+                                    <ComboBoxItem Content="a/x"/>
+                                    <ComboBoxItem Content="log2l"/>
+                                    <ComboBoxItem Content="+"/>
+                                    <ComboBoxItem Content="-"/>
+                                </ComboBox>
+                                <TextBox x:Name="OperationNumberTextBox"
+                                         Style="{StaticResource TextBoxBaseStyle}"/>
+                            </StackPanel>
+                            <Button x:Name="UpdateDataButton"
+                                    Content="更新数据"
+                                    Style="{StaticResource FunctionButtonBaseType}"
+                                    HorizontalAlignment="Right"
+                                    Click="UpdateDataButton_OnClick"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="数据">
+                        <StackPanel >
+                            <Label Content="列数"/>
+                            <TextBox x:Name="FirstColumnTextBox"
+                                     Style="{StaticResource TextBoxBaseStyle}"/>
+                            <TextBox x:Name="SecondColumnTextBox"
+                                     Style="{StaticResource TextBoxBaseStyle}"/>
+                            <Button x:Name="SendDataButton"
+                                    Content="发送数据"
+                                    Style="{StaticResource FunctionButtonBaseType}"
+                                    HorizontalAlignment="Right"
+                                    Click="SendDataButton_OnClick"/>
+                        </StackPanel>
+                    </GroupBox>
                 </StackPanel>
-            </GroupBox>
+                </GroupBox>
             </Grid>
         </StackPanel>
     </Grid>

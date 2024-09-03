@@ -16,19 +16,19 @@ public partial class PlotDataCollectionWindows : Window {
     private double _yMax;
     private List<Point> _points;
     private ImportTabPage _parent;
+
     public PlotDataCollectionWindows(ImportTabPage parent) {
         InitializeComponent();
         _points = [];
         _parent = parent;
     }
 
-
     private void ManualSelectedButton_OnClick(object sender, RoutedEventArgs e) {
         _points.Clear();
-        Plot.ClearPoints();
         Cursor = Cursors.Arrow;
         Plot.ConvertToCoordinate(_xMin, _xMax, _yMin, _yMax, ref _points);
         PlotDataGrid.ItemsSource = _points;
+        PlotDataGrid.Items.Refresh();
     }
 
     private void SendDataButton_OnClick(object sender, RoutedEventArgs e) {
@@ -83,8 +83,11 @@ public partial class PlotDataCollectionWindows : Window {
         Plot.ClearPoints();
     }
 
-    private void ReGetPointButton_OnClick(object sender, RoutedEventArgs e) => Plot.ClearPoints();
-
+    private void ReGetPointButton_OnClick(object sender, RoutedEventArgs e) {
+        Plot.ClearPoints();
+        _points.Clear();
+        Cursor = Cursors.Cross;
+    }
 
     private void ShowPlotLineCheckBox_OnChecked(object sender, RoutedEventArgs e) {
         int sortMethod = 0;
@@ -97,8 +100,8 @@ public partial class PlotDataCollectionWindows : Window {
         Plot.ClearLines();
     }
 
-
     private void PlotGrid_OnMouseEnter(object sender, MouseEventArgs e) { Plot.Focus(); }
+
     private void PlotGrid_OnKeyDown(object sender, KeyEventArgs e) { Plot.Focus(); }
 
     private void UnFocusableTextBox_OnMouseEnter(object sender, MouseEventArgs e) {
@@ -112,6 +115,8 @@ public partial class PlotDataCollectionWindows : Window {
             "*" => (a, b) => a * b,
             "/" => (a, b) => a / b,
             "^" => Math.Pow,
+            "a/x" => (a, b) => b / a,
+            "log2l" => (a, b) => Math.Pow(b, a),
             _ => throw new NotImplementedException("无发进行未定义的操作!")
         };
         if(!double.TryParse(OperationNumberTextBox.Text, out double operationNumber)) {

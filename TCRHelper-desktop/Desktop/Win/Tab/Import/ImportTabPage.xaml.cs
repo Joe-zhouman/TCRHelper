@@ -45,7 +45,7 @@ public partial class ImportTabPage : UserControl {
     }
 
     private void ImportFromTabularButton_OnClick(object sender, RoutedEventArgs e) {
-        TabularDataCollectionWindow w = new(Config);
+        TabularDataCollectionWindow w = new(Config, this);
         w.Show();
     }
 
@@ -123,6 +123,7 @@ public partial class ImportTabPage : UserControl {
     }
 
     private void ImportMatListComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
+        if(ImportMatListComboBox.SelectedValue == null) { return; }
         _materialViewModel.Name.Value = ImportMatListComboBox.SelectedValue.ToString()!;
         VirtualTextBox.Focus();
         SearchMatFromDb();
@@ -213,11 +214,10 @@ public partial class ImportTabPage : UserControl {
         else if((bool)AmbientTemperatureCheckBox.IsChecked!) { x = _contact.AmbientTemperature; }
         else { x = _contact.HeatFlux; }
 
-        bool isResistance = ResistanceRadioButton.IsChecked.HasValue && ResistanceRadioButton.IsChecked.Value;
 
         foreach(Point point in _points) {
             x.Value = point.X;
-            _contact.ContactResistance.Value = isResistance ? point.Y : 1 / point.Y;
+            _contact.ContactResistance.Value = point.Y;
             _dbHelper.InsertResistance(_contact);
         }
         InteractionUtilities.ShowAndHideTooltip("所有数据插入成功");

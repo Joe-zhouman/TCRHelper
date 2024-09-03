@@ -20,15 +20,14 @@ public partial class TabularDataCollectionWindow : Window {
     public string[,] identifiedData;
     private IOcrProduct _ocr;
     private AppConfig _appConfig;
-    public TabularDataCollectionWindow(AppConfig appConfig) {
+    public ImportTabPage parent;
+    public TabularDataCollectionWindow(AppConfig appConfig, ImportTabPage parent) {
         InitializeComponent();
         UniformDistributedRadioButton.IsChecked = true;
         LOCKED_ELEMENTS = [RowNumSlider, ColNumSlider, RowNumTextBox, ColNumTextBox];
         _appConfig = appConfig;
+        this.parent = parent;
     }
-
-
-
     private void RowNumSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
         RowNumTextBox.Text = RowNumSlider.Value.ToString(CultureInfo.InvariantCulture);
     }
@@ -99,7 +98,7 @@ public partial class TabularDataCollectionWindow : Window {
             ConfirmNumRowColCheckBox.IsChecked = true;
         }
         Tabular.SplitImage(nRow, nCol, ref images, 2);
-        IdentifyResultWindows w = new(images, _ocr);
+        IdentifyResultWindows w = new(images, _ocr, this);
         w.ShowDialog();
     }
 

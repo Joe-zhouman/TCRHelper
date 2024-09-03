@@ -130,11 +130,13 @@
                             <ComboBox x:Name="OperationComboBox" 
                                       SelectedIndex="0" 
                                       Width="40" Height="20" Margin="5">
-                                <ComboBoxItem Content="+"/>
-                                <ComboBoxItem Content="-"/>
                                 <ComboBoxItem Content="*"/>
                                 <ComboBoxItem Content="/"/>
                                 <ComboBoxItem Content="^"/>
+                                <ComboBoxItem Content="a/x"/>
+                                <ComboBoxItem Content="log2l"/>
+                                <ComboBoxItem Content="+"/>
+                                <ComboBoxItem Content="-"/>
                             </ComboBox>
                             <TextBox x:Name="OperationNumberTextBox"
                                      Style="{StaticResource TextBoxBaseStyle}"/>
@@ -144,6 +146,13 @@
                                 Style="{StaticResource FunctionButtonBaseType}"
                                 HorizontalAlignment="Right"
                                 Click="UpdateDataButton_OnClick"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="log坐标取值">
+                    <StackPanel>
+                        <Label Content="1. 坐标填写指数"/>
+                        <Label Content="2. 获取坐标"/>
+                        <Label Content="3. 使用log2l转化"/>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="TODO List!">

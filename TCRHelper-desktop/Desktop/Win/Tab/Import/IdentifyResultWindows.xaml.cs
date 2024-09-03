@@ -13,14 +13,15 @@ public partial class IdentifyResultWindows : Window {
     private BitmapSource[,] _bitmapSources;
     private DataTable _identifiedResult;
     private IOcrProduct _ocr;
-    public IdentifyResultWindows(BitmapSource[,] bitmapSources, IOcrProduct ocr) {
+    private TabularDataCollectionWindow _parent;
+    public IdentifyResultWindows(BitmapSource[,] bitmapSources, IOcrProduct ocr, TabularDataCollectionWindow parent) {
         InitializeComponent();
         _bitmapSources = bitmapSources;
         _ocr = ocr;
         InitIdentifyResultDataTable();
         IdentifyProgressBar.Maximum = _bitmapSources.Length;
         IdentifyProgressBar.Value = 0;
-
+        _parent = parent;
     }
     private async void InitIdentify() {
         for(int rowIndex = 0; rowIndex < _bitmapSources.GetLength(0); rowIndex++) {
@@ -85,6 +86,41 @@ public partial class IdentifyResultWindows : Window {
 
     private async void IdentifyResultWindows_OnLoaded(object sender, RoutedEventArgs e) {
         InitIdentify();
+    }
+
+    private void UpdateDataButton_OnClick(object sender, RoutedEventArgs e) {
+        Func<double, double, double> operation = OperationComboBox.Text switch {
+            "+" => (a, b) => a + b,
+            "-" => (a, b) => a - b,
+            "*" => (a, b) => a * b,
+            "/" => (a, b) => a / b,
+            "^" => Math.Pow,
+            "a/x" => (a, b) => b / a,
+            "log2l" => (a, b) => Math.Pow(b, a),
+            _ => throw new NotImplementedException("无发进行未定义的操作!")
+        };
+        if(!double.TryParse(OperationNumberTextBox.Text, out double operationNumber)) {
+            InteractionUtilities.ShowAndHideTooltip("无法进行此操作!", 2);
+            return;
+        }
+        if(!int.TryParse(ColumnTextBox.Text, out int n)) {
+            InteractionUtilities.ShowAndHideTooltip("无法进行此操作!", 2);
+            return;
+        }
+        for(int i = 0; i < _identifiedResult.Rows.Count; i++) {
+            if(!double.TryParse(_identifiedResult.Rows[i][n].ToString(), out double num)) {
+                InteractionUtilities.ShowAndHideTooltip("无法进行此操作!", 2);
+                return;
+            }
+            _identifiedResult.Rows[i][n] = operation(num, operationNumber);
+        }
+    }
+
+    private void SendDataButton_OnClick(object sender, RoutedEventArgs e) {
+        int col1 = int.Parse(FirstColumnTextBox.Text);
+        int col2 = int.Parse(SecondColumnTextBox.Text);
+        List<Point> p = (from DataRow row in _identifiedResult.Rows select new Point(double.Parse(row[col1].ToString()), double.Parse(row[col2].ToString()))).ToList();
+        _parent.parent.ShowPoints(p);
     }
 }
 
