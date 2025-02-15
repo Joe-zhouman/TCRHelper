@@ -67,9 +67,11 @@
                         <StackPanel >
                             <Label Content="列数"/>
                             <TextBox x:Name="FirstColumnTextBox"
-                                     Style="{StaticResource TextBoxBaseStyle}"/>
+                                     Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="0"/>
                             <TextBox x:Name="SecondColumnTextBox"
-                                     Style="{StaticResource TextBoxBaseStyle}"/>
+                                     Style="{StaticResource TextBoxBaseStyle}"
+                                     Text="1"/>
                             <Button x:Name="SendDataButton"
                                     Content="发送数据"
                                     Style="{StaticResource FunctionButtonBaseType}"
