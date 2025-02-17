@@ -62,6 +62,7 @@ public static class SIUnitsConvertFactor {
     public const double CENTI_METER = CENTI * METER;
     public const double MILLI_METER = MILLI * METER;
     public const double MICRO_METER = MICRO * METER;
+    public const double KILO_METER = KILO * METER;
     #endregion
 
     #region TimeUnit
@@ -79,6 +80,11 @@ public static class SIUnitsConvertFactor {
 
     #endregion
 
+    #region AngleUnit
+
+    public const double DEGREE = 1.0;
+    public const double RADIAN = DEGREE * 0.01744;
+    #endregion
     #region AmountOfSubstanceUnit
 
     public const double MOL = 1.0;

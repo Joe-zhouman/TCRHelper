@@ -107,4 +107,38 @@ public class UnitComboBoxViewModel {
             new DisplayValuePair<double>("cm²K/W", SI.CELSIUS_DEGREE / SI.WATT * SI.SQUARE_CENTI_METER / SI.SQUARE_MILLI_METER),
             new DisplayValuePair<double>("m²K/W", SI.SQUARE_METER * SI.CELSIUS_DEGREE / SI.WATT / SI.SQUARE_MILLI_METER)
         ];
+    private ObservableCollection<DisplayValuePair<double>>? _viscosity;
+
+    public ObservableCollection<DisplayValuePair<double>> Viscosity =>
+        _viscosity ??= [
+            new DisplayValuePair<double>("mN/m", SI.KILO_GRAM / SI.METER/SI.SECOND),
+        ];
+    private ObservableCollection<DisplayValuePair<double>>? _angle;
+    public ObservableCollection<DisplayValuePair<double>> Angle =>
+        _angle ??= [
+            new DisplayValuePair<double>("°", SI.DEGREE),
+            new DisplayValuePair<double>("rad", SI.RADIAN),
+        ];
+    private ObservableCollection<DisplayValuePair<double>>? _tension;
+
+    public ObservableCollection<DisplayValuePair<double>> Tension =>
+        _tension ??= [
+            new DisplayValuePair<double>("mN/m", SI.NEWTON / SI.KILO_METER),
+            new DisplayValuePair<double>("N/m", SI.NEWTON / SI.METER),
+            new DisplayValuePair<double>("μK/W", SI.NEWTON/SI.METER*SI.MILLI)
+        ];
+    private ObservableCollection<DisplayValuePair<double>>? _power;
+
+    public ObservableCollection<DisplayValuePair<double>> Power =>
+        _power ??= [
+            new DisplayValuePair<double>("W", SI.WATT),
+            new DisplayValuePair<double>("kW", SI.KILO_WATT),
+        ];
+    private ObservableCollection<DisplayValuePair<double>>? _latent_heat;
+
+    public ObservableCollection<DisplayValuePair<double>> LatentHeat =>
+        _latent_heat ??= [
+            new DisplayValuePair<double>("kJ/kg", SI.KILO_JOULE/SI.KILO_GRAM),
+            new DisplayValuePair<double>("J/kg", SI.JOULE/SI.KILO_GRAM),
+        ];
 }
