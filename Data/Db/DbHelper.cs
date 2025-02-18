@@ -25,7 +25,7 @@ using System.Text;
 
 namespace Data.Db;
 
-public class DbHelper {
+public partial class DbHelper {
     public static IDbClient? DbClient { get; set; }
 
     private static readonly string _COMMON_REFERENCE_TABLE_COL =
@@ -39,15 +39,6 @@ public class DbHelper {
 
     private static string CommonMaterialTableValue(MaterialViewModel material) =>
         $"'{material.Name.Value.Replace(" ", "").ToLower()}',{material.MolMass.Property.RealValue},{material.Density.Property.RealValue},{material.Density.RefId.Value},{material.SpecificHeat.Property.RealValue},{material.SpecificHeat.RefId.Value},{material.ThermalConductivity.Property.RealValue},{material.ThermalConductivity.RefId.Value},{material.ThermalExpansion.Property.RealValue},{material.ThermalExpansion.RefId.Value},{material.YoungModulus.Property.RealValue},{material.YoungModulus.RefId.Value},{material.ShearModulus.Property.RealValue},{material.ShearModulus.RefId.Value},{material.BulkModulus.Property.RealValue},{material.BulkModulus.RefId.Value},{material.PoissonRatio.Property.RealValue},{material.PoissonRatio.RefId.Value},{material.MothsHardness.Property.RealValue},{material.MothsHardness.RefId.Value},{material.VickersHardness.Property.RealValue},{material.VickersHardness.RefId.Value},{material.BrinellHardness.Property.RealValue},{material.BrinellHardness.RefId.Value},'{material.Description.Value}'";
-
-    private static readonly string _COMMON_SOLID_TABLE_COL = $"{SolidTable.NAME},{SolidTable.DENSITY},{SolidTable.THERMAL_CONDUCTIVITY},{SolidTable.SPECIFIC_HEAT},{SolidTable.DESCRIPTION}";
-
-    private static string CommonSolidTableValue(SolidViewModel material) =>
-        $"'{material.Name.Value.Replace(" ", "").ToLower()}',{material.Density.RealValue},{material.ThermalConductivity.RealValue},{material.SpecificHeat.RealValue},'{material.Description.Value}'";
-    private static readonly string _COMMON_Fluid_TABLE_COL = $"{FluidTable.NAME},{FluidTable.DENSITY},{FluidTable.THERMAL_CONDUCTIVITY},{FluidTable.SPECIFIC_HEAT},{FluidTable.VISCOSITY},{FluidTable.LATENT_HEAT},{FluidTable.MELT_POINT},{FluidTable.BOIL_POINT},{FluidTable.TENSION_COEFF},{FluidTable.CONTACT_ANGLE},{FluidTable.DESCRIPTION}";
-
-    private static string CommonFluidTableValue(FluidViewModel material) =>
-        $"'{material.Name.Value.Replace(" ", "").ToLower()}',{material.Density.RealValue},{material.ThermalConductivity.RealValue},{material.SpecificHeat.RealValue},{material.Viscosity.RealValue},{material.LatentHeat.RealValue},{material.MeltPoint.RealValue},{material.BoilPoint.RealValue},{material.TensionCoeff.RealValue},{material.ContactAngle.RealValue},'{material.Description.Value}'";
 
 
     private static readonly string _COMMON_RESISTANCE_TABLE_COL = $"{ResistanceTable.RESISTANCE},{ResistanceTable.CONTACT_MAT_1},{ResistanceTable.CONTACT_MAT_2},{ResistanceTable.MAT_1_RA},{ResistanceTable.MAT_2_RA},{ResistanceTable.MAT_1_RZ},{ResistanceTable.MAT_2_RZ},{ResistanceTable.MAT_1_RSM},{ResistanceTable.MAT_2_RSM},{ResistanceTable.MAT_1_RMR},{ResistanceTable.MAT_2_RMR},{ResistanceTable.AMBIENT_PRESS},{ResistanceTable.AMBIENT_TEMP},{ResistanceTable.CONTACT_PRESS},{ResistanceTable.HEAT_FLUX},{ResistanceTable.REF},{ResistanceTable.DESCRIPTION}";
@@ -95,34 +86,8 @@ public class DbHelper {
         DbClient?.CloseSqlConnection();
         return true;
     }
-    public bool InsertMat(SolidViewModel material) {
-        DbClient?.OpenDb();
-        if(Exist(SolidTable.TABLE_NAME, SolidTable.NAME, material.Name.Value)) {
-            DbClient?.CloseSqlConnection();
-            return false;
-        }
-        DbClient?.InsertIntoSpecific(SolidTable.TABLE_NAME, _COMMON_SOLID_TABLE_COL, CommonSolidTableValue(material));
-        var reader = DbClient?.ExecuteQuery($"SELECT {SolidTable.ID} FROM {SolidTable.TABLE_NAME} WHERE {SolidTable.NAME}='{material.Name.Value}'");
-        if(reader is null || !reader.HasRows) { throw new DBConcurrencyException(); }
-        reader.Read();
-        material.Id.Value = reader.GetInt32(SolidTable.ID);
-        DbClient?.CloseSqlConnection();
-        return true;
-    }
-    public bool InsertMat(FluidViewModel material) {
-        DbClient?.OpenDb();
-        if(Exist(FluidTable.TABLE_NAME, FluidTable.NAME, material.Name.Value)) {
-            DbClient?.CloseSqlConnection();
-            return false;
-        }
-        DbClient?.InsertIntoSpecific(FluidTable.TABLE_NAME, _COMMON_Fluid_TABLE_COL, CommonFluidTableValue(material));
-        var reader = DbClient?.ExecuteQuery($"SELECT {FluidTable.ID} FROM {FluidTable.TABLE_NAME} WHERE {FluidTable.NAME}='{material.Name.Value}'");
-        if(reader is null || !reader.HasRows) { throw new DBConcurrencyException(); }
-        reader.Read();
-        material.Id.Value = reader.GetInt32(FluidTable.ID);
-        DbClient?.CloseSqlConnection();
-        return true;
-    }
+
+
     #endregion
     public bool InsertResistance(ContactViewModel contact) {
         DbClient?.OpenDb();
@@ -190,44 +155,8 @@ public class DbHelper {
         DbClient?.CloseSqlConnection();
         return true;
     }
-    public bool SearchFluidMat(FluidViewModel mat) {
-        DbClient?.OpenDb();
-        var reader =
-            DbClient?.SelectWhere(FluidTable.TABLE_NAME, "*", $"{FluidTable.NAME}='{mat.Name.Value}'");
-        if(reader is null || !reader.HasRows) { DbClient?.CloseSqlConnection(); return false; }
 
-        reader.Read();
-        mat.Id.Value = reader.GetInt32(FluidTable.ID);
-        mat.Density.RealValue = reader.GetDouble(FluidTable.DENSITY);
-        mat.SpecificHeat.RealValue = reader.GetDouble(FluidTable.SPECIFIC_HEAT);
-        mat.ThermalConductivity.RealValue = reader.GetDouble(FluidTable.THERMAL_CONDUCTIVITY);
-        mat.Viscosity.RealValue = reader.GetDouble(FluidTable.VISCOSITY);
-        mat.LatentHeat.RealValue = reader.GetDouble(FluidTable.LATENT_HEAT);
-        mat.MeltPoint.RealValue = reader.GetDouble(FluidTable.MELT_POINT);
-        mat.BoilPoint.RealValue = reader.GetDouble(FluidTable.BOIL_POINT);
-        mat.TensionCoeff.RealValue = reader.GetDouble(FluidTable.TENSION_COEFF);
-        mat.ContactAngle.RealValue = reader.GetDouble(FluidTable.CONTACT_ANGLE);
-        mat.Description.Value = reader.GetString(FluidTable.DESCRIPTION);
-        mat.RefId.Value = reader.GetInt32(FluidTable.REF_ID);
-        DbClient?.CloseSqlConnection();
-        return true;
-    }
-    public bool SearchSolidMat(SolidViewModel mat) {
-        DbClient?.OpenDb();
-        var reader =
-            DbClient?.SelectWhere(SolidTable.TABLE_NAME, "*", $"{SolidTable.NAME}='{mat.Name.Value}'");
-        if(reader is null || !reader.HasRows) { DbClient?.CloseSqlConnection(); return false; }
 
-        reader.Read();
-        mat.Id.Value = reader.GetInt32(SolidTable.ID);
-        mat.Density.RealValue = reader.GetDouble(SolidTable.DENSITY);
-        mat.SpecificHeat.RealValue = reader.GetDouble(SolidTable.SPECIFIC_HEAT);
-        mat.ThermalConductivity.RealValue = reader.GetDouble(SolidTable.THERMAL_CONDUCTIVITY);
-        mat.Description.Value = reader.GetString(SolidTable.DESCRIPTION);
-        mat.RefId.Value = reader.GetInt32(SolidTable.REF_ID);
-        DbClient?.CloseSqlConnection();
-        return true;
-    }
     #endregion
 
     #region GetMatList
@@ -245,30 +174,7 @@ public class DbHelper {
         DbClient?.CloseSqlConnection();
         return matList;
     }
-    public ObservableCollection<DisplayValuePair<int>> GetSolidMatList() {
-        DbClient?.OpenDb();
-        var reader = DbClient?.Select(SolidTable.TABLE_NAME, $"{SolidTable.ID},{SolidTable.NAME}");
-        ObservableCollection<DisplayValuePair<int>> matList = [];
-        if(reader is null || !reader.HasRows) { DbClient?.CloseSqlConnection(); return matList; }
 
-        while(reader.Read()) {
-            matList.Add(new DisplayValuePair<int>(reader.GetString(SolidTable.NAME), reader.GetInt32(SolidTable.ID)));
-        }
-        DbClient?.CloseSqlConnection();
-        return matList;
-    }
-    public ObservableCollection<DisplayValuePair<int>> GetFluidMatList() {
-        DbClient?.OpenDb();
-        var reader = DbClient?.Select(FluidTable.TABLE_NAME, $"{FluidTable.ID},{FluidTable.NAME}");
-        ObservableCollection<DisplayValuePair<int>> matList = [];
-        if(reader is null || !reader.HasRows) { DbClient?.CloseSqlConnection(); return matList; }
-
-        while(reader.Read()) {
-            matList.Add(new DisplayValuePair<int>(reader.GetString(FluidTable.NAME), reader.GetInt32(FluidTable.ID)));
-        }
-        DbClient?.CloseSqlConnection();
-        return matList;
-    }
     #endregion
     public bool UpdateMat(MaterialViewModel mat) {
         DbClient?.OpenDb();
@@ -276,24 +182,6 @@ public class DbHelper {
         List<string> colValueList = CommonMaterialTableValue(mat).Split(',').ToList();
         DbClient?.UpdateInto(MaterialTable.TABLE_NAME, colNameList, colValueList,
             $"{MaterialTable.MAT_ID}={mat.Id.Value}");
-        DbClient?.CloseSqlConnection();
-        return true;
-    }
-    public bool UpdateFluidMat(FluidViewModel mat) {
-        DbClient?.OpenDb();
-        List<string> colNameList = _COMMON_Fluid_TABLE_COL.Split(',').ToList();
-        List<string> colValueList = CommonFluidTableValue(mat).Split(',').ToList();
-        DbClient?.UpdateInto(FluidTable.TABLE_NAME, colNameList, colValueList,
-            $"{FluidTable.ID}={mat.Id.Value}");
-        DbClient?.CloseSqlConnection();
-        return true;
-    }
-    public bool UpdateSolidMat(SolidViewModel mat) {
-        DbClient?.OpenDb();
-        List<string> colNameList = _COMMON_SOLID_TABLE_COL.Split(',').ToList();
-        List<string> colValueList = CommonSolidTableValue(mat).Split(',').ToList();
-        DbClient?.UpdateInto(SolidTable.TABLE_NAME, colNameList, colValueList,
-            $"{SolidTable.ID}={mat.Id.Value}");
         DbClient?.CloseSqlConnection();
         return true;
     }

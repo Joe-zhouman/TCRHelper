@@ -14,11 +14,11 @@
 // ************************************************
 // *          YOU'LL NEVER WALK ALONE             *
 // ************************************************
-
+using SI = Model.ViewModel.Unit.SIUnitsConvertFactor;
 namespace Model.ViewModel.Db;
 public static class VcTable {
     public const string TABLE_NAME = "vc";
-    public const string SHAPE = "shape";
+    public const string ID = "id";
     public const string SIZE1 = "size1";
     public const string SIZE2 = "size2";
     public const string SIZE3 = "size3";
@@ -36,8 +36,45 @@ public static class VcTable {
     public const string WICK_THICK = "wick_thick";
     public const string RESISTANCE = "resistance";
     public const string TEMP_DIFF = "temp_diff";
+    public const string MAX_HEAT = "max_heat";
+    public const string DESCRIPTION = "description";
+    public const string REF_ID = "ref_id";
 
 }
 public class VcViewModel : ViewModelBase {
-
+    public VcViewModel() {
+        Size1.Unit = SI.MILLI_METER;
+        Size2.Unit = SI.MILLI_METER;
+        Size3.Unit = SI.MILLI_METER;
+        EvaporationLen.Unit = SI.MILLI_METER;
+        CondensationLen.Unit = SI.MILLI_METER;
+        ShellThick.Unit = SI.MILLI_METER;
+        Angle.Unit = SI.DEGREE;
+        Power.Unit = SI.WATT;
+        WickThick.Unit = SI.MILLI_METER;
+        Resistance.Unit = SI.KELVIN / SI.WATT;
+        TempDiff.Unit = SI.KELVIN;
+        MaxHeat.Unit = SI.WATT / SI.SQUARE_METER;
+    }
+    public ViewModelProperty<int> Id { get; set; } = new();
+    public UnitaryValue Size1 { get; set; } = new();
+    public UnitaryValue Size2 { get; set; } = new();
+    public UnitaryValue Size3 { get; set; } = new();
+    public UnitaryValue EvaporationLen { get; set; } = new();
+    public UnitaryValue CondensationLen { get; set; } = new();
+    public UnitaryValue ShellThick { get; set; } = new();
+    public UnitaryValue Angle { get; set; } = new();
+    public UnitaryValue Power { get; set; } = new();
+    public UnitaryValue WickThick { get; set; } = new();
+    public UnitaryValue Resistance { get; set; } = new();
+    public UnitaryValue TempDiff { get; set; } = new();
+    public UnitaryValue MaxHeat { get; set; } = new();
+    public ViewModelProperty<double> FillRatio { get; set; } = new();
+    public ViewModelProperty<int> WickNumMesh { get; set; } = new();
+    public ViewModelProperty<int> WickNumLayer { get; set; } = new();
+    public ViewModelProperty<string> WickId { get; set; } = new();
+    public ViewModelProperty<string> FluidId { get; set; } = new();
+    public ViewModelProperty<string> ShellId { get; set; } = new();
+    public ViewModelProperty<string> Description { get; set; } = new();
+    public ViewModelProperty<int> RefId { get; set; } = new();
 }

@@ -125,7 +125,7 @@ public class UnitComboBoxViewModel {
         _tension ??= [
             new DisplayValuePair<double>("mN/m", SI.NEWTON / SI.KILO_METER),
             new DisplayValuePair<double>("N/m", SI.NEWTON / SI.METER),
-            new DisplayValuePair<double>("μK/W", SI.NEWTON/SI.METER*SI.MILLI)
+            new DisplayValuePair<double>("μK/W", SI.NEWTON/SI.METER*SI.MICRO)
         ];
     private ObservableCollection<DisplayValuePair<double>>? _power;
 
@@ -140,5 +140,11 @@ public class UnitComboBoxViewModel {
         _latent_heat ??= [
             new DisplayValuePair<double>("kJ/kg", SI.KILO_JOULE/SI.KILO_GRAM),
             new DisplayValuePair<double>("J/kg", SI.JOULE/SI.KILO_GRAM),
+        ];
+    private ObservableCollection<DisplayValuePair<double>>? _total_res;
+
+    public ObservableCollection<DisplayValuePair<double>> TotalRes =>
+        _total_res ??= [
+            new DisplayValuePair<double>("K/W", SI.KELVIN/SI.WATT),
         ];
 }

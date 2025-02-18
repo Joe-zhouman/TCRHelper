@@ -35,7 +35,15 @@ public partial class DbHelper {
     private static string CommonFluidTableValue(FluidViewModel material) =>
         $"'{material.Name.Value.Replace(" ", "").ToLower()}',{material.Density.RealValue},{material.ThermalConductivity.RealValue},{material.SpecificHeat.RealValue},{material.Viscosity.RealValue},{material.LatentHeat.RealValue},{material.MeltPoint.RealValue},{material.BoilPoint.RealValue},{material.TensionCoeff.RealValue},{material.ContactAngle.RealValue},'{material.Description.Value}'";
 
-
+    private static string _COMMON_VC_TABLE_COL = $"{VcTable.FLUID_ID},{VcTable.SHELL_ID},{VcTable.WICK_ID},{VcTable.SIZE1},{VcTable.SIZE2},{VcTable.SIZE3},{VcTable.EVAPORATION_LEN},{VcTable.CONDENSATION_LEN},{VcTable.SHELL_THICK},{VcTable.WICK_NUM_MESH},{VcTable.WICK_NUM_LAYER},{VcTable.WICK_THICK},{VcTable.FILL_RATIO},{VcTable.ANGLE},{VcTable.POWER},{VcTable.RESISTANCE},{VcTable.TEMP_DIFF},{VcTable.MAX_HEAT},{VcTable.DESCRIPTION}";
+    private static string CommonVcTableValue(VcViewModel material) => $"{material.FluidId},{material.ShellId},{material.WickId},{material.Size1},{material.Size2},{material.Size3},{material.EvaporationLen},{material.CondensationLen},{material.ShellThick},{material.WickNumMesh},{material.WickNumLayer},{material.WickThick},{material.FillRatio},{material.Angle},{material.Power},{material.Resistance},{material.TempDiff},{material.MaxHeat},'{material.Description}'";
+    public bool InsertVc(VcViewModel vc) {
+        DbClient?.OpenDb();
+        DbClient?.InsertIntoSpecific(VcTable.TABLE_NAME, _COMMON_VC_TABLE_COL,
+            CommonVcTableValue(vc));
+        DbClient?.CloseSqlConnection();
+        return true;
+    }
     #region InsertMat
     public bool InsertMat(SolidViewModel material) {
         DbClient?.OpenDb();
